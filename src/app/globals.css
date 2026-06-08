@@ -94,9 +94,18 @@ body {
 
 /* 3D Wooden Cutout effect for continents (SVG Paths) */
 .wooden-continent {
-  /* Heavy drop shadow to make them look like thick wood pieces floating on the wall */
+  /* Flat initially or very subtle shadow so it sits on the wall */
+  filter: drop-shadow(1px 3px 2px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  transform-origin: center;
+}
+
+.wooden-continent:hover {
+  /* Heavy drop shadow to make them look like thick wood pieces popping out when hovered */
   filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.7)) drop-shadow(2px 5px 4px rgba(0, 0, 0, 0.5));
-  transition: all 0.3s ease;
+  /* A slight lift effect */
+  transform: translateY(-2px) scale(1.005);
 }
 
 /* Africa continent - merged visually by removing individual drop shadows */
