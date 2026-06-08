@@ -226,6 +226,55 @@ export default function MapComponent() {
     }
   };
 
+  const handleCountryClick = (feature: any) => {
+    const name = feature?.properties?.name;
+    
+    if (africanCountries.includes(name)) {
+      setSelectedLoc({
+        id: 99,
+        name: "Lục địa Châu Phi",
+        year: "1911",
+        desc: "Bác làm phụ bếp trên con tàu Đô đốc Latouche-Tréville, đi qua nhiều cảng biển ở Châu Phi như Dakar (Senegal), Madagascar, Algeria, Ai Cập... để tìm hiểu đời sống của nhân dân thuộc địa.",
+        coords: [8.0, 20.0],
+        videoId: ""
+      });
+      return;
+    }
+
+    let searchString = "";
+    if (name === "Vietnam") searchString = "Việt Nam";
+    else if (name === "France") searchString = "Pháp";
+    else if (name === "United States of America") searchString = "Mỹ";
+    else if (name === "United Kingdom") searchString = "Anh";
+    else if (name === "Russia") searchString = "Liên Xô";
+    else if (name === "China") searchString = "Trung Quốc";
+    else if (name === "Thailand") searchString = "Thái Lan";
+
+    if (searchString) {
+      const locs = journeyLocations.filter(l => l.name.includes(searchString));
+      if (locs.length > 0) {
+        if (locs.length > 1) {
+          setSelectedLoc({
+            id: locs[0].id,
+            name: searchString,
+            year: locs.map(l => l.year).join(" & "),
+            desc: locs.map(l => `📍 ${l.name}: ${l.desc}`).join("\n\n"),
+            coords: locs[0].coords,
+            videoId: locs[0].videoId
+          });
+        } else {
+          setSelectedLoc(locs[0]);
+        }
+      }
+    }
+  };
+
+  const onEachFeature = (feature: any, layer: L.Layer) => {
+    layer.on({
+      click: () => handleCountryClick(feature)
+    });
+  };
+
   return (
     <div className="map-frame-wrapper">
       <MapContainer
@@ -249,6 +298,7 @@ export default function MapComponent() {
               key="rest-of-world"
               data={{ ...geoData, features: geoData.features.filter((f: any) => !africanCountries.includes(f.properties.name)) }}
               style={getCountryStyle}
+              onEachFeature={onEachFeature}
             />
             {/* Render Africa in a custom pane to apply an outer shadow without internal shadows */}
             <Pane name="africaPane" className="wooden-continent" style={{ zIndex: 400 }}>
@@ -256,6 +306,7 @@ export default function MapComponent() {
                 key="africa"
                 data={{ ...geoData, features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }}
                 style={getCountryStyle}
+                onEachFeature={onEachFeature}
               />
             </Pane>
           </>
@@ -303,37 +354,15 @@ export default function MapComponent() {
 
       {/* Fixed UI Overlay for Selected Location */}
       {selectedLoc && (
-        <div className="fixed-overlay">
-          <div className="fixed-overlay-content">
+        <div className="fixed-overlay" onClick={() => setSelectedLoc(null)}>
+          <div className="fixed-overlay-content" onClick={(e) => e.stopPropagation()}>
             <button className="close-btn" onClick={() => setSelectedLoc(null)}>✕</button>
             <div className="popup-header">
               <span className="popup-year">{selectedLoc.year}</span>
               <h3 className="popup-title">{selectedLoc.name}</h3>
             </div>
-
-            <p className="popup-desc">{selectedLoc.desc}</p>
-
-            <div className="popup-video-container">
-              {selectedLoc.videoId && selectedLoc.videoId !== 'YOUR_YOUTUBE_ID' && !selectedLoc.videoId.startsWith('YOUR_YOUTUBE_ID') ? (
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={`https://www.youtube.com/embed/${selectedLoc.videoId}?controls=1`}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              ) : (
-                <div className="popup-video-placeholder">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '8px', margin: '0 auto', display: 'block' }}>
-                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-                    <path d="m10 15 5-3-5-3z" />
-                  </svg>
-                  <p>Mã QR Video sẽ tích hợp tại đây</p>
-                  <small>Nhóm cập nhật link YouTube sau</small>
-                </div>
-              )}
+            <div className="popup-body">
+              <p className="popup-desc">{selectedLoc.desc}</p>
             </div>
           </div>
         </div>
