@@ -139,6 +139,25 @@ body {
   filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
 }
 
+/* Animated Flowing Path for historical routes */
+.flowing-path {
+  animation: flow 30s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+}
+
+@keyframes flow {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Custom Arrow Icon */
+.custom-arrow-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
 /* Custom Marker */
 .custom-marker {
   display: flex;
