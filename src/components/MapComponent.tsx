@@ -199,7 +199,7 @@ export default function MapComponent() {
 
     // Map specific colors to specific countries for the wooden effect
     const colorMap: Record<string, string> = {
-      "Vietnam": "#8b5a2b", // Walnut (Dark)
+      "Vietnam": "#ef4444", // Red
       "France": "#d49a6a", // Oak (Medium light)
       "United Kingdom": "#b06d3b", // Cherry (Medium dark)
       "Russia": "#e8c382", // Pine (Very light)
@@ -217,11 +217,11 @@ export default function MapComponent() {
         className: 'wooden-continent' // Apply drop shadow
       };
     } else if (africanCountries.includes(name)) {
-      // Single dark distinct wood tone for all of Africa
+      // Single dark distinct wood tone for all of Africa (Vietnam's old color)
       return {
-        fillColor: '#3e220e',
+        fillColor: '#8b5a2b',
         weight: 1.5, // Slightly thick stroke matching fill color to close any subpixel gaps between countries
-        color: '#3e220e', // Same as fill color to hide borders completely
+        color: '#8b5a2b', // Same as fill color to hide borders completely
         fillOpacity: 1,
         className: 'africa-continent' // Custom class without individual drop shadows
       };
