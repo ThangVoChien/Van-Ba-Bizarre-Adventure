@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Polyline, GeoJSON } from 'react-leaflet';
+import { MapContainer, Marker, Polyline, GeoJSON, Pane } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -156,7 +156,7 @@ export default function MapComponent() {
     { id: 'CN', name: "CHINA", coords: [36.0, 104.0] as [number, number], width: 120, tracking: '8px', transform: 'scale(0.7)' },
     { id: 'TH', name: "THAILAND", coords: [15.5, 101.0] as [number, number], width: 60, tracking: '1px', transform: 'scale(0.35)' },
     { id: 'US', name: "USA", coords: [38.0, -97.0] as [number, number], width: 100, tracking: '6px', transform: 'scale(0.7)' },
-    { id: 'AF', name: "AFRICA", coords: [0.0, 20.0] as [number, number], width: 200, tracking: '15px', transform: 'scale(0.8)' }
+    { id: 'AF', name: "AFRICA", coords: [8.0, 20.0] as [number, number], width: 200, tracking: '15px', transform: 'scale(0.8)' }
   ];
 
   const createCountryLabel = (label: any) => {
@@ -190,6 +190,15 @@ export default function MapComponent() {
         color: 'rgba(0,0,0,0.6)', // Subtle edge line
         fillOpacity: 1,
         className: 'wooden-continent' // Apply drop shadow
+      };
+    } else if (africanCountries.includes(name)) {
+      // Single dark distinct wood tone for all of Africa
+      return {
+        fillColor: '#3e220e',
+        weight: 1.5, // Slightly thick stroke matching fill color to close any subpixel gaps between countries
+        color: '#3e220e', // Same as fill color to hide borders completely
+        fillOpacity: 1,
+        className: 'africa-continent' // Custom class without individual drop shadows
       };
     } else if (visitedCountries.includes(name)) {
       let hash = 0;
@@ -234,10 +243,22 @@ export default function MapComponent() {
       >
         {/* Render the world map using GeoJSON polygons to look like wooden cutouts */}
         {geoData && (
-          <GeoJSON
-            data={geoData}
-            style={getCountryStyle}
-          />
+          <>
+            {/* Render all non-African countries on the default pane */}
+            <GeoJSON
+              key="rest-of-world"
+              data={{ ...geoData, features: geoData.features.filter((f: any) => !africanCountries.includes(f.properties.name)) }}
+              style={getCountryStyle}
+            />
+            {/* Render Africa in a custom pane to apply an outer shadow without internal shadows */}
+            <Pane name="africaPane" className="wooden-continent" style={{ zIndex: 400 }}>
+              <GeoJSON
+                key="africa"
+                data={{ ...geoData, features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }}
+                style={getCountryStyle}
+              />
+            </Pane>
+          </>
         )}
 
         {/* Render Country Labels */}

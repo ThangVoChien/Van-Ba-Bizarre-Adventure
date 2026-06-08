@@ -99,6 +99,12 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Africa continent - merged visually by removing individual drop shadows */
+.africa-continent {
+  filter: none;
+  transition: all 0.3s ease;
+}
+
 /* Unvisited continents blend into the background wall */
 .unvisited-continent {
   filter: none;
