@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap');
+
+:root {
+  --background: #fdfbf7;
+  --foreground: #2d3748;
+  --primary: #c53030;
+  --primary-hover: #9b2c2c;
+  --gold-1: #d4af37;
+  --gold-2: #ffe599;
+  --gold-3: #aa771c;
+  --gold-4: #8a5a19;
+  --gold-5: #e6c27a;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  /* Steel-blue painted wall background */
+  background-color: #3b5062;
+  background-image: radial-gradient(circle at center 30%, #5d758f 0%, #314455 100%);
+  color: var(--foreground);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* App Header styling - Restored to static flow so it pushes map down */
+.app-header {
+  text-align: center;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 24px;
+  border-radius: 4px;
+  border: 2px solid var(--gold-1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+  pointer-events: none;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.app-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0;
+  background: linear-gradient(to right, var(--gold-1), var(--gold-2), var(--gold-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+}
+
+.app-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #fbd38d;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Map Frame wrapper - Frameless, Full Screen minus header */
+.map-frame-wrapper {
+  width: 100vw; 
+  flex: 1; /* Fill the remaining height */
+  min-height: 0; /* Important for flex children */
+  padding: 0; 
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  position: relative;
+  z-index: 10;
+}
+
+/* Map container styling */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+  background: transparent !important; /* Let the wall show through */
+  box-shadow: none;
+  filter: none; /* Removed the previous image filter */
+}
+
+/* 3D Wooden Cutout effect for continents (SVG Paths) */
+.wooden-continent {
+  /* Heavy drop shadow to make them look like thick wood pieces floating on the wall */
+  filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.7)) drop-shadow(2px 5px 4px rgba(0, 0, 0, 0.5));
+  transition: all 0.3s ease;
+}
+
+/* Unvisited continents blend into the background wall */
+.unvisited-continent {
+  filter: none;
+  transition: all 0.3s ease;
+}
+
+/* Country Labels - Flat Engraved Look matching the image */
+.country-label-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500; /* Very thin and elegant like the image */
+  color: #1c110b; /* Solid very dark color */
+  text-transform: uppercase;
+  text-shadow: none; /* Flat text, no shadow */
+  pointer-events: none; /* Don't block clicks */
+  opacity: 0.8; /* Slight transparency so it looks printed/engraved */
+}
+
+/* Path Line */
+.path-line {
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+}
+
+/* Custom Marker */
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,0.8));
+}
+
+.marker-pulse {
+  width: 16px;
+  height: 16px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(197, 48, 48, 0.5);
+  animation: pulse 2s infinite;
+  border: 3px solid white;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(197, 48, 48, 0.9); }
+  70% { box-shadow: 0 0 0 15px rgba(197, 48, 48, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(197, 48, 48, 0); }
+}
+
+/* Fixed Overlay Styling - Pastel/Vintage */
+.fixed-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); 
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out forwards;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 24px;
+}
+
+.fixed-overlay-content {
+  background: #fdfbf7; /* Pastel off-white paper */
+  background-image: radial-gradient(#f4ebd8 10%, transparent 10%); /* Subtle paper texture */
+  background-size: 10px 10px;
+  border: 6px solid var(--gold-1); /* Golden border for modal */
+  color: #2d3748;
+  border-radius: 4px;
+  box-shadow: 0 40px 80px -10px rgba(0, 0, 0, 0.9);
+  padding: 40px;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.popup-video-container {
+  width: 100%;
+  height: 300px;
+  background: #1a202c;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+  border: 4px solid var(--gold-4);
+}
+
+.popup-video-placeholder {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 2px solid var(--gold-3);
+  color: var(--gold-3);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  background: var(--gold-3);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 16px;
+}
+
+.popup-year {
+  background: var(--primary);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+}
+
+.popup-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  color: #2d3748;
+}
+
+.popup-desc {
+  font-size: 1.1rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Responsive adjust for mobile */
+@media (max-width: 600px) {
+  .app-header { top: 10px; padding: 4px 12px; }
+  .app-title { font-size: 1.2rem; }
+  .app-subtitle { font-size: 0.7rem; }
+  .map-frame-wrapper { 
+    width: 100vw;
+    height: 100vh; 
+    padding: 20px; /* Thinner gold frame on mobile */
+  }
+  .fixed-overlay-content { padding: 24px; }
+  .popup-video-container { height: 220px; }
+  .popup-title { font-size: 1.3rem; }
+}
