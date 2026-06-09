@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, Marker, Polyline, GeoJSON, Pane } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -129,6 +129,7 @@ export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
   const [selectedLoc, setSelectedLoc] = useState<typeof journeyLocations[0] | null>(null);
   const [geoData, setGeoData] = useState(null);
+  const africaGeoJsonRef = useRef<any>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -154,6 +155,32 @@ export default function MapComponent() {
       })
       .catch(err => console.error("Could not load GeoJSON", err));
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedLoc(null);
+      }
+    };
+    if (selectedLoc) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    
+    // Highlight Africa ONLY when it's clicked/selected
+    const africaPane = document.querySelector('.africa-pane') as HTMLElement;
+    if (africaPane) {
+      if (selectedLoc?.id === 99) {
+        africaPane.style.filter = 'drop-shadow(0 0 8px #fbbf24) drop-shadow(0 0 12px #fbbf24)';
+        africaPane.style.transition = 'filter 0.3s ease';
+        africaPane.style.zIndex = '600';
+      } else {
+        africaPane.style.filter = '';
+        africaPane.style.zIndex = '210';
+      }
+    }
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedLoc]);
 
   if (!mounted) return null;
 
@@ -220,8 +247,8 @@ export default function MapComponent() {
       // Single dark distinct wood tone for all of Africa (Vietnam's old color)
       return {
         fillColor: '#8b5a2b',
-        weight: 1.5, // Slightly thick stroke matching fill color to close any subpixel gaps between countries
-        color: '#8b5a2b', // Same as fill color to hide borders completely
+        weight: 1, 
+        color: 'rgba(0,0,0,0.6)', // Standard black border
         fillOpacity: 1,
         className: 'africa-continent' // Custom class without individual drop shadows
       };
@@ -292,9 +319,48 @@ export default function MapComponent() {
     }
   };
 
-  const onEachFeature = (feature: any, layer: L.Layer) => {
+  const onEachFeature = (feature: any, layer: any) => {
     layer.on({
-      click: () => handleCountryClick(feature)
+      mouseover: (e: any) => {
+        const name = feature?.properties?.name;
+        if (africanCountries.includes(name)) {
+          const pane = document.querySelector('.africa-pane') as HTMLElement;
+          if (pane) {
+            pane.classList.add('africa-pane-hover');
+          }
+        } else {
+          // Let CSS handle hover effects for non-African countries
+        }
+      },
+      mouseout: (e: any) => {
+        const name = feature?.properties?.name;
+        if (africanCountries.includes(name)) {
+          const pane = document.querySelector('.africa-pane') as HTMLElement;
+          if (pane) {
+            pane.classList.remove('africa-pane-hover');
+          }
+        } else {
+          // CSS hover naturally reverts when mouse leaves
+        }
+      },
+      click: () => {
+        handleCountryClick(feature);
+      },
+      add: () => {
+        const el = (layer as any).getElement?.() || (layer as any)._path;
+        if (el) {
+          el.setAttribute('tabindex', '0');
+          el.setAttribute('role', 'button');
+          el.setAttribute('aria-label', feature?.properties?.name || 'Country');
+          
+          el.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleCountryClick(feature);
+            }
+          });
+        }
+      }
     });
   };
 
@@ -324,10 +390,24 @@ export default function MapComponent() {
               onEachFeature={onEachFeature}
             />
             {/* Render Africa in a custom pane to apply an outer shadow without internal shadows */}
-            <Pane name="africaPane" className="wooden-continent" style={{ zIndex: 400 }}>
-              <GeoJSON
-                key="africa"
-                data={{ ...geoData, features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }}
+            <Pane name="africaPane" style={{ zIndex: 210 }} className="africa-pane">
+              {/* Solid underlay to close anti-aliasing gaps and prevent drop-shadow bleed */}
+              <GeoJSON 
+                key="africa-underlay"
+                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }} 
+                style={() => ({
+                  fillColor: '#8b5a2b',
+                  color: '#8b5a2b',
+                  weight: 3,
+                  fillOpacity: 1,
+                  className: 'africa-continent',
+                  interactive: false // Don't intercept clicks
+                })}
+              />
+              {/* Interactive layer with black borders */}
+              <GeoJSON 
+                key="africa-interactive"
+                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }} 
                 style={getCountryStyle}
                 onEachFeature={onEachFeature}
               />
@@ -390,6 +470,13 @@ export default function MapComponent() {
         ))}
         */}
       </MapContainer>
+
+      {/* Instruction Overlay for Affordance */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none text-center w-max max-w-[90vw]">
+        <p className="bg-[rgba(28,35,49,0.85)] text-[#ffe599] px-6 py-3 rounded-md border border-t-[3px] border-[#d4af37] border-x-[rgba(212,175,55,0.3)] border-b-[rgba(212,175,55,0.3)] shadow-[0_10px_25px_rgba(0,0,0,0.5)] font-['Montserrat',sans-serif] text-[0.85rem] font-semibold uppercase tracking-widest backdrop-blur-md">
+          Nhấp vào các quốc gia được đánh dấu để khám phá hành trình
+        </p>
+      </div>
 
       {/* Fixed UI Overlay for Selected Location */}
       {selectedLoc && (

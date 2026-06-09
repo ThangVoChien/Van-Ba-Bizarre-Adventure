@@ -114,6 +114,15 @@ body {
   transition: all 0.3s ease;
 }
 
+.africa-pane {
+  transition: transform 0.3s ease, filter 0.3s ease !important;
+}
+
+.africa-pane-hover {
+  filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.7)) drop-shadow(2px 5px 4px rgba(0, 0, 0, 0.5));
+  transform: translateY(-2px) scale(1.005);
+}
+
 /* Unvisited continents blend into the background wall */
 .unvisited-continent {
   filter: none;
@@ -194,7 +203,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 24px;
@@ -215,7 +224,7 @@ body {
   max-width: 450px;
   max-height: 90vh;
   overflow-y: auto;
-  animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .close-btn {
@@ -284,8 +293,16 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { 
+    opacity: 0; 
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  to { 
+    opacity: 1; 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 @keyframes scaleUp {
@@ -312,4 +329,36 @@ body {
   .fixed-overlay-content { padding: 24px; }
   .popup-video-container { height: 220px; }
   .popup-title { font-size: 1.3rem; }
+}
+
+/* --- POLISH: Custom Scrollbar --- */
+.fixed-overlay-content::-webkit-scrollbar {
+  width: 8px;
+}
+.fixed-overlay-content::-webkit-scrollbar-track {
+  background: rgba(28, 35, 49, 0.4);
+  border-radius: 4px;
+}
+.fixed-overlay-content::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+}
+.fixed-overlay-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.8);
+}
+
+/* Restore yellow focus ring for non-African countries, but exclude African countries so they only glow as a whole continent */
+path.leaflet-interactive:not(.africa-continent):focus,
+path.leaflet-interactive:not(.africa-continent):focus-visible {
+  outline: none !important;
+  stroke: var(--gold-1) !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 10px var(--gold-1)) !important;
+}
+
+/* Custom focus ring for close button */
+.close-btn:focus-visible {
+  outline: 2px solid var(--gold-1);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
