@@ -185,11 +185,10 @@ const historicalRoutes = [
   { id: '9f', color: '#dc2626', start: [43.8, 87.6] as [number, number], end: [36.1, 103.8] as [number, number], control: [40.0, 95.7] as [number, number] }, // Urumqi -> Lanzhou
   { id: '9g', color: '#dc2626', start: [36.1, 103.8] as [number, number], end: [34.3, 108.9] as [number, number], control: [35.2, 106.3] as [number, number] }, // Lanzhou -> Xi'an
 
-  // Chặng 10: Hoạt động ở Trung Quốc
   { id: '10a', color: '#dc2626', start: [34.3, 108.9] as [number, number], end: [37.8, 112.5] as [number, number], control: [36.0, 110.7] as [number, number] }, // Xi'an -> Taiyuan
   { id: '10b', color: '#dc2626', start: [37.8, 112.5] as [number, number], end: [25.2, 110.2] as [number, number], control: [31.5, 111.3] as [number, number] }, // Taiyuan -> Guilin
 
-  // Chặng 11: Trở về Tổ quốc (Black)
+  // Chặng 10: Trở về Tổ quốc (Black)
   { id: '11a', color: '#000000', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
   { id: '11b', color: '#000000', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
 ];
@@ -213,6 +212,19 @@ const createArrowIcon = (angle: number, color: string) => {
     iconAnchor: [7, 7]
   });
 };
+
+const routeLegend = [
+  { id: 1, label: "Chặng 1: Cảng Sài Gòn - Le Havre", color: "#ea580c" },
+  { id: 2, label: "Chặng 2: Vòng quanh châu Phi", color: "#16a34a" },
+  { id: 3, label: "Chặng 3: Pháp - Châu Mỹ - Anh", color: "#1e3a8a" },
+  { id: 4, label: "Chặng 4: Pháp - Liên Xô", color: "#db2777" },
+  { id: 5, label: "Chặng 5: Moskva - Quảng Châu", color: "#9333ea" },
+  { id: 6, label: "Chặng 6: Moskva - Xiêm", color: "#0ea5e9" },
+  { id: 7, label: "Chặng 7: Hong Kong - Thượng Hải", color: "#15803d" },
+  { id: 8, label: "Chặng 8: Thượng Hải - Moskva", color: "#1d4ed8" },
+  { id: 9, label: "Chặng 9: Moskva - Quế Lâm", color: "#dc2626" },
+  { id: 10, label: "Chặng 10: Quế Lâm - Pác Bó", color: "#000000" },
+];
 
 export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
@@ -457,7 +469,8 @@ export default function MapComponent() {
     <div className="map-frame-wrapper">
       <MapContainer
         center={[15, 20]}
-        zoom={3}
+        zoom={2.85}
+        zoomSnap={0.05}
         zoomControl={false}
         dragging={false}
         scrollWheelZoom={false}
@@ -561,6 +574,19 @@ export default function MapComponent() {
         ))}
         */}
       </MapContainer>
+
+      {/* Map Legend Overlay */}
+      <div className="absolute top-4 right-4 z-[1000] bg-[rgba(255,255,255,0.95)] p-4 rounded-lg shadow-lg border border-gray-200 pointer-events-auto max-h-[80vh] overflow-y-auto">
+        <h4 className="font-bold text-gray-800 mb-3 text-sm border-b pb-2 uppercase tracking-wide">Hành trình trên biển</h4>
+        <div className="flex flex-col gap-2">
+          {routeLegend.map(item => (
+            <div key={item.id} className="flex items-center gap-3">
+              <div className="w-8 h-1.5 rounded-full shadow-sm" style={{ backgroundColor: item.color }}></div>
+              <span className="text-xs font-medium text-gray-700 whitespace-nowrap">{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Instruction Overlay for Affordance */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none text-center w-max max-w-[90vw]">
