@@ -142,7 +142,6 @@ const historicalRoutes = [
   { id: '26c', color: '#9333ea', start: [31.2, 121.4] as [number, number], end: [24.4, 118.0] as [number, number], control: [28.0, 122.5] as [number, number] }, // Shanghai -> Xiamen
   { id: '26d', color: '#9333ea', start: [24.4, 118.0] as [number, number], end: [22.3, 114.1] as [number, number], control: [22.5, 116.5] as [number, number] }, // Xiamen -> Guangzhou
 
-  // Chặng 6: Chiều về - Tách ra xa hơn nữa so với chiều đi để nhìn thật rõ
   { id: '27a', color: '#9333ea', start: [22.3, 114.1] as [number, number], end: [24.6, 118.5] as [number, number], control: [21.6, 117.75] as [number, number] }, // Guangzhou -> Xiamen
   { id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [28.2, 124.5] as [number, number] }, // Xiamen -> Shanghai
   { id: '27c', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
@@ -157,9 +156,25 @@ const historicalRoutes = [
   { id: '28c2', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
   { id: '28b', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
   { id: '28a', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
+  // Chặng 6: Hoạt động ở Châu Âu (Blue)
+  { id: '6a', color: '#0ea5e9', start: [55.7, 37.6] as [number, number], end: [52.5, 13.4] as [number, number], control: [55.0, 25.0] as [number, number] }, // Moscow -> Berlin
+  { id: '6b', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [48.8, 2.3] as [number, number], control: [50.0, 7.0] as [number, number] }, // Berlin -> Paris
+  { id: '6c', color: '#0ea5e9', start: [48.8, 2.3] as [number, number], end: [50.8, 4.3] as [number, number], control: [50.0, 2.5] as [number, number] }, // Paris -> Brussels
+  { id: '6d', color: '#0ea5e9', start: [50.8, 4.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 8.0] as [number, number] }, // Brussels -> Berlin
+  { id: '6e', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [46.9, 7.4] as [number, number], control: [50.0, 11.0] as [number, number] }, // Berlin -> Switzerland
+  { id: '6f', color: '#0ea5e9', start: [46.9, 7.4] as [number, number], end: [40.8, 14.3] as [number, number], control: [44.0, 10.0] as [number, number] }, // Switzerland -> Napoli
+  { id: '6g', color: '#0ea5e9', start: [40.8, 14.3] as [number, number], end: [31.4, 30.1] as [number, number], control: [35.0, 24.0] as [number, number] }, // Napoli -> Port Said
+  { id: '6h', color: '#0ea5e9', start: [31.4, 30.1] as [number, number], end: [11.3, 43.3] as [number, number], control: [24.0, 40.0] as [number, number] }, // Port Said -> Djibouti
+  { id: '6i', color: '#0ea5e9', start: [11.3, 43.3] as [number, number], end: [5.7, 80.7] as [number, number], control: [10.0, 60.0] as [number, number] }, // Djibouti -> Sri Lanka
+  { id: '6j', color: '#0ea5e9', start: [5.7, 80.7] as [number, number], end: [1.15, 104.01] as [number, number], control: [4.0, 92.0] as [number, number] }, // Sri Lanka -> Singapore
+  { id: '6k', color: '#0ea5e9', start: [1.15, 104.01] as [number, number], end: [13.7, 100.5] as [number, number], control: [7.0, 105.0] as [number, number] }, // Singapore -> Bangkok
 
-  // Chặng 7: Về nước (Orange)
-
+  // Chặng 7: Hoạt động ở Châu Á (Dark Green) - Lộ trình đơn giản hóa
+  { id: '7a', color: '#15803d', start: [13.7, 100.5] as [number, number], end: [1.35, 103.8] as [number, number], control: [7.0, 102.5] as [number, number] }, // Bangkok -> Singapore
+  { id: '7b', color: '#15803d', start: [1.35, 104.2] as [number, number], end: [31.2, 121.4] as [number, number], control: [16.0, 118.0] as [number, number] }, // Singapore -> Shanghai
+  { id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
+  { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
+  { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
 ];
 
 const createCustomIcon = () => {
