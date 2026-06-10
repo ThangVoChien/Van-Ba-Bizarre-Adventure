@@ -52,57 +52,114 @@ function getBezierCurve(start: [number, number], end: [number, number], control:
 
 // Map routes based on historical journey map (colors divided by stages)
 const historicalRoutes = [
-  // Chặng 1 (Xanh dương đậm) & Chặng 2 (Xanh lá - Vòng quanh Châu Phi)
-  { id: '1', color: '#1e3a8a', start: [10.7, 106.7] as [number, number], end: [1.2, 103.8] as [number, number], control: [5.0, 108.0] as [number, number] }, // SG -> Singapore
-  { id: '2', color: '#1e3a8a', start: [1.2, 103.8] as [number, number], end: [5.9, 80.5] as [number, number], control: [8.0, 95.0] as [number, number] }, // Singapore -> Sri Lanka
-  { id: '3', color: '#888888', start: [5.9, 80.5] as [number, number], end: [-18.8, 47.5] as [number, number], control: [-5.0, 65.0] as [number, number] }, // Sri Lanka -> Madagascar
-  { id: '4', color: '#16a34a', start: [-18.8, 47.5] as [number, number], end: [-35.0, 20.0] as [number, number], control: [-30.0, 40.0] as [number, number] }, // Madagascar -> Cape Town
-  { id: '5', color: '#16a34a', start: [-35.0, 20.0] as [number, number], end: [-4.0, 11.0] as [number, number], control: [-20.0, 5.0] as [number, number] }, // Cape Town -> Congo/Gabon
-  { id: '6', color: '#16a34a', start: [-4.0, 11.0] as [number, number], end: [14.6, -17.4] as [number, number], control: [5.0, -5.0] as [number, number] }, // Gabon -> Dakar
-  { id: '7', color: '#16a34a', start: [14.6, -17.4] as [number, number], end: [38.7, -9.1] as [number, number], control: [30.0, -25.0] as [number, number] }, // Dakar -> Lisbon
-  { id: '8', color: '#16a34a', start: [38.7, -9.1] as [number, number], end: [49.4, 0.1] as [number, number], control: [45.0, -10.0] as [number, number] }, // Lisbon -> Le Havre
+  // Chặng 1: Cảng Sài Gòn - Le Havre (Orange/Red)
+  { id: '1', color: '#ea580c', start: [10.82, 106.63] as [number, number], end: [1.35, 103.81] as [number, number], control: [5.0, 108.0] as [number, number] }, // Sài Gòn -> Singapore
+  { id: '2', color: '#ea580c', start: [1.35, 103.81] as [number, number], end: [5.9, 80.5] as [number, number], control: [8.0, 95.0] as [number, number] }, // Singapore -> Colombo
+  { id: '3', color: '#ea580c', start: [5.9, 80.5] as [number, number], end: [11.5, 43.1] as [number, number], control: [15.0, 60.0] as [number, number] }, // Colombo -> Djibouti
+  { id: '4', color: '#ea580c', start: [11.5, 43.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [22.0, 38.0] as [number, number] },
+  { id: '5', color: '#ea580c', start: [31.2, 29.9] as [number, number], end: [43.3, 5.4] as [number, number], control: [36.0, 20.0] as [number, number] }, // Port Said -> Marseille
 
-  // Chặng 3: Pháp - Nam Mỹ - Mỹ - Anh - Pháp (Xanh chàm / Indigo)
-  { id: '9', color: '#4338ca', start: [49.4, 0.1] as [number, number], end: [-22.9, -43.1] as [number, number], control: [20.0, -40.0] as [number, number] }, // France -> Rio de Janeiro
-  { id: '10', color: '#4338ca', start: [-22.9, -43.1] as [number, number], end: [-34.6, -58.3] as [number, number], control: [-30.0, -45.0] as [number, number] }, // Rio -> Buenos Aires
-  { id: '11', color: '#4338ca', start: [-34.6, -58.3] as [number, number], end: [40.7, -74.0] as [number, number], control: [5.0, -60.0] as [number, number] }, // Buenos Aires -> New York
-  { id: '12', color: '#4338ca', start: [40.7, -74.0] as [number, number], end: [42.3, -71.0] as [number, number], control: [41.0, -72.0] as [number, number] }, // NY -> Boston
-  { id: '13', color: '#4338ca', start: [42.3, -71.0] as [number, number], end: [51.5, -0.1] as [number, number], control: [55.0, -40.0] as [number, number] }, // Boston -> London
-  { id: '14', color: '#4338ca', start: [51.5, -0.1] as [number, number], end: [48.8, 2.3] as [number, number], control: [50.0, 1.0] as [number, number] }, // London -> Paris
+  // Hành trình đi biển vòng quanh TBN sang Bắc Pháp (Chặng 1)
+  { id: '6', color: '#ea580c', start: [43.3, 5.4] as [number, number], end: [36.0, -6.0] as [number, number], control: [38.0, 3.0] as [number, number] }, // Marseille -> Gibraltar
+  { id: '6b', color: '#ea580c', start: [36.0, -6.0] as [number, number], end: [43.0, -10.0] as [number, number], control: [39.0, -12.0] as [number, number] }, // Gibraltar -> Mũi Tây Ban Nha (Outer)
+  { id: '6c', color: '#ea580c', start: [43.0, -10.0] as [number, number], end: [48.5, -6.0] as [number, number], control: [46.0, -10.0] as [number, number] }, // Tây Ban Nha -> Mũi Tây Pháp (Outer)
+  { id: '6d', color: '#ea580c', start: [48.5, -6.0] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.5, -3.0] as [number, number] }, // Mũi Tây Pháp -> Le Havre (Outer)
 
-  // Chặng 4: Pháp - Liên Xô (Hồng / Đỏ nhạt)
-  { id: '15', color: '#e11d48', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [51.0, 8.0] as [number, number] }, // Paris -> Berlin
-  { id: '16', color: '#e11d48', start: [52.5, 13.4] as [number, number], end: [59.9, 30.3] as [number, number], control: [56.0, 20.0] as [number, number] }, // Berlin -> Petrograd
-  { id: '17', color: '#e11d48', start: [59.9, 30.3] as [number, number], end: [55.7, 37.6] as [number, number], control: [58.0, 35.0] as [number, number] }, // Petrograd -> Moscow
+  // Chặng 2: Đi quanh châu Phi (Green) - Chiều KIM ĐỒNG HỒ
+  // Bắt đầu từ Cảng Tây Bắc (Le Havre) vòng qua Tây Ban Nha vào Địa Trung Hải
+  { id: '7', color: '#16a34a', start: [49.5, 0.1] as [number, number], end: [48.5, -5.0] as [number, number], control: [49.5, -2.0] as [number, number] }, // Le Havre -> Mũi Tây Pháp
+  { id: '8', color: '#16a34a', start: [48.5, -5.0] as [number, number], end: [43.0, -9.0] as [number, number], control: [45.5, -8.0] as [number, number] }, // Mũi Tây Pháp -> Mũi TBN
+  { id: '9', color: '#16a34a', start: [43.0, -9.0] as [number, number], end: [36.0, -5.0] as [number, number], control: [39.5, -9.5] as [number, number] }, // Mũi TBN -> Gibraltar
 
-  // Chặng 5: Liên Xô - Trung Quốc (Xanh da trời)
-  { id: '18', color: '#0ea5e9', start: [55.7, 37.6] as [number, number], end: [43.1, 131.9] as [number, number], control: [65.0, 80.0] as [number, number] }, // Moscow -> Vladivostok
-  { id: '19', color: '#0ea5e9', start: [43.1, 131.9] as [number, number], end: [23.1, 113.2] as [number, number], control: [35.0, 130.0] as [number, number] }, // Vladivostok -> Guangzhou
+  // Ghé Algeria ("Angela") và đi dọc Bắc Phi tới Ai Cập
+  { id: '10', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [36.7, 3.2] as [number, number], control: [36.0, -1.0] as [number, number] }, // Gibraltar -> Algeria
+  { id: '10a2', color: '#16a34a', start: [36.7, 3.2] as [number, number], end: [36.8, 10.1] as [number, number], control: [37.0, 6.0] as [number, number] }, // Algeria -> Tunisia
+  { id: '10a3', color: '#16a34a', start: [36.8, 10.1] as [number, number], end: [32.8, 13.1] as [number, number], control: [35.0, 12.0] as [number, number] }, // Tunisia -> Libya
+  { id: '10a4', color: '#16a34a', start: [32.8, 13.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [33.0, 22.0] as [number, number] }, // Libya -> Egypt
 
-  // Chặng 6: Trung Quốc - Xiêm (Xanh lá mạ)
-  { id: '20', color: '#22c55e', start: [23.1, 113.2] as [number, number], end: [13.7, 100.5] as [number, number], control: [18.0, 110.0] as [number, number] }, // Guangzhou -> Bangkok
-  { id: '21', color: '#22c55e', start: [13.7, 100.5] as [number, number], end: [17.4, 102.7] as [number, number], control: [15.0, 101.0] as [number, number] }, // Bangkok -> Udon Thani
+  // Từ Ai Cập đi xuống bờ Đông Châu Phi (Biển Đỏ -> Ấn Độ Dương)
+  { id: '11', color: '#16a34a', start: [31.2, 29.9] as [number, number], end: [11.5, 43.1] as [number, number], control: [23.0, 39.0] as [number, number] }, // Egypt -> Djibouti
+  { id: '11b', color: '#16a34a', start: [11.5, 43.1] as [number, number], end: [11.8, 51.5] as [number, number], control: [13.5, 47.0] as [number, number] }, // Djibouti -> Mũi Sừng Châu Phi
+  { id: '11c', color: '#16a34a', start: [11.8, 51.5] as [number, number], end: [2.0, 45.3] as [number, number], control: [7.0, 49.5] as [number, number] }, // Mũi Sừng Châu Phi -> Somalia
+  { id: '11d', color: '#16a34a', start: [2.0, 45.3] as [number, number], end: [-4.0, 39.6] as [number, number], control: [0.0, 44.0] as [number, number] }, // Somalia -> Kenya
+  { id: '11e', color: '#16a34a', start: [-4.0, 39.6] as [number, number], end: [-6.8, 39.2] as [number, number], control: [-5.5, 41.0] as [number, number] }, // Kenya -> Tanzania
+  { id: '11f', color: '#16a34a', start: [-6.8, 39.2] as [number, number], end: [-12.3, 49.3] as [number, number], control: [-8.0, 45.0] as [number, number] }, // Tanzania -> Bắc Madagascar
+  { id: '12', color: '#16a34a', start: [-12.3, 49.3] as [number, number], end: [-21.1, 55.5] as [number, number], control: [-16.0, 54.0] as [number, number] }, // Bắc Madagascar -> Reunion
 
-  // Chặng 7: Xiêm - Trung Quốc (Vàng)
-  { id: '22', color: '#eab308', start: [17.4, 102.7] as [number, number], end: [13.7, 100.5] as [number, number], control: [16.0, 102.0] as [number, number] }, // Udon Thani -> Bangkok
-  { id: '23', color: '#eab308', start: [13.7, 100.5] as [number, number], end: [1.2, 103.8] as [number, number], control: [8.0, 100.0] as [number, number] }, // Bangkok -> Singapore
-  { id: '24', color: '#eab308', start: [1.2, 103.8] as [number, number], end: [22.3, 114.1] as [number, number], control: [10.0, 110.0] as [number, number] }, // Singapore -> Hong Kong
+  // Vòng qua Nam Phi sang bờ Tây
+  { id: '13', color: '#16a34a', start: [-21.1, 55.5] as [number, number], end: [-33.9, 18.4] as [number, number], control: [-35.0, 40.0] as [number, number] }, // Reunion -> Cape Town
+  { id: '14', color: '#16a34a', start: [-33.9, 18.4] as [number, number], end: [-8.8, 13.2] as [number, number], control: [-20.0, 10.0] as [number, number] }, // Cape Town -> Angola
 
-  // Chặng 8: Hong Kong - Liên Xô (Cam)
-  { id: '25', color: '#f97316', start: [22.3, 114.1] as [number, number], end: [24.4, 118.0] as [number, number], control: [23.0, 116.0] as [number, number] }, // Hong Kong -> Xiamen
-  { id: '26', color: '#f97316', start: [24.4, 118.0] as [number, number], end: [31.2, 121.4] as [number, number], control: [28.0, 122.0] as [number, number] }, // Xiamen -> Shanghai
-  { id: '27', color: '#f97316', start: [31.2, 121.4] as [number, number], end: [43.1, 131.9] as [number, number], control: [35.0, 128.0] as [number, number] }, // Shanghai -> Vladivostok
-  { id: '28', color: '#f97316', start: [43.1, 131.9] as [number, number], end: [55.7, 37.6] as [number, number], control: [60.0, 90.0] as [number, number] }, // Vladivostok -> Moscow
+  // Đi ngược lên bờ Tây Châu Phi (đẩy cong ra ngoài biển để không lẹm đất liền)
+  { id: '15a', color: '#16a34a', start: [-8.8, 13.2] as [number, number], end: [-5.8, 12.0] as [number, number], control: [-7.0, 9.0] as [number, number] }, // Angola -> Congo
+  { id: '15b', color: '#16a34a', start: [-5.8, 12.0] as [number, number], end: [6.5, 3.4] as [number, number], control: [0.0, 6.0] as [number, number] }, // Congo -> Nigeria
+  { id: '15c', color: '#16a34a', start: [6.5, 3.4] as [number, number], end: [5.6, -0.2] as [number, number], control: [4.0, 1.5] as [number, number] }, // Nigeria -> Ghana
+  { id: '15d', color: '#16a34a', start: [5.6, -0.2] as [number, number], end: [5.3, -4.0] as [number, number], control: [3.0, -2.0] as [number, number] }, // Ghana -> Cote D'Ivoire
+  { id: '15e', color: '#16a34a', start: [5.3, -4.0] as [number, number], end: [14.6, -17.4] as [number, number], control: [-2.0, -15.0] as [number, number] }, // Cote D'Ivoire -> Dakar
 
-  // Chặng 9: Liên Xô - Trung Quốc (Đỏ)
-  { id: '29', color: '#ef4444', start: [55.7, 37.6] as [number, number], end: [43.8, 87.6] as [number, number], control: [52.0, 60.0] as [number, number] }, // Moscow -> Urumqi
-  { id: '30', color: '#ef4444', start: [43.8, 87.6] as [number, number], end: [36.6, 101.7] as [number, number], control: [40.0, 95.0] as [number, number] }, // Urumqi -> Xining
-  { id: '31', color: '#ef4444', start: [36.6, 101.7] as [number, number], end: [34.3, 108.9] as [number, number], control: [35.0, 105.0] as [number, number] }, // Xining -> Xi'an
-  { id: '32', color: '#ef4444', start: [34.3, 108.9] as [number, number], end: [25.0, 102.7] as [number, number], control: [30.0, 105.0] as [number, number] }, // Xi'an -> Kunming
+  // Đoạn cuối: Đến Morocco ("mongo"), qua Gibraltar, rồi cập bến Cảng Đông Nam (Marseille)
+  { id: '16a', color: '#16a34a', start: [14.6, -17.4] as [number, number], end: [33.5, -7.5] as [number, number], control: [24.0, -22.0] as [number, number] }, // Dakar -> Morocco
+  { id: '16b', color: '#16a34a', start: [33.5, -7.5] as [number, number], end: [36.0, -5.0] as [number, number], control: [35.0, -8.0] as [number, number] }, // Morocco -> Gibraltar
+  { id: '16c', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [43.3, 5.4] as [number, number], control: [38.0, 0.0] as [number, number] }, // Gibraltar -> Marseille
 
-  // Chặng 10: Trung Quốc - Việt Nam (Đỏ thẫm)
-  { id: '33', color: '#991b1b', start: [25.0, 102.7] as [number, number], end: [25.2, 110.2] as [number, number], control: [26.0, 106.0] as [number, number] }, // Kunming -> Guilin
-  { id: '34', color: '#991b1b', start: [25.2, 110.2] as [number, number], end: [22.9, 106.0] as [number, number], control: [24.0, 108.0] as [number, number] }, // Guilin -> Pac Bo
+  // Chặng 3: Pháp - Châu Mỹ - Anh (Dark Blue)
+  { id: '18', color: '#1e3a8a', start: [49.5, 0.1] as [number, number], end: [48.5, -6.5] as [number, number], control: [49.5, -3.0] as [number, number] }, // Le Havre -> Ngoài khơi Tây Pháp
+  { id: '18b', color: '#1e3a8a', start: [48.5, -6.5] as [number, number], end: [14.6, -61.0] as [number, number], control: [30.0, -45.0] as [number, number] }, // Ngoài khơi Tây Pháp -> vùng Caribbean
+  { id: '19', color: '#1e3a8a', start: [14.6, -61.0] as [number, number], end: [-7.0, -25.0] as [number, number], control: [5.0, -35.0] as [number, number] }, // Caribbean -> Ngoài khơi Brazil (vòng ngoài)
+  { id: '19b', color: '#1e3a8a', start: [-7.0, -25.0] as [number, number], end: [-34.9, -56.1] as [number, number], control: [-25.0, -25.0] as [number, number] }, // Ngoài khơi Brazil -> Uruguay
+  { id: '20', color: '#1e3a8a', start: [-34.6, -58.3] as [number, number], end: [-7.0, -30.0] as [number, number], control: [-25.0, -30.0] as [number, number] }, // Argentina -> Ngoài khơi Brazil (vòng trong)
+  { id: '20b', color: '#1e3a8a', start: [-7.0, -30.0] as [number, number], end: [40.7, -74.0] as [number, number], control: [10.0, -40.0] as [number, number] }, // Ngoài khơi Brazil -> New York (chéo qua đường kia)
+  { id: '21', color: '#1e3a8a', start: [40.7, -74.0] as [number, number], end: [49.5, -8.0] as [number, number], control: [45.0, -40.0] as [number, number] }, // New York -> Cửa ngõ eo biển Manche (đi vòng xuống Nam Ireland để né đất liền)
+  { id: '21b', color: '#1e3a8a', start: [49.5, -8.0] as [number, number], end: [50.9, -1.4] as [number, number], control: [50.0, -4.0] as [number, number] }, // Cửa ngõ eo biển -> Anh (cảng bờ Nam)
+  { id: '22', color: '#1e3a8a', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
+
+  // Chặng 4: Pháp - Liên Xô (Pink/Magenta)
+  { id: '23', color: '#db2777', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 6.0] as [number, number] }, // Paris -> Berlin
+  { id: '23b', color: '#db2777', start: [52.5, 13.4] as [number, number], end: [53.5, 9.9] as [number, number], control: [53.5, 12.0] as [number, number] }, // Berlin -> Hamburg
+
+  // Vòng ra Biển Bắc rồi vòng qua đỉnh Đan Mạch vào biển Baltic
+  { id: '24', color: '#db2777', start: [53.5, 9.9] as [number, number], end: [56.5, 5.0] as [number, number], control: [54.5, 6.0] as [number, number] }, // Hamburg -> Biển Bắc (đi ra ngoài biển)
+  { id: '24b', color: '#db2777', start: [56.5, 5.0] as [number, number], end: [58.5, 11.0] as [number, number], control: [58.5, 6.0] as [number, number] }, // Biển Bắc -> Ngoài khơi đỉnh Đan Mạch (vòng qua đỉnh)
+  { id: '24c', color: '#db2777', start: [58.5, 11.0] as [number, number], end: [55.0, 14.0] as [number, number], control: [56.5, 12.0] as [number, number] }, // Ngoài khơi đỉnh Đan Mạch -> Nam Thụy Điển (xuyên qua eo biển Kattegat)
+  { id: '24d', color: '#db2777', start: [55.0, 14.0] as [number, number], end: [57.5, 20.0] as [number, number], control: [55.5, 17.5] as [number, number] }, // Nam Thụy Điển -> Giữa biển Baltic (né phía dưới đảo Gotland)
+  { id: '24e', color: '#db2777', start: [57.5, 20.0] as [number, number], end: [59.8, 24.5] as [number, number], control: [59.5, 20.0] as [number, number] }, // Giữa biển Baltic -> Cửa vịnh Phần Lan (vòng lên Bắc để né các đảo của Estonia)
+  { id: '24f', color: '#db2777', start: [59.8, 24.5] as [number, number], end: [59.9, 30.3] as [number, number], control: [60.0, 27.5] as [number, number] }, // Cửa vịnh Phần Lan -> Petrograd
+
+  // Chặng 5: Liên Xô - Trung Quốc (Purple)
+  { id: '25a', color: '#9333ea', start: [55.7, 37.6] as [number, number], end: [53.2, 50.1] as [number, number], control: [54.5, 43.8] as [number, number] }, // Moscow -> Samara (Đi thẳng xuống biên giới)
+  { id: '25b', color: '#9333ea', start: [53.2, 50.1] as [number, number], end: [55.1, 61.4] as [number, number], control: [54.2, 55.7] as [number, number] }, // Samara -> Chelyabinsk (Vòng lên)
+  { id: '25c1', color: '#9333ea', start: [55.1, 61.4] as [number, number], end: [56.1, 69.5] as [number, number], control: [55.6, 65.45] as [number, number] }, // Chelyabinsk -> Ishim (Vòng lên phía Bắc né biên giới)
+  { id: '25c2', color: '#9333ea', start: [56.1, 69.5] as [number, number], end: [55.0, 73.4] as [number, number], control: [55.55, 71.45] as [number, number] }, // Ishim -> Omsk
+  { id: '25e', color: '#9333ea', start: [55.0, 73.4] as [number, number], end: [55.0, 82.9] as [number, number], control: [55.2, 78.0] as [number, number] }, // Omsk -> Novosibirsk
+  { id: '25f', color: '#9333ea', start: [55.0, 82.9] as [number, number], end: [52.3, 104.3] as [number, number], control: [57.0, 93.6] as [number, number] }, // Novosibirsk -> Irkutsk (Vòng lên phía Bắc né biên giới)
+  { id: '25g1', color: '#9333ea', start: [52.3, 104.3] as [number, number], end: [51.5, 111.0] as [number, number], control: [51.9, 107.65] as [number, number] }, // Irkutsk -> Đoạn võng xuống
+  { id: '25g2', color: '#9333ea', start: [51.5, 111.0] as [number, number], end: [55.0, 124.0] as [number, number], control: [54.5, 117.5] as [number, number] }, // Đoạn võng -> Đỉnh vòng cung
+  { id: '25h', color: '#9333ea', start: [55.0, 124.0] as [number, number], end: [48.5, 135.1] as [number, number], control: [53.5, 130.0] as [number, number] }, // Đỉnh vòng cung -> Khabarovsk
+  { id: '25i', color: '#9333ea', start: [48.5, 135.1] as [number, number], end: [43.1, 133.0] as [number, number], control: [46.0, 135.5] as [number, number] }, // Khabarovsk -> Vladivostok
+  // Chặng 5: Đi tàu biển từ Vladivostok đến thẳng Quảng Châu
+  { id: '26a', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [33.5, 129.0] as [number, number], control: [39.0, 134.0] as [number, number] }, // Vladivostok -> Tsushima
+  { id: '26b', color: '#9333ea', start: [33.5, 129.0] as [number, number], end: [31.2, 121.4] as [number, number], control: [32.5, 124.5] as [number, number] }, // Tsushima -> Shanghai
+  { id: '26c', color: '#9333ea', start: [31.2, 121.4] as [number, number], end: [24.4, 118.0] as [number, number], control: [28.0, 122.5] as [number, number] }, // Shanghai -> Xiamen
+  { id: '26d', color: '#9333ea', start: [24.4, 118.0] as [number, number], end: [22.3, 114.1] as [number, number], control: [22.5, 116.5] as [number, number] }, // Xiamen -> Guangzhou
+
+  // Chặng 6: Chiều về - Tách ra xa hơn nữa so với chiều đi để nhìn thật rõ
+  { id: '27a', color: '#9333ea', start: [22.3, 114.1] as [number, number], end: [24.6, 118.5] as [number, number], control: [21.6, 117.75] as [number, number] }, // Guangzhou -> Xiamen
+  { id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [28.2, 124.5] as [number, number] }, // Xiamen -> Shanghai
+  { id: '27c', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
+  { id: '27d', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
+  { id: '28i', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
+  { id: '28h', color: '#9333ea', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [54.6, 130.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
+  { id: '28g2', color: '#9333ea', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [55.6, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
+  { id: '28g1', color: '#9333ea', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [53.0, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
+  { id: '28f', color: '#9333ea', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [58.1, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk (Vòng lên phía Bắc)
+  { id: '28e', color: '#9333ea', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [56.3, 78.0] as [number, number] }, // Novosibirsk -> Omsk
+  { id: '28c1', color: '#9333ea', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [56.65, 71.45] as [number, number] }, // Omsk -> Ishim (Vòng lên phía Bắc né biên giới)
+  { id: '28c2', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
+  { id: '28b', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
+  { id: '28a', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
+
+  // Chặng 7: Về nước (Orange)
+
 ];
 
 const createCustomIcon = () => {
@@ -128,7 +185,7 @@ const createArrowIcon = (angle: number, color: string) => {
 export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
   const [selectedLoc, setSelectedLoc] = useState<typeof journeyLocations[0] | null>(null);
-  const [geoData, setGeoData] = useState(null);
+  const [geoData, setGeoData] = useState<any>(null);
   const africaGeoJsonRef = useRef<any>(null);
 
   useEffect(() => {
@@ -165,7 +222,7 @@ export default function MapComponent() {
     if (selectedLoc) {
       window.addEventListener('keydown', handleKeyDown);
     }
-    
+
     // Highlight Africa ONLY when it's clicked/selected
     const africaPane = document.querySelector('.africa-pane') as HTMLElement;
     if (africaPane) {
@@ -247,7 +304,7 @@ export default function MapComponent() {
       // Single dark distinct wood tone for all of Africa (Vietnam's old color)
       return {
         fillColor: '#8b5a2b',
-        weight: 1, 
+        weight: 1,
         color: 'rgba(0,0,0,0.6)', // Standard black border
         fillOpacity: 1,
         className: 'africa-continent' // Custom class without individual drop shadows
@@ -352,7 +409,7 @@ export default function MapComponent() {
           el.setAttribute('tabindex', '0');
           el.setAttribute('role', 'button');
           el.setAttribute('aria-label', feature?.properties?.name || 'Country');
-          
+
           el.addEventListener('keydown', (e: KeyboardEvent) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -392,9 +449,9 @@ export default function MapComponent() {
             {/* Render Africa in a custom pane to apply an outer shadow without internal shadows */}
             <Pane name="africaPane" style={{ zIndex: 210 }} className="africa-pane">
               {/* Solid underlay to close anti-aliasing gaps and prevent drop-shadow bleed */}
-              <GeoJSON 
+              <GeoJSON
                 key="africa-underlay"
-                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }} 
+                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) } as any}
                 style={() => ({
                   fillColor: '#8b5a2b',
                   color: '#8b5a2b',
@@ -405,9 +462,9 @@ export default function MapComponent() {
                 })}
               />
               {/* Interactive layer with black borders */}
-              <GeoJSON 
+              <GeoJSON
                 key="africa-interactive"
-                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) }} 
+                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) } as any}
                 style={getCountryStyle}
                 onEachFeature={onEachFeature}
               />
@@ -446,11 +503,13 @@ export default function MapComponent() {
                     className: 'flowing-path'
                   }}
                 />
-                <Marker
-                  position={midPoint}
-                  icon={createArrowIcon(angle, route.color)}
-                  interactive={false}
-                />
+                {!(route as any).hideArrow && (
+                  <Marker
+                    position={midPoint}
+                    icon={createArrowIcon(angle, route.color)}
+                    interactive={false}
+                  />
+                )}
               </React.Fragment>
             );
           })}
