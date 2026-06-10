@@ -87,8 +87,8 @@ const historicalRoutes = [
   { id: '12', color: '#16a34a', start: [-12.3, 49.3] as [number, number], end: [-21.1, 55.5] as [number, number], control: [-16.0, 54.0] as [number, number] }, // Bắc Madagascar -> Reunion
 
   // Vòng qua Nam Phi sang bờ Tây
-  { id: '13', color: '#16a34a', start: [-21.1, 55.5] as [number, number], end: [-33.9, 18.4] as [number, number], control: [-35.0, 40.0] as [number, number] }, // Reunion -> Cape Town
-  { id: '14', color: '#16a34a', start: [-33.9, 18.4] as [number, number], end: [-8.8, 13.2] as [number, number], control: [-20.0, 10.0] as [number, number] }, // Cape Town -> Angola
+  { id: '13', color: '#16a34a', start: [-21.1, 55.5] as [number, number], end: [-36.0, 18.0] as [number, number], control: [-38.0, 40.0] as [number, number] }, // Reunion -> Cape Town (vòng ngoài khơi xa)
+  { id: '14', color: '#16a34a', start: [-36.0, 18.0] as [number, number], end: [-8.8, 13.2] as [number, number], control: [-20.0, 8.0] as [number, number] }, // Cape Town -> Angola (đẩy lùi ra Đại Tây Dương)
 
   // Đi ngược lên bờ Tây Châu Phi (đẩy cong ra ngoài biển để không lẹm đất liền)
   { id: '15a', color: '#16a34a', start: [-8.8, 13.2] as [number, number], end: [-5.8, 12.0] as [number, number], control: [-7.0, 9.0] as [number, number] }, // Angola -> Congo
@@ -164,9 +164,9 @@ const historicalRoutes = [
   { id: '6e', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [46.9, 7.4] as [number, number], control: [50.0, 11.0] as [number, number] }, // Berlin -> Switzerland
   { id: '6f', color: '#0ea5e9', start: [46.9, 7.4] as [number, number], end: [40.8, 14.3] as [number, number], control: [44.0, 10.0] as [number, number] }, // Switzerland -> Napoli
   { id: '6g', color: '#0ea5e9', start: [40.8, 14.3] as [number, number], end: [31.4, 30.1] as [number, number], control: [35.0, 24.0] as [number, number] }, // Napoli -> Port Said
-  { id: '6h', color: '#0ea5e9', start: [31.4, 30.1] as [number, number], end: [11.3, 43.3] as [number, number], control: [24.0, 40.0] as [number, number] }, // Port Said -> Djibouti
-  { id: '6i', color: '#0ea5e9', start: [11.3, 43.3] as [number, number], end: [5.7, 80.7] as [number, number], control: [10.0, 60.0] as [number, number] }, // Djibouti -> Sri Lanka
-  { id: '6j', color: '#0ea5e9', start: [5.7, 80.7] as [number, number], end: [1.15, 104.01] as [number, number], control: [4.0, 92.0] as [number, number] }, // Sri Lanka -> Singapore
+  { id: '6h', color: '#0ea5e9', start: [31.4, 30.1] as [number, number], end: [11.3, 43.3] as [number, number], control: [21.5, 37.5] as [number, number] }, // Port Said -> Djibouti
+  { id: '6i', color: '#0ea5e9', start: [11.3, 43.3] as [number, number], end: [5.7, 80.7] as [number, number], control: [14.0, 60.0] as [number, number] }, // Djibouti -> Sri Lanka (vòng qua Mũi Sừng Châu Phi)
+  { id: '6j', color: '#0ea5e9', start: [5.7, 80.7] as [number, number], end: [1.15, 104.01] as [number, number], control: [7.0, 95.0] as [number, number] }, // Sri Lanka -> Singapore (vòng qua eo biển Malacca)
   { id: '6k', color: '#0ea5e9', start: [1.15, 104.01] as [number, number], end: [13.7, 100.5] as [number, number], control: [7.0, 105.0] as [number, number] }, // Singapore -> Bangkok
 
   // Chặng 7: Hoạt động ở Châu Á (Dark Green) - Lộ trình đơn giản hóa
@@ -175,6 +175,23 @@ const historicalRoutes = [
   { id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
   { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
   { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
+
+  // Chặng 9: Hành trình về nước qua ngả Tân Cương (Red)
+  { id: '9a', color: '#dc2626', start: [55.7, 37.6] as [number, number], end: [56.3, 44.0] as [number, number], control: [56.5, 40.8] as [number, number] }, // Moscow -> Nizhniy Novgorod
+  { id: '9b', color: '#dc2626', start: [56.3, 44.0] as [number, number], end: [55.8, 49.1] as [number, number], control: [56.5, 46.5] as [number, number] }, // Nizhniy Novgorod -> Kazan
+  { id: '9c', color: '#dc2626', start: [55.8, 49.1] as [number, number], end: [56.8, 60.6] as [number, number], control: [57.0, 54.8] as [number, number] }, // Kazan -> Yekaterinburg
+  { id: '9d', color: '#dc2626', start: [56.8, 60.6] as [number, number], end: [55.0, 73.3] as [number, number], control: [56.5, 67.0] as [number, number] }, // Yekaterinburg -> Omsk
+  { id: '9e', color: '#dc2626', start: [55.0, 73.3] as [number, number], end: [43.8, 87.6] as [number, number], control: [49.4, 80.4] as [number, number] }, // Omsk -> Urumqi
+  { id: '9f', color: '#dc2626', start: [43.8, 87.6] as [number, number], end: [36.1, 103.8] as [number, number], control: [40.0, 95.7] as [number, number] }, // Urumqi -> Lanzhou
+  { id: '9g', color: '#dc2626', start: [36.1, 103.8] as [number, number], end: [34.3, 108.9] as [number, number], control: [35.2, 106.3] as [number, number] }, // Lanzhou -> Xi'an
+
+  // Chặng 10: Hoạt động ở Trung Quốc
+  { id: '10a', color: '#dc2626', start: [34.3, 108.9] as [number, number], end: [37.8, 112.5] as [number, number], control: [36.0, 110.7] as [number, number] }, // Xi'an -> Taiyuan
+  { id: '10b', color: '#dc2626', start: [37.8, 112.5] as [number, number], end: [25.2, 110.2] as [number, number], control: [31.5, 111.3] as [number, number] }, // Taiyuan -> Guilin
+
+  // Chặng 11: Trở về Tổ quốc (Black)
+  { id: '11a', color: '#000000', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
+  { id: '11b', color: '#000000', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
 ];
 
 const createCustomIcon = () => {
@@ -499,7 +516,7 @@ export default function MapComponent() {
 
         {/* Render Historical Routes (Flowing Dashed Lines with Arrows) */}
         <Pane name="routesPane" style={{ zIndex: 500 }}>
-          {historicalRoutes.map(route => {
+          {historicalRoutes.map((route) => {
             const curvePoints = getBezierCurve(route.start, route.end, route.control);
             // Angle of the tangent at midpoint is parallel to the line from start to end
             const angle = Math.atan2(route.start[0] - route.end[0], route.end[1] - route.start[1]) * (180 / Math.PI);
