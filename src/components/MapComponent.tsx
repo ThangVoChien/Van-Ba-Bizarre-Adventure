@@ -395,12 +395,12 @@ export default function MapComponent() {
   ];
 
   const countryLabels = [
-    { id: 'VN', name: "VIETNAM", coords: [20.5, 104.5] as [number, number], width: 40, tracking: '1px', transform: 'scale(0.4)' },
+    { id: 'VN', name: "VIETNAM", coords: [14.0, 108.0] as [number, number], width: 40, tracking: '1px', transform: 'scale(0.4)' },
     { id: 'FR', name: "FRANCE", coords: [46.5, 2.5] as [number, number], width: 60, tracking: '2px', transform: 'scale(0.4)' },
     { id: 'UK', name: "U.K.", coords: [54.0, -2.5] as [number, number], width: 40, tracking: '1px', transform: 'scale(0.4)' },
     { id: 'RU', name: "RUSSIA", coords: [56.0, 95.0] as [number, number], width: 250, tracking: '16px', transform: 'scale(0.9)' },
     { id: 'CN', name: "CHINA", coords: [36.0, 104.0] as [number, number], width: 120, tracking: '8px', transform: 'scale(0.7)' },
-    { id: 'TH', name: "THAILAND", coords: [15.5, 101.0] as [number, number], width: 60, tracking: '1px', transform: 'scale(0.35)' },
+    { id: 'TH', name: "THAILAND", coords: [14.0, 101.0] as [number, number], width: 60, tracking: '1px', transform: 'scale(0.35)' },
     { id: 'US', name: "USA", coords: [38.0, -97.0] as [number, number], width: 100, tracking: '6px', transform: 'scale(0.7)' },
     { id: 'AF', name: "AFRICA", coords: [8.0, 20.0] as [number, number], width: 200, tracking: '15px', transform: 'scale(0.8)' }
   ];
