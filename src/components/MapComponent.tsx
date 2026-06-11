@@ -41,7 +41,7 @@ const journeyLocations = [
   { id: 3, name: "Colombo, Sri Lanka", year: "1911", desc: "Điểm dừng chân trên biển Ấn Độ Dương.", coords: [5.9, 80.5] as [number, number] },
   { id: 4, name: "Madagascar", year: "1911", desc: "Bác chứng kiến nỗi khổ của người dân thuộc địa tại châu Phi.", coords: [-18.8, 47.5] as [number, number] },
   { id: 5, name: "Cape Town, Nam Phi", year: "1911", desc: "Điểm vòng qua mũi nam của lục địa châu Phi.", coords: [-35.0, 20.0] as [number, number] },
-  { id: 6, name: "Dakar, Senegal", year: "1911", desc: "Tàu cập cảng Tây Phi trước khi hướng về châu Âu.", coords: [14.6, -17.4] as [number, number] },
+  { id: 6, name: "Oran, Algeria", year: "1911", desc: "Trên đường sang Pháp, con tàu ghé lại cảng Oran (Bắc Phi). Bác thấy người Pháp cũng đối xử tàn tệ với người bản xứ như ở Đông Dương.", coords: [35.7, -0.6] as [number, number] },
   { id: 7, name: "Le Havre, Pháp", year: "1911", desc: "Điểm đến đầu tiên tại Pháp. Bác bắt đầu cuộc sống lao động và tìm hiểu nước Pháp.", coords: [49.4, 0.1] as [number, number] },
   { id: 8, name: "Paris, Pháp", year: "1917-1923", desc: "Nơi Bác gửi Yêu sách của nhân dân An Nam và tham gia sáng lập Đảng Cộng sản Pháp.", coords: [48.8566, 2.3522] as [number, number] },
   { id: 9, name: "Rio de Janeiro, Brazil", year: "1912", desc: "Làm việc trên các con tàu vận tải quốc tế, Bác dừng chân tại Rio de Janeiro (Brazil). Người ở lại khu phố Santa Teresa, làm vườn, phụ bếp và kết giao với giới công nhân cảng để tìm hiểu đời sống của nhân dân lao động bản xứ.", coords: [-22.9, -43.1] as [number, number] },
@@ -64,7 +64,11 @@ const journeyLocations = [
   { id: 26, name: "Tây An (Xi'an), Trung Quốc", year: "1938", desc: "Hoạt động tại Văn phòng Bát Lộ Quân.", coords: [34.3, 108.9] as [number, number] },
   { id: 27, name: "Côn Minh, Trung Quốc", year: "1940", desc: "Nơi Bác nhận định thời cơ cách mạng Việt Nam đã đến.", coords: [25.0, 102.7] as [number, number] },
   { id: 28, name: "Quế Lâm, Trung Quốc", year: "1940", desc: "Bác tổ chức lớp huấn luyện cán bộ và xuất bản báo.", coords: [25.2, 110.2] as [number, number] },
-  { id: 29, name: "Pác Bó, Cao Bằng", year: "1941", desc: "Ngày 28/1/1941, Bác chính thức đặt chân về Tổ quốc sau 30 năm.", coords: [22.9806, 106.0504] as [number, number] }
+  { id: 29, name: "Pác Bó, Cao Bằng", year: "1941", desc: "Ngày 28/1/1941, Bác chính thức đặt chân về Tổ quốc sau 30 năm.", coords: [22.9806, 106.0504] as [number, number] },
+  { id: 30, name: "Port Said, Ai Cập", year: "1911", desc: "Tàu đi qua kênh đào Suez và dừng chân tại Port Said. Tại đây, Bác chứng kiến cảnh những người lao động châu Phi bị bóc lột thậm tệ.", coords: [24.0, 30.8] as [number, number] },
+  { id: 31, name: "Cảng Luanda, Angola", year: "1911", desc: "Trên hành trình dọc bờ biển Tây Phi, con tàu đi qua vùng biển Angola. Bác tiếp tục ghi nhận cuộc sống lầm than của người dân các nước thuộc địa.", coords: [-14.0, 17.8] as [number, number] },
+  { id: 32, name: "Somalia", year: "1911", desc: "Tàu đi qua vùng biển thuộc châu Phi. Bác tận mắt chứng kiến sự tàn bạo của chủ nghĩa thực dân đối với người dân bản xứ.", coords: [-0.5, 44.5] as [number, number] },
+  { id: 33, name: "Lagos, Nigeria", year: "1911", desc: "Hành trình đi dọc bờ biển Tây Phi qua các cảng biển châu Phi, càng củng cố thêm nhận thức của Bác về nỗi đau chung của các dân tộc bị áp bức.", coords: [6.5, 8.6] as [number, number] }
 ];
 
 // Helper function to generate bezier curve points for smooth oceanic paths
@@ -537,18 +541,7 @@ export default function MapComponent() {
       window.addEventListener('keydown', handleKeyDown);
     }
 
-    // Highlight Africa ONLY when it's clicked/selected
-    const africaPane = document.querySelector('.africa-pane') as HTMLElement;
-    if (africaPane) {
-      if (selectedLoc?.id === 99) {
-        africaPane.style.filter = 'drop-shadow(0 0 8px #fbbf24) drop-shadow(0 0 12px #fbbf24)';
-        africaPane.style.transition = 'filter 0.3s ease';
-        africaPane.style.zIndex = '600';
-      } else {
-        africaPane.style.filter = '';
-        africaPane.style.zIndex = '210';
-      }
-    }
+    // Highlight logic for Africa pane is removed since Africa is now individual countries
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedLoc]);
@@ -569,7 +562,7 @@ export default function MapComponent() {
   const visitedCountries = [
     "Vietnam", "France", "United Kingdom", "Russia", "China", "Thailand", "United States of America",
     "Singapore", "Sri Lanka", "Brazil", "Argentina", "Germany",
-    ...africanCountries
+    "Madagascar", "South Africa", "Algeria", "Egypt", "Angola", "Somalia", "Nigeria"
   ];
 
   const countryLabels = [
@@ -583,7 +576,13 @@ export default function MapComponent() {
     { id: 'US', name: "USA", coords: [38.0, -97.0] as [number, number], width: 100, tracking: '6px', transform: isMobile ? 'scale(0.4)' : 'scale(0.7)' },
     { id: 'BR', name: "BRAZIL", coords: [-10.0, -53.0] as [number, number], width: 100, tracking: '6px', transform: isMobile ? 'scale(0.4)' : 'scale(0.7)' },
     { id: 'AR', name: "ARGENTINA", coords: [-35.0, -64.0] as [number, number], width: 120, tracking: '4px', transform: isMobile ? 'scale(0.35)' : 'scale(0.6)' },
-    { id: 'AF', name: "AFRICA", coords: [8.0, 20.0] as [number, number], width: 200, tracking: '15px', transform: isMobile ? 'scale(0.5)' : 'scale(0.8)' }
+    { id: 'DZ', name: "ALGERIA", coords: [26.0, 1.6] as [number, number], width: 70, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'ZA', name: "NAM PHI", coords: [-33.0, 22.9] as [number, number], width: 80, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'MG', name: "MADAGASCAR", coords: [-21.5, 46.8] as [number, number], width: 100, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'EG', name: "AI CẬP", coords: [24.0, 30.8] as [number, number], width: 60, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'AO', name: "ANGOLA", coords: [-14.0, 17.8] as [number, number], width: 70, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'SO', name: "SOMALIA", coords: [-0.5, 44.5] as [number, number], width: 70, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' },
+    { id: 'NG', name: "NIGERIA", coords: [6.5, 8.6] as [number, number], width: 70, tracking: '1px', transform: isMobile ? 'scale(0.2)' : 'scale(0.35)' }
   ];
 
   const createCountryLabel = (label: any) => {
@@ -607,7 +606,14 @@ export default function MapComponent() {
       "Russia": "#e8c382", // Pine (Very light)
       "China": "#dca965", // Maple (Warm light)
       "Thailand": "#c18a53", // Teak (Medium warm)
-      "United States of America": "#a0522d" // Sienna (Reddish brown)
+      "United States of America": "#a0522d", // Sienna (Reddish brown)
+      "Madagascar": "#9fc088", // Sage Green
+      "South Africa": "#f29d9d", // Soft Pink
+      "Algeria": "#fba94b", // Soft Orange
+      "Egypt": "#fce181", // Soft Yellow
+      "Angola": "#d8b4e2", // Lilac
+      "Somalia": "#8bbde3", // Light Blue
+      "Nigeria": "#a1d5c9" // Teal
     };
 
     if (visitedCountries.includes(name) && colorMap[name]) {
@@ -617,15 +623,6 @@ export default function MapComponent() {
         color: 'rgba(0,0,0,0.6)', // Subtle edge line
         fillOpacity: 1,
         className: 'wooden-continent' // Apply drop shadow
-      };
-    } else if (africanCountries.includes(name)) {
-      // Single dark distinct wood tone for all of Africa (Vietnam's old color)
-      return {
-        fillColor: '#8b5a2b',
-        weight: 1,
-        color: 'rgba(0,0,0,0.6)', // Standard black border
-        fillOpacity: 1,
-        className: 'africa-continent' // Custom class without individual drop shadows
       };
     } else if (visitedCountries.includes(name)) {
       let hash = 0;
@@ -656,17 +653,6 @@ export default function MapComponent() {
   const handleCountryClick = (feature: any) => {
     const name = feature?.properties?.name;
 
-    if (africanCountries.includes(name)) {
-      setSelectedLoc({
-        id: 99,
-        name: "Lục địa Châu Phi",
-        year: "1911",
-        desc: "Bác làm phụ bếp trên con tàu Đô đốc Latouche-Tréville, đi qua nhiều cảng biển ở Châu Phi như Dakar (Senegal), Madagascar, Algeria, Ai Cập... để tìm hiểu đời sống của nhân dân thuộc địa.",
-        coords: [8.0, 20.0]
-      });
-      return;
-    }
-
     let searchString = "";
     if (name === "Vietnam") searchString = "Việt Nam";
     else if (name === "France") searchString = "Pháp";
@@ -680,6 +666,13 @@ export default function MapComponent() {
     else if (name === "Brazil") searchString = "Brazil";
     else if (name === "Argentina") searchString = "Argentina";
     else if (name === "Germany") searchString = "Đức";
+    else if (name === "Madagascar") searchString = "Madagascar";
+    else if (name === "South Africa") searchString = "Nam Phi";
+    else if (name === "Algeria") searchString = "Algeria";
+    else if (name === "Egypt") searchString = "Ai Cập";
+    else if (name === "Angola") searchString = "Angola";
+    else if (name === "Somalia") searchString = "Somalia";
+    else if (name === "Nigeria") searchString = "Nigeria";
 
     if (searchString) {
       const locs = journeyLocations.filter(l => l.name.includes(searchString));
@@ -702,26 +695,10 @@ export default function MapComponent() {
   const onEachFeature = (feature: any, layer: any) => {
     layer.on({
       mouseover: (e: any) => {
-        const name = feature?.properties?.name;
-        if (africanCountries.includes(name)) {
-          const pane = document.querySelector('.africa-pane') as HTMLElement;
-          if (pane) {
-            pane.classList.add('africa-pane-hover');
-          }
-        } else {
-          // Let CSS handle hover effects for non-African countries
-        }
+        // Let CSS handle hover effects for all countries
       },
       mouseout: (e: any) => {
-        const name = feature?.properties?.name;
-        if (africanCountries.includes(name)) {
-          const pane = document.querySelector('.africa-pane') as HTMLElement;
-          if (pane) {
-            pane.classList.remove('africa-pane-hover');
-          }
-        } else {
-          // CSS hover naturally reverts when mouse leaves
-        }
+        // CSS hover naturally reverts when mouse leaves
       },
       click: () => {
         handleCountryClick(feature);
@@ -783,36 +760,13 @@ export default function MapComponent() {
         {/* Render the world map using GeoJSON polygons to look like wooden cutouts */}
         {geoData && (
           <>
-            {/* Render all non-African countries on the default pane */}
+            {/* Render all countries on the default pane */}
             <GeoJSON
-              key="rest-of-world"
-              data={{ ...geoData, features: geoData.features.filter((f: any) => !africanCountries.includes(f.properties.name)) }}
+              key="world-map"
+              data={geoData}
               style={getCountryStyle}
               onEachFeature={onEachFeature}
             />
-            {/* Render Africa in a custom pane to apply an outer shadow without internal shadows */}
-            <Pane name="africaPane" style={{ zIndex: 210 }} className="africa-pane">
-              {/* Solid underlay to close anti-aliasing gaps and prevent drop-shadow bleed */}
-              <GeoJSON
-                key="africa-underlay"
-                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) } as any}
-                style={() => ({
-                  fillColor: '#8b5a2b',
-                  color: '#8b5a2b',
-                  weight: 3,
-                  fillOpacity: 1,
-                  className: 'africa-continent',
-                  interactive: false // Don't intercept clicks
-                })}
-              />
-              {/* Interactive layer with black borders */}
-              <GeoJSON
-                key="africa-interactive"
-                data={{ type: 'FeatureCollection', features: geoData.features.filter((f: any) => africanCountries.includes(f.properties.name)) } as any}
-                style={getCountryStyle}
-                onEachFeature={onEachFeature}
-              />
-            </Pane>
           </>
         )}
 

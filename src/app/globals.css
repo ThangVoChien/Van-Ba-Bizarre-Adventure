@@ -115,20 +115,7 @@ body {
   transform: translateY(-2px) scale(1.005);
 }
 
-/* Africa continent - merged visually by removing individual drop shadows */
-.africa-continent {
-  filter: none;
-  transition: all 0.3s ease;
-}
 
-.africa-pane {
-  transition: transform 0.3s ease, filter 0.3s ease !important;
-}
-
-.africa-pane-hover {
-  filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.7)) drop-shadow(2px 5px 4px rgba(0, 0, 0, 0.5));
-  transform: translateY(-2px) scale(1.005);
-}
 
 /* Unvisited continents blend into the background wall */
 .unvisited-continent {
@@ -354,9 +341,9 @@ body {
   background: rgba(212, 175, 55, 0.8);
 }
 
-/* Restore yellow focus ring for non-African countries, but exclude African countries so they only glow as a whole continent */
-path.leaflet-interactive:not(.africa-continent):focus,
-path.leaflet-interactive:not(.africa-continent):focus-visible {
+/* Custom focus ring for countries */
+path.leaflet-interactive:focus,
+path.leaflet-interactive:focus-visible {
   outline: none !important;
   stroke: var(--gold-1) !important;
   stroke-width: 3px !important;
