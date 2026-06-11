@@ -103,6 +103,7 @@ const historicalRoutes = [
   { id: '16c', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [43.3, 5.4] as [number, number], control: [38.0, 0.0] as [number, number] }, // Gibraltar -> Marseille
 
   // Chặng 3: Pháp - Châu Mỹ - Anh (Dark Blue)
+  { id: '17', color: '#1e3a8a', start: [43.3, 5.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [46.0, 3.0] as [number, number] }, // Marseille -> Le Havre
   { id: '18', color: '#1e3a8a', start: [49.5, 0.1] as [number, number], end: [48.5, -6.5] as [number, number], control: [49.5, -3.0] as [number, number] }, // Le Havre -> Ngoài khơi Tây Pháp
   { id: '18b', color: '#1e3a8a', start: [48.5, -6.5] as [number, number], end: [14.6, -61.0] as [number, number], control: [30.0, -45.0] as [number, number] }, // Ngoài khơi Tây Pháp -> vùng Caribbean
   { id: '19', color: '#1e3a8a', start: [14.6, -61.0] as [number, number], end: [-7.0, -25.0] as [number, number], control: [5.0, -35.0] as [number, number] }, // Caribbean -> Ngoài khơi Brazil (vòng ngoài)
@@ -145,7 +146,7 @@ const historicalRoutes = [
   { id: '26d', color: '#9333ea', start: [24.4, 118.0] as [number, number], end: [22.3, 114.1] as [number, number], control: [22.5, 116.5] as [number, number] }, // Xiamen -> Guangzhou
 
   { id: '27a', color: '#9333ea', start: [22.3, 114.1] as [number, number], end: [24.6, 118.5] as [number, number], control: [21.6, 117.75] as [number, number] }, // Guangzhou -> Xiamen
-  { id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [28.2, 124.5] as [number, number] }, // Xiamen -> Shanghai
+  { id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [29.0, 126.0] as [number, number] }, // Xiamen -> Shanghai (Uốn cong ra xa bờ hơn để dễ nhìn)
   { id: '27c', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
   { id: '27d', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
   { id: '28i', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
@@ -177,19 +178,19 @@ const historicalRoutes = [
   { id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
   { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
   { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
-  // Chặng 8: Thượng Hải - Moskva (Purple)
-  { id: '8a', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
-  { id: '8b', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
-  { id: '8c', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
-  { id: '8d', color: '#9333ea', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [54.6, 130.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
-  { id: '8e', color: '#9333ea', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [55.6, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
-  { id: '8f', color: '#9333ea', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [53.0, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
-  { id: '8g', color: '#9333ea', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [58.1, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk
-  { id: '8h', color: '#9333ea', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [56.3, 78.0] as [number, number] }, // Novosibirsk -> Omsk
-  { id: '8i', color: '#9333ea', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [56.65, 71.45] as [number, number] }, // Omsk -> Ishim
-  { id: '8j', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
-  { id: '8k', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
-  { id: '8l', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
+  // Chặng 8: Thượng Hải - Moskva (Black - vẽ song song với chặng 5 về)
+  { id: '8a', color: '#000000', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [31.5, 127.5] as [number, number] }, // Shanghai -> Tsushima
+  { id: '8b', color: '#000000', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [40.5, 137.5] as [number, number] }, // Tsushima -> Vladivostok
+  { id: '8c', color: '#000000', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [46.5, 137.0] as [number, number] }, // Vladivostok -> Khabarovsk
+  { id: '8d', color: '#000000', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [53.0, 131.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
+  { id: '8e', color: '#000000', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [54.0, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
+  { id: '8f', color: '#000000', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [51.5, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
+  { id: '8g', color: '#000000', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [59.5, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk
+  { id: '8h', color: '#000000', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [57.5, 78.0] as [number, number] }, // Novosibirsk -> Omsk
+  { id: '8i', color: '#000000', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [57.8, 71.45] as [number, number] }, // Omsk -> Ishim
+  { id: '8j', color: '#000000', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [58.0, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
+  { id: '8k', color: '#000000', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [56.5, 55.7] as [number, number] }, // Chelyabinsk -> Samara
+  { id: '8l', color: '#000000', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [56.5, 43.8] as [number, number] }, // Samara -> Moscow
 
   // Chặng 9: Hành trình về nước qua ngả Tân Cương (Red)
   { id: '9a', color: '#dc2626', start: [55.7, 37.6] as [number, number], end: [56.3, 44.0] as [number, number], control: [56.5, 40.8] as [number, number] }, // Moscow -> Nizhniy Novgorod
@@ -203,9 +204,9 @@ const historicalRoutes = [
   { id: '10a', color: '#dc2626', start: [34.3, 108.9] as [number, number], end: [37.8, 112.5] as [number, number], control: [36.0, 110.7] as [number, number] }, // Xi'an -> Taiyuan
   { id: '10b', color: '#dc2626', start: [37.8, 112.5] as [number, number], end: [25.2, 110.2] as [number, number], control: [31.5, 111.3] as [number, number] }, // Taiyuan -> Guilin
 
-  // Chặng 10: Trở về Tổ quốc (Black)
-  { id: '11a', color: '#000000', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
-  { id: '11b', color: '#000000', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
+  // Chặng 10: Trở về Tổ quốc (Yellow)
+  { id: '11a', color: '#eab308', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
+  { id: '11b', color: '#eab308', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
 ];
 
 const createCustomIcon = () => {
@@ -236,9 +237,22 @@ const routeLegend = [
   { id: 5, prefix: "5.1 - 5.7", label: "Chặng 5: Moskva - Quảng Châu", color: "#9333ea" },
   { id: 6, prefix: "6.1 - 6.7", label: "Chặng 6: Moskva - Xiêm", color: "#0ea5e9" },
   { id: 7, prefix: "7.1 - 7.14", label: "Chặng 7: Hong Kong - Thượng Hải", color: "#15803d" },
-  { id: 8, prefix: "8.1 - 8.3", label: "Chặng 8: Thượng Hải - Moskva", color: "#9333ea" },
+  { id: 8, prefix: "8.1 - 8.3", label: "Chặng 8: Thượng Hải - Moskva", color: "#000000" },
   { id: 9, prefix: "9.1 - 9.4", label: "Chặng 9: Moskva - Quế Lâm", color: "#dc2626" },
-  { id: 10, prefix: "10.1 - 10.8", label: "Chặng 10: Quế Lâm - Pác Bó", color: "#000000" },
+  { id: 10, prefix: "10.1 - 10.8", label: "Chặng 10: Quế Lâm - Pác Bó", color: "#eab308" },
+];
+
+const stageStartIndices = [
+  0,
+  historicalRoutes.findIndex(r => r.id === '7'),
+  historicalRoutes.findIndex(r => r.id === '18'),
+  historicalRoutes.findIndex(r => r.id === '22_to_23'),
+  historicalRoutes.findIndex(r => r.id === '25a'),
+  historicalRoutes.findIndex(r => r.id === '6a'),
+  historicalRoutes.findIndex(r => r.id === '7a'),
+  historicalRoutes.findIndex(r => r.id === '8a'),
+  historicalRoutes.findIndex(r => r.id === '9a'),
+  historicalRoutes.findIndex(r => r.id === '11a'),
 ];
 
 export default function MapComponent() {
@@ -574,11 +588,6 @@ export default function MapComponent() {
             return historicalRoutes.map((route, index) => {
               if (routeProgress <= index) return null;
 
-              const isStage5Return = route.id.startsWith('27') || route.id.startsWith('28');
-              if (isStage5Return && stage8StartIndex !== -1 && routeProgress >= stage8StartIndex) {
-                 return null; // Xóa chiều về chặng 5 khi bắt đầu vẽ chặng 8
-              }
-
               const routeLocalProgress = Math.min(1, routeProgress - index);
               const curvePoints = getBezierCurve(route.start, route.end, route.control);
             
@@ -661,16 +670,29 @@ export default function MapComponent() {
           fontFamily: "'Montserrat', sans-serif"
         }}
       >
-        {routeLegend.map(item => (
-          <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30px' }}>
-              <div style={{ width: '100%', height: '3px', backgroundColor: item.color, borderRadius: '1.5px', boxShadow: '0 1px 3px rgba(0,0,0,0.6)' }}></div>
+        {routeLegend.map((item, index) => {
+          const isVisible = routeProgress >= stageStartIndices[index];
+          return (
+            <div 
+              key={item.id} 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '10px',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                transition: 'all 0.5s ease-out'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30px' }}>
+                <div style={{ width: '100%', height: '3px', backgroundColor: item.color, borderRadius: '1.5px', boxShadow: '0 1px 3px rgba(0,0,0,0.6)' }}></div>
+              </div>
+              <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc', textShadow: '1px 1px 2px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.9), 1px -1px 2px rgba(0,0,0,0.9), -1px 1px 2px rgba(0,0,0,0.9), 0px 2px 4px rgba(0,0,0,0.8)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>
+                {item.label}
+              </span>
             </div>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc', textShadow: '1px 1px 2px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.9), 1px -1px 2px rgba(0,0,0,0.9), -1px 1px 2px rgba(0,0,0,0.9), 0px 2px 4px rgba(0,0,0,0.8)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>
-              {item.label}
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Tiny Start Button */}
