@@ -60,10 +60,10 @@ const historicalRoutes = [
   { id: '5', color: '#ea580c', start: [31.2, 29.9] as [number, number], end: [43.3, 5.4] as [number, number], control: [36.0, 20.0] as [number, number] }, // Port Said -> Marseille
 
   // Hành trình đi biển vòng quanh TBN sang Bắc Pháp (Chặng 1)
-  { id: '6', color: '#ea580c', start: [43.3, 5.4] as [number, number], end: [36.0, -6.0] as [number, number], control: [38.0, 3.0] as [number, number] }, // Marseille -> Gibraltar
-  { id: '6b', color: '#ea580c', start: [36.0, -6.0] as [number, number], end: [43.0, -10.0] as [number, number], control: [39.0, -12.0] as [number, number] }, // Gibraltar -> Mũi Tây Ban Nha (Outer)
-  { id: '6c', color: '#ea580c', start: [43.0, -10.0] as [number, number], end: [48.5, -6.0] as [number, number], control: [46.0, -10.0] as [number, number] }, // Tây Ban Nha -> Mũi Tây Pháp (Outer)
-  { id: '6d', color: '#ea580c', start: [48.5, -6.0] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.5, -3.0] as [number, number] }, // Mũi Tây Pháp -> Le Havre (Outer)
+  { id: '1_6a', color: '#ea580c', start: [43.3, 5.4] as [number, number], end: [36.0, -6.0] as [number, number], control: [38.0, 3.0] as [number, number] }, // Marseille -> Gibraltar
+  { id: '1_6b', color: '#ea580c', start: [36.0, -6.0] as [number, number], end: [43.0, -10.0] as [number, number], control: [39.0, -12.0] as [number, number] }, // Gibraltar -> Mũi Tây Ban Nha (Outer)
+  { id: '1_6c', color: '#ea580c', start: [43.0, -10.0] as [number, number], end: [48.5, -6.0] as [number, number], control: [46.0, -10.0] as [number, number] }, // Tây Ban Nha -> Mũi Tây Pháp (Outer)
+  { id: '1_6d', color: '#ea580c', start: [48.5, -6.0] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.5, -3.0] as [number, number] }, // Mũi Tây Pháp -> Le Havre (Outer)
 
   // Chặng 2: Đi quanh châu Phi (Green) - Chiều KIM ĐỒNG HỒ
   // Bắt đầu từ Cảng Tây Bắc (Le Havre) vòng qua Tây Ban Nha vào Địa Trung Hải
@@ -78,12 +78,12 @@ const historicalRoutes = [
   { id: '10a4', color: '#16a34a', start: [32.8, 13.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [33.0, 22.0] as [number, number] }, // Libya -> Egypt
 
   // Từ Ai Cập đi xuống bờ Đông Châu Phi (Biển Đỏ -> Ấn Độ Dương)
-  { id: '11', color: '#16a34a', start: [31.2, 29.9] as [number, number], end: [11.5, 43.1] as [number, number], control: [23.0, 39.0] as [number, number] }, // Egypt -> Djibouti
-  { id: '11b', color: '#16a34a', start: [11.5, 43.1] as [number, number], end: [11.8, 51.5] as [number, number], control: [13.5, 47.0] as [number, number] }, // Djibouti -> Mũi Sừng Châu Phi
-  { id: '11c', color: '#16a34a', start: [11.8, 51.5] as [number, number], end: [2.0, 45.3] as [number, number], control: [7.0, 49.5] as [number, number] }, // Mũi Sừng Châu Phi -> Somalia
-  { id: '11d', color: '#16a34a', start: [2.0, 45.3] as [number, number], end: [-4.0, 39.6] as [number, number], control: [0.0, 44.0] as [number, number] }, // Somalia -> Kenya
-  { id: '11e', color: '#16a34a', start: [-4.0, 39.6] as [number, number], end: [-6.8, 39.2] as [number, number], control: [-5.5, 41.0] as [number, number] }, // Kenya -> Tanzania
-  { id: '11f', color: '#16a34a', start: [-6.8, 39.2] as [number, number], end: [-12.3, 49.3] as [number, number], control: [-8.0, 45.0] as [number, number] }, // Tanzania -> Bắc Madagascar
+  { id: '2_11a', color: '#16a34a', start: [31.2, 29.9] as [number, number], end: [11.5, 43.1] as [number, number], control: [23.0, 39.0] as [number, number] }, // Egypt -> Djibouti
+  { id: '2_11b', color: '#16a34a', start: [11.5, 43.1] as [number, number], end: [11.8, 51.5] as [number, number], control: [13.5, 47.0] as [number, number] }, // Djibouti -> Mũi Sừng Châu Phi
+  { id: '2_11c', color: '#16a34a', start: [11.8, 51.5] as [number, number], end: [2.0, 45.3] as [number, number], control: [7.0, 49.5] as [number, number] }, // Mũi Sừng Châu Phi -> Somalia
+  { id: '2_11d', color: '#16a34a', start: [2.0, 45.3] as [number, number], end: [-4.0, 39.6] as [number, number], control: [0.0, 44.0] as [number, number] }, // Somalia -> Kenya
+  { id: '2_11e', color: '#16a34a', start: [-4.0, 39.6] as [number, number], end: [-6.8, 39.2] as [number, number], control: [-5.5, 41.0] as [number, number] }, // Kenya -> Tanzania
+  { id: '2_11f', color: '#16a34a', start: [-6.8, 39.2] as [number, number], end: [-12.3, 49.3] as [number, number], control: [-8.0, 45.0] as [number, number] }, // Tanzania -> Bắc Madagascar
   { id: '12', color: '#16a34a', start: [-12.3, 49.3] as [number, number], end: [-21.1, 55.5] as [number, number], control: [-16.0, 54.0] as [number, number] }, // Bắc Madagascar -> Reunion
 
   // Vòng qua Nam Phi sang bờ Tây
