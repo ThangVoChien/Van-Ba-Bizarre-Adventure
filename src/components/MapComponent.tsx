@@ -221,12 +221,12 @@ const createCustomIcon = () => {
 };
 
 const createArrowIcon = (angle: number, color: string, isMobile: boolean = false) => {
-  const size = isMobile ? 8 : 14;
+  const size = isMobile ? 12 : 16; // Tăng size lên một chút xíu để dễ nhìn trên mobile, vì đường đứt nét đã dày 2.5px
   const anchor = size / 2;
   return L.divIcon({
     className: 'custom-arrow-icon',
-    html: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="transform: rotate(${angle}deg); transform-origin: center; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));">
-            <path fill="${color}" d="M24 12l-24-12v24z"/>
+    html: `<svg width="${size}" height="${size}" viewBox="-12 -12 24 24" style="transform: rotate(${angle}deg); transform-origin: 50% 50%; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); display: block;">
+            <path fill="${color}" d="M 8 0 L -10 -8 L -10 8 Z"/>
            </svg>`,
     iconSize: [size, size],
     iconAnchor: [anchor, anchor]
