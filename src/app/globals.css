@@ -157,8 +157,8 @@ body {
 }
 
 @keyframes flow {
-  from { stroke-dashoffset: 200; }
-  to { stroke-dashoffset: 0; }
+  from { stroke-dashoffset: 200px; }
+  to { stroke-dashoffset: 0px; }
 }
 
 /* Custom Arrow Icon */
