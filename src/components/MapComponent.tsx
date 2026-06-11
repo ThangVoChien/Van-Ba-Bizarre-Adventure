@@ -526,7 +526,7 @@ export default function MapComponent() {
     <div className="map-frame-wrapper">
       <MapContainer
         center={[20, 20]}
-        zoom={2.85}
+        zoom={2.5}
         zoomSnap={0.05}
         zoomControl={false}
         dragging={false}
