@@ -366,6 +366,7 @@ export default function MapComponent() {
   const [selectedLoc, setSelectedLoc] = useState<typeof journeyLocations[0] | null>(null);
   const [geoData, setGeoData] = useState<any>(null);
   const [routeProgress, setRouteProgress] = useState<number>(historicalRoutes.length);
+  const [isExploreActive, setIsExploreActive] = useState<boolean>(false);
   const animationRef = useRef<number | null>(null);
   const africaGeoJsonRef = useRef<any>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -383,6 +384,7 @@ export default function MapComponent() {
           cancelAnimationFrame(animationRef.current);
         }
         setRouteProgress(historicalRoutes.length); // Stop animation and show full map
+        setIsExploreActive(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -399,6 +401,7 @@ export default function MapComponent() {
     
     setSelectedLoc(null); // Ensure popup is hidden during animation
     setRouteProgress(-1);
+    setIsExploreActive(true);
     isCanceledRef.current = false;
 
     // Phát nhạc mở đầu
@@ -479,6 +482,9 @@ export default function MapComponent() {
 
     if (isCanceledRef.current) return;
 
+    // Đặt routeProgress full để Tiêu đề hiện ra ngay khi bắt đầu phát lời kết thúc
+    setRouteProgress(historicalRoutes.length);
+
     // Phát nhạc kết thúc
     const ketthuc = new Audio('/voice/ket_thuc.wav');
     audioRef.current = ketthuc;
@@ -487,10 +493,7 @@ export default function MapComponent() {
       ketthuc.onerror = () => resolve();
       ketthuc.play().catch(() => resolve());
     });
-    
-    if (!isCanceledRef.current) {
-      setRouteProgress(historicalRoutes.length);
-    }
+    setIsExploreActive(false);
   };
 
   useEffect(() => {
@@ -732,16 +735,17 @@ export default function MapComponent() {
     });
   };
 
-  const isMapAnimating = routeProgress < historicalRoutes.length;
+  const isTitleHidden = routeProgress < historicalRoutes.length;
+  const isButtonHidden = isExploreActive || routeProgress < historicalRoutes.length;
 
   return (
     <div className="map-frame-wrapper">
       <div
         className="app-header"
         style={{
-          opacity: isMapAnimating ? 0 : 1,
+          opacity: isTitleHidden ? 0 : 1,
           transition: 'opacity 0.5s ease-in-out',
-          pointerEvents: isMapAnimating ? 'none' : 'auto'
+          pointerEvents: isTitleHidden ? 'none' : 'auto'
         }}
       >
         <h1 className="app-title">Hành trình Cứu nước</h1>
@@ -932,9 +936,9 @@ export default function MapComponent() {
           right: isMobile ? '15px' : 'auto',
           transform: isMobile ? 'none' : 'translateX(-50%)',
           zIndex: 9999,
-          opacity: isMapAnimating ? 0 : 1,
+          opacity: isButtonHidden ? 0 : 1,
           transition: 'opacity 0.5s ease-in-out',
-          pointerEvents: isMapAnimating ? 'none' : 'auto'
+          pointerEvents: isButtonHidden ? 'none' : 'auto'
         }}
       >
         <button
