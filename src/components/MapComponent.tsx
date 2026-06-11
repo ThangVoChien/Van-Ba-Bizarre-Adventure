@@ -82,162 +82,162 @@ function getBezierCurve(start: [number, number], end: [number, number], control:
 // Map routes based on historical journey map (colors divided by stages)
 const historicalRoutes = [
   // Chặng 1: Cảng Sài Gòn - Le Havre (Orange/Red)
-  { id: '1', color: '#ea580c', start: [10.82, 106.63] as [number, number], end: [1.35, 103.81] as [number, number], control: [5.0, 108.0] as [number, number] }, // Sài Gòn -> Singapore
-  { id: '2', color: '#ea580c', start: [1.35, 103.81] as [number, number], end: [5.9, 80.5] as [number, number], control: [8.0, 95.0] as [number, number] }, // Singapore -> Colombo
-  { id: '3', color: '#ea580c', start: [5.9, 80.5] as [number, number], end: [11.5, 43.1] as [number, number], control: [15.0, 60.0] as [number, number] }, // Colombo -> Djibouti
-  { id: '4', color: '#ea580c', start: [11.5, 43.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [22.0, 38.0] as [number, number] },
-  { id: '5', color: '#ea580c', start: [31.2, 29.9] as [number, number], end: [43.3, 5.4] as [number, number], control: [36.0, 20.0] as [number, number] }, // Port Said -> Marseille
+  { stage: 1, id: '1', color: '#ea580c', start: [10.82, 106.63] as [number, number], end: [1.35, 103.81] as [number, number], control: [5.0, 108.0] as [number, number] }, // Sài Gòn -> Singapore
+  { stage: 1, id: '2', color: '#ea580c', start: [1.35, 103.81] as [number, number], end: [5.9, 80.5] as [number, number], control: [8.0, 95.0] as [number, number] }, // Singapore -> Colombo
+  { stage: 1, id: '3', color: '#ea580c', start: [5.9, 80.5] as [number, number], end: [11.5, 43.1] as [number, number], control: [15.0, 60.0] as [number, number] }, // Colombo -> Djibouti
+  { stage: 1, id: '4', color: '#ea580c', start: [11.5, 43.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [22.0, 38.0] as [number, number] },
+  { stage: 1, id: '5', color: '#ea580c', start: [31.2, 29.9] as [number, number], end: [43.3, 5.4] as [number, number], control: [36.0, 20.0] as [number, number] }, // Port Said -> Marseille
 
   // Hành trình đi biển vòng quanh TBN sang Bắc Pháp (Chặng 1)
-  { id: '1_6a', color: '#ea580c', start: [43.3, 5.4] as [number, number], end: [36.0, -6.0] as [number, number], control: [38.0, 3.0] as [number, number] }, // Marseille -> Gibraltar
-  { id: '1_6b', color: '#ea580c', start: [36.0, -6.0] as [number, number], end: [43.0, -10.0] as [number, number], control: [39.0, -12.0] as [number, number] }, // Gibraltar -> Mũi Tây Ban Nha (Outer)
-  { id: '1_6c', color: '#ea580c', start: [43.0, -10.0] as [number, number], end: [48.5, -6.0] as [number, number], control: [46.0, -10.0] as [number, number] }, // Tây Ban Nha -> Mũi Tây Pháp (Outer)
-  { id: '1_6d', color: '#ea580c', start: [48.5, -6.0] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.5, -3.0] as [number, number] }, // Mũi Tây Pháp -> Le Havre (Outer)
+  { stage: 1, id: '1_6a', color: '#ea580c', start: [43.3, 5.4] as [number, number], end: [36.0, -6.0] as [number, number], control: [38.0, 3.0] as [number, number] }, // Marseille -> Gibraltar
+  { stage: 1, id: '1_6b', color: '#ea580c', start: [36.0, -6.0] as [number, number], end: [43.0, -10.0] as [number, number], control: [39.0, -12.0] as [number, number] }, // Gibraltar -> Mũi Tây Ban Nha (Outer)
+  { stage: 1, id: '1_6c', color: '#ea580c', start: [43.0, -10.0] as [number, number], end: [48.5, -6.0] as [number, number], control: [46.0, -10.0] as [number, number] }, // Tây Ban Nha -> Mũi Tây Pháp (Outer)
+  { stage: 1, id: '1_6d', color: '#ea580c', start: [48.5, -6.0] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.5, -3.0] as [number, number] }, // Mũi Tây Pháp -> Le Havre (Outer)
 
   // Chặng 2: Đi quanh châu Phi (Green) - Chiều KIM ĐỒNG HỒ
   // Bắt đầu từ Cảng Tây Bắc (Le Havre) vòng qua Tây Ban Nha vào Địa Trung Hải
-  { id: '7', color: '#16a34a', start: [49.5, 0.1] as [number, number], end: [48.5, -5.0] as [number, number], control: [49.5, -2.0] as [number, number] }, // Le Havre -> Mũi Tây Pháp
-  { id: '8', color: '#16a34a', start: [48.5, -5.0] as [number, number], end: [43.0, -9.0] as [number, number], control: [45.5, -8.0] as [number, number] }, // Mũi Tây Pháp -> Mũi TBN
-  { id: '9', color: '#16a34a', start: [43.0, -9.0] as [number, number], end: [36.0, -5.0] as [number, number], control: [39.5, -9.5] as [number, number] }, // Mũi TBN -> Gibraltar
+  { stage: 2, id: '7', color: '#16a34a', start: [49.5, 0.1] as [number, number], end: [48.5, -5.0] as [number, number], control: [49.5, -2.0] as [number, number] }, // Le Havre -> Mũi Tây Pháp
+  { stage: 2, id: '8', color: '#16a34a', start: [48.5, -5.0] as [number, number], end: [43.0, -9.0] as [number, number], control: [45.5, -8.0] as [number, number] }, // Mũi Tây Pháp -> Mũi TBN
+  { stage: 2, id: '9', color: '#16a34a', start: [43.0, -9.0] as [number, number], end: [36.0, -5.0] as [number, number], control: [39.5, -9.5] as [number, number] }, // Mũi TBN -> Gibraltar
 
   // Ghé Algeria ("Angela") và đi dọc Bắc Phi tới Ai Cập
-  { id: '10', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [36.7, 3.2] as [number, number], control: [36.0, -1.0] as [number, number] }, // Gibraltar -> Algeria
-  { id: '10a2', color: '#16a34a', start: [36.7, 3.2] as [number, number], end: [36.8, 10.1] as [number, number], control: [37.0, 6.0] as [number, number] }, // Algeria -> Tunisia
-  { id: '10a3', color: '#16a34a', start: [36.8, 10.1] as [number, number], end: [32.8, 13.1] as [number, number], control: [35.0, 12.0] as [number, number] }, // Tunisia -> Libya
-  { id: '10a4', color: '#16a34a', start: [32.8, 13.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [33.0, 22.0] as [number, number] }, // Libya -> Egypt
+  { stage: 2, id: '10', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [36.7, 3.2] as [number, number], control: [36.0, -1.0] as [number, number] }, // Gibraltar -> Algeria
+  { stage: 2, id: '10a2', color: '#16a34a', start: [36.7, 3.2] as [number, number], end: [36.8, 10.1] as [number, number], control: [37.0, 6.0] as [number, number] }, // Algeria -> Tunisia
+  { stage: 2, id: '10a3', color: '#16a34a', start: [36.8, 10.1] as [number, number], end: [32.8, 13.1] as [number, number], control: [35.0, 12.0] as [number, number] }, // Tunisia -> Libya
+  { stage: 2, id: '10a4', color: '#16a34a', start: [32.8, 13.1] as [number, number], end: [31.2, 29.9] as [number, number], control: [33.0, 22.0] as [number, number] }, // Libya -> Egypt
 
   // Từ Ai Cập đi xuống bờ Đông Châu Phi (Biển Đỏ -> Ấn Độ Dương)
-  { id: '2_11a', color: '#16a34a', start: [31.2, 29.9] as [number, number], end: [11.5, 43.1] as [number, number], control: [23.0, 39.0] as [number, number] }, // Egypt -> Djibouti
-  { id: '2_11b', color: '#16a34a', start: [11.5, 43.1] as [number, number], end: [11.8, 51.5] as [number, number], control: [13.5, 47.0] as [number, number] }, // Djibouti -> Mũi Sừng Châu Phi
-  { id: '2_11c', color: '#16a34a', start: [11.8, 51.5] as [number, number], end: [2.0, 45.3] as [number, number], control: [7.0, 49.5] as [number, number] }, // Mũi Sừng Châu Phi -> Somalia
-  { id: '2_11d', color: '#16a34a', start: [2.0, 45.3] as [number, number], end: [-4.0, 39.6] as [number, number], control: [0.0, 44.0] as [number, number] }, // Somalia -> Kenya
-  { id: '2_11e', color: '#16a34a', start: [-4.0, 39.6] as [number, number], end: [-6.8, 39.2] as [number, number], control: [-5.5, 41.0] as [number, number] }, // Kenya -> Tanzania
-  { id: '2_11f', color: '#16a34a', start: [-6.8, 39.2] as [number, number], end: [-12.3, 49.3] as [number, number], control: [-8.0, 45.0] as [number, number] }, // Tanzania -> Bắc Madagascar
-  { id: '12', color: '#16a34a', start: [-12.3, 49.3] as [number, number], end: [-21.1, 55.5] as [number, number], control: [-16.0, 54.0] as [number, number] }, // Bắc Madagascar -> Reunion
+  { stage: 2, id: '2_11a', color: '#16a34a', start: [31.2, 29.9] as [number, number], end: [11.5, 43.1] as [number, number], control: [23.0, 39.0] as [number, number] }, // Egypt -> Djibouti
+  { stage: 2, id: '2_11b', color: '#16a34a', start: [11.5, 43.1] as [number, number], end: [11.8, 51.5] as [number, number], control: [13.5, 47.0] as [number, number] }, // Djibouti -> Mũi Sừng Châu Phi
+  { stage: 2, id: '2_11c', color: '#16a34a', start: [11.8, 51.5] as [number, number], end: [2.0, 45.3] as [number, number], control: [7.0, 49.5] as [number, number] }, // Mũi Sừng Châu Phi -> Somalia
+  { stage: 2, id: '2_11d', color: '#16a34a', start: [2.0, 45.3] as [number, number], end: [-4.0, 39.6] as [number, number], control: [0.0, 44.0] as [number, number] }, // Somalia -> Kenya
+  { stage: 2, id: '2_11e', color: '#16a34a', start: [-4.0, 39.6] as [number, number], end: [-6.8, 39.2] as [number, number], control: [-5.5, 41.0] as [number, number] }, // Kenya -> Tanzania
+  { stage: 2, id: '2_11f', color: '#16a34a', start: [-6.8, 39.2] as [number, number], end: [-12.3, 49.3] as [number, number], control: [-8.0, 45.0] as [number, number] }, // Tanzania -> Bắc Madagascar
+  { stage: 2, id: '12', color: '#16a34a', start: [-12.3, 49.3] as [number, number], end: [-21.1, 55.5] as [number, number], control: [-16.0, 54.0] as [number, number] }, // Bắc Madagascar -> Reunion
 
   // Vòng qua Nam Phi sang bờ Tây
-  { id: '13', color: '#16a34a', start: [-21.1, 55.5] as [number, number], end: [-36.0, 18.0] as [number, number], control: [-38.0, 40.0] as [number, number] }, // Reunion -> Cape Town (vòng ngoài khơi xa)
-  { id: '14', color: '#16a34a', start: [-36.0, 18.0] as [number, number], end: [-8.8, 13.2] as [number, number], control: [-20.0, 8.0] as [number, number] }, // Cape Town -> Angola (đẩy lùi ra Đại Tây Dương)
+  { stage: 2, id: '13', color: '#16a34a', start: [-21.1, 55.5] as [number, number], end: [-36.0, 18.0] as [number, number], control: [-38.0, 40.0] as [number, number] }, // Reunion -> Cape Town (vòng ngoài khơi xa)
+  { stage: 2, id: '14', color: '#16a34a', start: [-36.0, 18.0] as [number, number], end: [-8.8, 13.2] as [number, number], control: [-20.0, 8.0] as [number, number] }, // Cape Town -> Angola (đẩy lùi ra Đại Tây Dương)
 
   // Đi ngược lên bờ Tây Châu Phi (đẩy cong ra ngoài biển để không lẹm đất liền)
-  { id: '15a', color: '#16a34a', start: [-8.8, 13.2] as [number, number], end: [-5.8, 12.0] as [number, number], control: [-7.0, 9.0] as [number, number] }, // Angola -> Congo
-  { id: '15b', color: '#16a34a', start: [-5.8, 12.0] as [number, number], end: [6.5, 3.4] as [number, number], control: [0.0, 6.0] as [number, number] }, // Congo -> Nigeria
-  { id: '15c', color: '#16a34a', start: [6.5, 3.4] as [number, number], end: [5.6, -0.2] as [number, number], control: [4.0, 1.5] as [number, number] }, // Nigeria -> Ghana
-  { id: '15d', color: '#16a34a', start: [5.6, -0.2] as [number, number], end: [5.3, -4.0] as [number, number], control: [3.0, -2.0] as [number, number] }, // Ghana -> Cote D'Ivoire
-  { id: '15e', color: '#16a34a', start: [5.3, -4.0] as [number, number], end: [14.6, -17.4] as [number, number], control: [-2.0, -15.0] as [number, number] }, // Cote D'Ivoire -> Dakar
+  { stage: 2, id: '15a', color: '#16a34a', start: [-8.8, 13.2] as [number, number], end: [-5.8, 12.0] as [number, number], control: [-7.0, 9.0] as [number, number] }, // Angola -> Congo
+  { stage: 2, id: '15b', color: '#16a34a', start: [-5.8, 12.0] as [number, number], end: [6.5, 3.4] as [number, number], control: [0.0, 6.0] as [number, number] }, // Congo -> Nigeria
+  { stage: 2, id: '15c', color: '#16a34a', start: [6.5, 3.4] as [number, number], end: [5.6, -0.2] as [number, number], control: [4.0, 1.5] as [number, number] }, // Nigeria -> Ghana
+  { stage: 2, id: '15d', color: '#16a34a', start: [5.6, -0.2] as [number, number], end: [5.3, -4.0] as [number, number], control: [3.0, -2.0] as [number, number] }, // Ghana -> Cote D'Ivoire
+  { stage: 2, id: '15e', color: '#16a34a', start: [5.3, -4.0] as [number, number], end: [14.6, -17.4] as [number, number], control: [-2.0, -15.0] as [number, number] }, // Cote D'Ivoire -> Dakar
 
   // Đoạn cuối: Đến Morocco ("mongo"), qua Gibraltar, rồi cập bến Cảng Đông Nam (Marseille)
-  { id: '16a', color: '#16a34a', start: [14.6, -17.4] as [number, number], end: [33.5, -7.5] as [number, number], control: [24.0, -22.0] as [number, number] }, // Dakar -> Morocco
-  { id: '16b', color: '#16a34a', start: [33.5, -7.5] as [number, number], end: [36.0, -5.0] as [number, number], control: [35.0, -8.0] as [number, number] }, // Morocco -> Gibraltar
-  { id: '16c', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [43.3, 5.4] as [number, number], control: [38.0, 0.0] as [number, number] }, // Gibraltar -> Marseille
+  { stage: 2, id: '16a', color: '#16a34a', start: [14.6, -17.4] as [number, number], end: [33.5, -7.5] as [number, number], control: [24.0, -22.0] as [number, number] }, // Dakar -> Morocco
+  { stage: 2, id: '16b', color: '#16a34a', start: [33.5, -7.5] as [number, number], end: [36.0, -5.0] as [number, number], control: [35.0, -8.0] as [number, number] }, // Morocco -> Gibraltar
+  { stage: 2, id: '16c', color: '#16a34a', start: [36.0, -5.0] as [number, number], end: [43.3, 5.4] as [number, number], control: [38.0, 0.0] as [number, number] }, // Gibraltar -> Marseille
 
   // Chặng 3: Pháp - Châu Mỹ - Anh (Dark Blue)
-  { id: '17', color: '#1e3a8a', start: [43.3, 5.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [46.0, 3.0] as [number, number] }, // Marseille -> Le Havre
-  { id: '18', color: '#1e3a8a', start: [49.5, 0.1] as [number, number], end: [48.5, -6.5] as [number, number], control: [49.5, -3.0] as [number, number] }, // Le Havre -> Ngoài khơi Tây Pháp
-  { id: '18b', color: '#1e3a8a', start: [48.5, -6.5] as [number, number], end: [14.6, -61.0] as [number, number], control: [30.0, -45.0] as [number, number] }, // Ngoài khơi Tây Pháp -> vùng Caribbean
-  { id: '19', color: '#1e3a8a', start: [14.6, -61.0] as [number, number], end: [-7.0, -25.0] as [number, number], control: [5.0, -35.0] as [number, number] }, // Caribbean -> Ngoài khơi Brazil (vòng ngoài)
-  { id: '19b', color: '#1e3a8a', start: [-7.0, -25.0] as [number, number], end: [-34.9, -56.1] as [number, number], control: [-25.0, -25.0] as [number, number] }, // Ngoài khơi Brazil -> Uruguay
-  { id: '20', color: '#1e3a8a', start: [-34.6, -58.3] as [number, number], end: [-7.0, -30.0] as [number, number], control: [-25.0, -30.0] as [number, number] }, // Argentina -> Ngoài khơi Brazil (vòng trong)
-  { id: '20b', color: '#1e3a8a', start: [-7.0, -30.0] as [number, number], end: [40.7, -74.0] as [number, number], control: [10.0, -40.0] as [number, number] }, // Ngoài khơi Brazil -> New York (chéo qua đường kia)
-  { id: '21', color: '#1e3a8a', start: [40.7, -74.0] as [number, number], end: [49.5, -8.0] as [number, number], control: [45.0, -40.0] as [number, number] }, // New York -> Cửa ngõ eo biển Manche (đi vòng xuống Nam Ireland để né đất liền)
-  { id: '21b', color: '#1e3a8a', start: [49.5, -8.0] as [number, number], end: [50.9, -1.4] as [number, number], control: [50.0, -4.0] as [number, number] }, // Cửa ngõ eo biển -> Anh (cảng bờ Nam)
+  { stage: 3, id: '17', color: '#1e3a8a', start: [43.3, 5.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [46.0, 3.0] as [number, number] }, // Marseille -> Le Havre
+  { stage: 3, id: '18', color: '#1e3a8a', start: [49.5, 0.1] as [number, number], end: [48.5, -6.5] as [number, number], control: [49.5, -3.0] as [number, number] }, // Le Havre -> Ngoài khơi Tây Pháp
+  { stage: 3, id: '18b', color: '#1e3a8a', start: [48.5, -6.5] as [number, number], end: [14.6, -61.0] as [number, number], control: [30.0, -45.0] as [number, number] }, // Ngoài khơi Tây Pháp -> vùng Caribbean
+  { stage: 3, id: '19', color: '#1e3a8a', start: [14.6, -61.0] as [number, number], end: [-7.0, -25.0] as [number, number], control: [5.0, -35.0] as [number, number] }, // Caribbean -> Ngoài khơi Brazil (vòng ngoài)
+  { stage: 3, id: '19b', color: '#1e3a8a', start: [-7.0, -25.0] as [number, number], end: [-34.9, -56.1] as [number, number], control: [-25.0, -25.0] as [number, number] }, // Ngoài khơi Brazil -> Uruguay
+  { stage: 3, id: '20', color: '#1e3a8a', start: [-34.6, -58.3] as [number, number], end: [-7.0, -30.0] as [number, number], control: [-25.0, -30.0] as [number, number] }, // Argentina -> Ngoài khơi Brazil (vòng trong)
+  { stage: 3, id: '20b', color: '#1e3a8a', start: [-7.0, -30.0] as [number, number], end: [40.7, -74.0] as [number, number], control: [10.0, -40.0] as [number, number] }, // Ngoài khơi Brazil -> New York (chéo qua đường kia)
+  { stage: 3, id: '21', color: '#1e3a8a', start: [40.7, -74.0] as [number, number], end: [49.5, -8.0] as [number, number], control: [45.0, -40.0] as [number, number] }, // New York -> Cửa ngõ eo biển Manche (đi vòng xuống Nam Ireland để né đất liền)
+  { stage: 3, id: '21b', color: '#1e3a8a', start: [49.5, -8.0] as [number, number], end: [50.9, -1.4] as [number, number], control: [50.0, -4.0] as [number, number] }, // Cửa ngõ eo biển -> Anh (cảng bờ Nam)
 
   // Chặng 4: Pháp - Liên Xô (Pink/Magenta)
-  { id: '22', color: '#db2777', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
-  { id: '22_to_23', color: '#db2777', start: [49.5, 0.1] as [number, number], end: [48.8, 2.3] as [number, number], control: [49.0, 1.0] as [number, number] }, // Le Havre -> Paris
-  { id: '23', color: '#db2777', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 6.0] as [number, number] }, // Paris -> Berlin
-  { id: '23b', color: '#db2777', start: [52.5, 13.4] as [number, number], end: [53.5, 9.9] as [number, number], control: [53.5, 12.0] as [number, number] }, // Berlin -> Hamburg
+  { stage: 4, id: '22', color: '#db2777', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
+  { stage: 4, id: '22_to_23', color: '#db2777', start: [49.5, 0.1] as [number, number], end: [48.8, 2.3] as [number, number], control: [49.0, 1.0] as [number, number] }, // Le Havre -> Paris
+  { stage: 4, id: '23', color: '#db2777', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 6.0] as [number, number] }, // Paris -> Berlin
+  { stage: 4, id: '23b', color: '#db2777', start: [52.5, 13.4] as [number, number], end: [53.5, 9.9] as [number, number], control: [53.5, 12.0] as [number, number] }, // Berlin -> Hamburg
 
   // Vòng ra Biển Bắc rồi vòng qua đỉnh Đan Mạch vào biển Baltic
-  { id: '24', color: '#db2777', start: [53.5, 9.9] as [number, number], end: [56.5, 5.0] as [number, number], control: [54.5, 6.0] as [number, number] }, // Hamburg -> Biển Bắc (đi ra ngoài biển)
-  { id: '24b', color: '#db2777', start: [56.5, 5.0] as [number, number], end: [58.5, 11.0] as [number, number], control: [58.5, 6.0] as [number, number] }, // Biển Bắc -> Ngoài khơi đỉnh Đan Mạch (vòng qua đỉnh)
-  { id: '24c', color: '#db2777', start: [58.5, 11.0] as [number, number], end: [55.0, 14.0] as [number, number], control: [56.5, 12.0] as [number, number] }, // Ngoài khơi đỉnh Đan Mạch -> Nam Thụy Điển (xuyên qua eo biển Kattegat)
-  { id: '24d', color: '#db2777', start: [55.0, 14.0] as [number, number], end: [57.5, 20.0] as [number, number], control: [55.5, 17.5] as [number, number] }, // Nam Thụy Điển -> Giữa biển Baltic (né phía dưới đảo Gotland)
-  { id: '24e', color: '#db2777', start: [57.5, 20.0] as [number, number], end: [59.8, 24.5] as [number, number], control: [59.5, 20.0] as [number, number] }, // Giữa biển Baltic -> Cửa vịnh Phần Lan (vòng lên Bắc để né các đảo của Estonia)
-  { id: '24f', color: '#db2777', start: [59.8, 24.5] as [number, number], end: [59.9, 30.3] as [number, number], control: [60.0, 27.5] as [number, number] }, // Cửa vịnh Phần Lan -> Petrograd
-  { id: '24g', color: '#db2777', start: [59.9, 30.3] as [number, number], end: [55.7, 37.6] as [number, number], control: [58.0, 35.0] as [number, number] }, // Petrograd -> Moscow
+  { stage: 4, id: '24', color: '#db2777', start: [53.5, 9.9] as [number, number], end: [56.5, 5.0] as [number, number], control: [54.5, 6.0] as [number, number] }, // Hamburg -> Biển Bắc (đi ra ngoài biển)
+  { stage: 4, id: '24b', color: '#db2777', start: [56.5, 5.0] as [number, number], end: [58.5, 11.0] as [number, number], control: [58.5, 6.0] as [number, number] }, // Biển Bắc -> Ngoài khơi đỉnh Đan Mạch (vòng qua đỉnh)
+  { stage: 4, id: '24c', color: '#db2777', start: [58.5, 11.0] as [number, number], end: [55.0, 14.0] as [number, number], control: [56.5, 12.0] as [number, number] }, // Ngoài khơi đỉnh Đan Mạch -> Nam Thụy Điển (xuyên qua eo biển Kattegat)
+  { stage: 4, id: '24d', color: '#db2777', start: [55.0, 14.0] as [number, number], end: [57.5, 20.0] as [number, number], control: [55.5, 17.5] as [number, number] }, // Nam Thụy Điển -> Giữa biển Baltic (né phía dưới đảo Gotland)
+  { stage: 4, id: '24e', color: '#db2777', start: [57.5, 20.0] as [number, number], end: [59.8, 24.5] as [number, number], control: [59.5, 20.0] as [number, number] }, // Giữa biển Baltic -> Cửa vịnh Phần Lan (vòng lên Bắc để né các đảo của Estonia)
+  { stage: 4, id: '24f', color: '#db2777', start: [59.8, 24.5] as [number, number], end: [59.9, 30.3] as [number, number], control: [60.0, 27.5] as [number, number] }, // Cửa vịnh Phần Lan -> Petrograd
+  { stage: 4, id: '24g', color: '#db2777', start: [59.9, 30.3] as [number, number], end: [55.7, 37.6] as [number, number], control: [58.0, 35.0] as [number, number] }, // Petrograd -> Moscow
 
   // Chặng 5: Liên Xô - Trung Quốc (Purple)
-  { id: '25a', color: '#9333ea', start: [55.7, 37.6] as [number, number], end: [53.2, 50.1] as [number, number], control: [54.5, 43.8] as [number, number] }, // Moscow -> Samara (Đi thẳng xuống biên giới)
-  { id: '25b', color: '#9333ea', start: [53.2, 50.1] as [number, number], end: [55.1, 61.4] as [number, number], control: [54.2, 55.7] as [number, number] }, // Samara -> Chelyabinsk (Vòng lên)
-  { id: '25c1', color: '#9333ea', start: [55.1, 61.4] as [number, number], end: [56.1, 69.5] as [number, number], control: [55.6, 65.45] as [number, number] }, // Chelyabinsk -> Ishim (Vòng lên phía Bắc né biên giới)
-  { id: '25c2', color: '#9333ea', start: [56.1, 69.5] as [number, number], end: [55.0, 73.4] as [number, number], control: [55.55, 71.45] as [number, number] }, // Ishim -> Omsk
-  { id: '25e', color: '#9333ea', start: [55.0, 73.4] as [number, number], end: [55.0, 82.9] as [number, number], control: [55.2, 78.0] as [number, number] }, // Omsk -> Novosibirsk
-  { id: '25f', color: '#9333ea', start: [55.0, 82.9] as [number, number], end: [52.3, 104.3] as [number, number], control: [57.0, 93.6] as [number, number] }, // Novosibirsk -> Irkutsk (Vòng lên phía Bắc né biên giới)
-  { id: '25g1', color: '#9333ea', start: [52.3, 104.3] as [number, number], end: [51.5, 111.0] as [number, number], control: [51.9, 107.65] as [number, number] }, // Irkutsk -> Đoạn võng xuống
-  { id: '25g2', color: '#9333ea', start: [51.5, 111.0] as [number, number], end: [55.0, 124.0] as [number, number], control: [54.5, 117.5] as [number, number] }, // Đoạn võng -> Đỉnh vòng cung
-  { id: '25h', color: '#9333ea', start: [55.0, 124.0] as [number, number], end: [48.5, 135.1] as [number, number], control: [53.5, 130.0] as [number, number] }, // Đỉnh vòng cung -> Khabarovsk
-  { id: '25i', color: '#9333ea', start: [48.5, 135.1] as [number, number], end: [43.1, 133.0] as [number, number], control: [46.0, 135.5] as [number, number] }, // Khabarovsk -> Vladivostok
+  { stage: 5, id: '25a', color: '#9333ea', start: [55.7, 37.6] as [number, number], end: [53.2, 50.1] as [number, number], control: [54.5, 43.8] as [number, number] }, // Moscow -> Samara (Đi thẳng xuống biên giới)
+  { stage: 5, id: '25b', color: '#9333ea', start: [53.2, 50.1] as [number, number], end: [55.1, 61.4] as [number, number], control: [54.2, 55.7] as [number, number] }, // Samara -> Chelyabinsk (Vòng lên)
+  { stage: 5, id: '25c1', color: '#9333ea', start: [55.1, 61.4] as [number, number], end: [56.1, 69.5] as [number, number], control: [55.6, 65.45] as [number, number] }, // Chelyabinsk -> Ishim (Vòng lên phía Bắc né biên giới)
+  { stage: 5, id: '25c2', color: '#9333ea', start: [56.1, 69.5] as [number, number], end: [55.0, 73.4] as [number, number], control: [55.55, 71.45] as [number, number] }, // Ishim -> Omsk
+  { stage: 5, id: '25e', color: '#9333ea', start: [55.0, 73.4] as [number, number], end: [55.0, 82.9] as [number, number], control: [55.2, 78.0] as [number, number] }, // Omsk -> Novosibirsk
+  { stage: 5, id: '25f', color: '#9333ea', start: [55.0, 82.9] as [number, number], end: [52.3, 104.3] as [number, number], control: [57.0, 93.6] as [number, number] }, // Novosibirsk -> Irkutsk (Vòng lên phía Bắc né biên giới)
+  { stage: 5, id: '25g1', color: '#9333ea', start: [52.3, 104.3] as [number, number], end: [51.5, 111.0] as [number, number], control: [51.9, 107.65] as [number, number] }, // Irkutsk -> Đoạn võng xuống
+  { stage: 5, id: '25g2', color: '#9333ea', start: [51.5, 111.0] as [number, number], end: [55.0, 124.0] as [number, number], control: [54.5, 117.5] as [number, number] }, // Đoạn võng -> Đỉnh vòng cung
+  { stage: 5, id: '25h', color: '#9333ea', start: [55.0, 124.0] as [number, number], end: [48.5, 135.1] as [number, number], control: [53.5, 130.0] as [number, number] }, // Đỉnh vòng cung -> Khabarovsk
+  { stage: 5, id: '25i', color: '#9333ea', start: [48.5, 135.1] as [number, number], end: [43.1, 133.0] as [number, number], control: [46.0, 135.5] as [number, number] }, // Khabarovsk -> Vladivostok
   // Chặng 5: Đi tàu biển từ Vladivostok đến thẳng Quảng Châu
-  { id: '26a', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [33.5, 129.0] as [number, number], control: [39.0, 134.0] as [number, number] }, // Vladivostok -> Tsushima
-  { id: '26b', color: '#9333ea', start: [33.5, 129.0] as [number, number], end: [31.2, 121.4] as [number, number], control: [32.5, 124.5] as [number, number] }, // Tsushima -> Shanghai
-  { id: '26c', color: '#9333ea', start: [31.2, 121.4] as [number, number], end: [24.4, 118.0] as [number, number], control: [28.0, 122.5] as [number, number] }, // Shanghai -> Xiamen
-  { id: '26d', color: '#9333ea', start: [24.4, 118.0] as [number, number], end: [22.3, 114.1] as [number, number], control: [22.5, 116.5] as [number, number] }, // Xiamen -> Guangzhou
+  { stage: 5, id: '26a', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [33.5, 129.0] as [number, number], control: [39.0, 134.0] as [number, number] }, // Vladivostok -> Tsushima
+  { stage: 5, id: '26b', color: '#9333ea', start: [33.5, 129.0] as [number, number], end: [31.2, 121.4] as [number, number], control: [32.5, 124.5] as [number, number] }, // Tsushima -> Shanghai
+  { stage: 5, id: '26c', color: '#9333ea', start: [31.2, 121.4] as [number, number], end: [24.4, 118.0] as [number, number], control: [28.0, 122.5] as [number, number] }, // Shanghai -> Xiamen
+  { stage: 5, id: '26d', color: '#9333ea', start: [24.4, 118.0] as [number, number], end: [22.3, 114.1] as [number, number], control: [22.5, 116.5] as [number, number] }, // Xiamen -> Guangzhou
 
-  { id: '27a', color: '#9333ea', start: [22.3, 114.1] as [number, number], end: [24.6, 118.5] as [number, number], control: [21.6, 117.75] as [number, number] }, // Guangzhou -> Xiamen
-  { id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [29.0, 126.0] as [number, number] }, // Xiamen -> Shanghai (Uốn cong ra xa bờ hơn để dễ nhìn)
-  { id: '27c', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
-  { id: '27d', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
-  { id: '28i', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
-  { id: '28h', color: '#9333ea', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [54.6, 130.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
-  { id: '28g2', color: '#9333ea', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [55.6, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
-  { id: '28g1', color: '#9333ea', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [53.0, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
-  { id: '28f', color: '#9333ea', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [58.1, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk (Vòng lên phía Bắc)
-  { id: '28e', color: '#9333ea', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [56.3, 78.0] as [number, number] }, // Novosibirsk -> Omsk
-  { id: '28c1', color: '#9333ea', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [56.65, 71.45] as [number, number] }, // Omsk -> Ishim (Vòng lên phía Bắc né biên giới)
-  { id: '28c2', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
-  { id: '28b', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
-  { id: '28a', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
+  { stage: 5, id: '27a', color: '#9333ea', start: [22.3, 114.1] as [number, number], end: [24.6, 118.5] as [number, number], control: [21.6, 117.75] as [number, number] }, // Guangzhou -> Xiamen
+  { stage: 5, id: '27b', color: '#9333ea', start: [24.6, 118.5] as [number, number], end: [31.4, 121.9] as [number, number], control: [29.0, 126.0] as [number, number] }, // Xiamen -> Shanghai (Uốn cong ra xa bờ hơn để dễ nhìn)
+  { stage: 5, id: '27c', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
+  { stage: 5, id: '27d', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
+  { stage: 5, id: '28i', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
+  { stage: 5, id: '28h', color: '#9333ea', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [54.6, 130.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
+  { stage: 5, id: '28g2', color: '#9333ea', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [55.6, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
+  { stage: 5, id: '28g1', color: '#9333ea', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [53.0, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
+  { stage: 5, id: '28f', color: '#9333ea', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [58.1, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk (Vòng lên phía Bắc)
+  { stage: 5, id: '28e', color: '#9333ea', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [56.3, 78.0] as [number, number] }, // Novosibirsk -> Omsk
+  { stage: 5, id: '28c1', color: '#9333ea', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [56.65, 71.45] as [number, number] }, // Omsk -> Ishim (Vòng lên phía Bắc né biên giới)
+  { stage: 5, id: '28c2', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
+  { stage: 5, id: '28b', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
+  { stage: 5, id: '28a', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
   // Chặng 6: Hoạt động ở Châu Âu (Blue)
-  { id: '6a', color: '#0ea5e9', start: [55.7, 37.6] as [number, number], end: [52.5, 13.4] as [number, number], control: [55.0, 25.0] as [number, number] }, // Moscow -> Berlin
-  { id: '6b', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [48.8, 2.3] as [number, number], control: [50.0, 7.0] as [number, number] }, // Berlin -> Paris
-  { id: '6c', color: '#0ea5e9', start: [48.8, 2.3] as [number, number], end: [50.8, 4.3] as [number, number], control: [50.0, 2.5] as [number, number] }, // Paris -> Brussels
-  { id: '6d', color: '#0ea5e9', start: [50.8, 4.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 8.0] as [number, number] }, // Brussels -> Berlin
-  { id: '6e', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [46.9, 7.4] as [number, number], control: [50.0, 11.0] as [number, number] }, // Berlin -> Switzerland
-  { id: '6f', color: '#0ea5e9', start: [46.9, 7.4] as [number, number], end: [40.8, 14.3] as [number, number], control: [44.0, 10.0] as [number, number] }, // Switzerland -> Napoli
-  { id: '6g', color: '#0ea5e9', start: [40.8, 14.3] as [number, number], end: [31.4, 30.1] as [number, number], control: [35.0, 24.0] as [number, number] }, // Napoli -> Port Said
-  { id: '6h', color: '#0ea5e9', start: [31.4, 30.1] as [number, number], end: [11.3, 43.3] as [number, number], control: [21.5, 37.5] as [number, number] }, // Port Said -> Djibouti
-  { id: '6i', color: '#0ea5e9', start: [11.3, 43.3] as [number, number], end: [5.7, 80.7] as [number, number], control: [14.0, 60.0] as [number, number] }, // Djibouti -> Sri Lanka (vòng qua Mũi Sừng Châu Phi)
-  { id: '6j', color: '#0ea5e9', start: [5.7, 80.7] as [number, number], end: [1.15, 104.01] as [number, number], control: [7.0, 95.0] as [number, number] }, // Sri Lanka -> Singapore (vòng qua eo biển Malacca)
-  { id: '6k', color: '#0ea5e9', start: [1.15, 104.01] as [number, number], end: [13.7, 100.5] as [number, number], control: [7.0, 105.0] as [number, number] }, // Singapore -> Bangkok
+  { stage: 6, id: '6a', color: '#0ea5e9', start: [55.7, 37.6] as [number, number], end: [52.5, 13.4] as [number, number], control: [55.0, 25.0] as [number, number] }, // Moscow -> Berlin
+  { stage: 6, id: '6b', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [48.8, 2.3] as [number, number], control: [50.0, 7.0] as [number, number] }, // Berlin -> Paris
+  { stage: 6, id: '6c', color: '#0ea5e9', start: [48.8, 2.3] as [number, number], end: [50.8, 4.3] as [number, number], control: [50.0, 2.5] as [number, number] }, // Paris -> Brussels
+  { stage: 6, id: '6d', color: '#0ea5e9', start: [50.8, 4.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 8.0] as [number, number] }, // Brussels -> Berlin
+  { stage: 6, id: '6e', color: '#0ea5e9', start: [52.5, 13.4] as [number, number], end: [46.9, 7.4] as [number, number], control: [50.0, 11.0] as [number, number] }, // Berlin -> Switzerland
+  { stage: 6, id: '6f', color: '#0ea5e9', start: [46.9, 7.4] as [number, number], end: [40.8, 14.3] as [number, number], control: [44.0, 10.0] as [number, number] }, // Switzerland -> Napoli
+  { stage: 6, id: '6g', color: '#0ea5e9', start: [40.8, 14.3] as [number, number], end: [31.4, 30.1] as [number, number], control: [35.0, 24.0] as [number, number] }, // Napoli -> Port Said
+  { stage: 6, id: '6h', color: '#0ea5e9', start: [31.4, 30.1] as [number, number], end: [11.3, 43.3] as [number, number], control: [21.5, 37.5] as [number, number] }, // Port Said -> Djibouti
+  { stage: 6, id: '6i', color: '#0ea5e9', start: [11.3, 43.3] as [number, number], end: [5.7, 80.7] as [number, number], control: [14.0, 60.0] as [number, number] }, // Djibouti -> Sri Lanka (vòng qua Mũi Sừng Châu Phi)
+  { stage: 6, id: '6j', color: '#0ea5e9', start: [5.7, 80.7] as [number, number], end: [1.15, 104.01] as [number, number], control: [7.0, 95.0] as [number, number] }, // Sri Lanka -> Singapore (vòng qua eo biển Malacca)
+  { stage: 6, id: '6k', color: '#0ea5e9', start: [1.15, 104.01] as [number, number], end: [13.7, 100.5] as [number, number], control: [7.0, 105.0] as [number, number] }, // Singapore -> Bangkok
 
   // Chặng 7: Hoạt động ở Châu Á (Dark Green) - Lộ trình đơn giản hóa
-  { id: '7a', color: '#15803d', start: [13.7, 100.5] as [number, number], end: [1.35, 103.8] as [number, number], control: [7.0, 102.5] as [number, number] }, // Bangkok -> Singapore
-  { id: '7b', color: '#15803d', start: [1.35, 104.2] as [number, number], end: [31.2, 121.4] as [number, number], control: [16.0, 118.0] as [number, number] }, // Singapore -> Shanghai
-  { id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
-  { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
-  { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
+  { stage: 7, id: '7a', color: '#15803d', start: [13.7, 100.5] as [number, number], end: [1.35, 103.8] as [number, number], control: [7.0, 102.5] as [number, number] }, // Bangkok -> Singapore
+  { stage: 7, id: '7b', color: '#15803d', start: [1.35, 104.2] as [number, number], end: [31.2, 121.4] as [number, number], control: [16.0, 118.0] as [number, number] }, // Singapore -> Shanghai
+  { stage: 7, id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
+  { stage: 7, id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
+  { stage: 7, id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
   // Chặng 8: Thượng Hải - Moskva (Black - vẽ song song với chặng 5 về)
-  { id: '8_pre1', color: '#000000', start: [22.1, 114.5] as [number, number], end: [23.1, 113.2] as [number, number], control: [22.5, 113.5] as [number, number] }, // Hong Kong -> Guangzhou
-  { id: '8_pre2', color: '#000000', start: [23.1, 113.2] as [number, number], end: [31.4, 121.9] as [number, number], control: [27.0, 119.0] as [number, number] }, // Guangzhou -> Shanghai
-  { id: '8a', color: '#000000', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [31.5, 127.5] as [number, number] }, // Shanghai -> Tsushima
-  { id: '8b', color: '#000000', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [40.5, 137.5] as [number, number] }, // Tsushima -> Vladivostok
-  { id: '8c', color: '#000000', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [46.5, 137.0] as [number, number] }, // Vladivostok -> Khabarovsk
-  { id: '8d', color: '#000000', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [53.0, 131.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
-  { id: '8e', color: '#000000', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [54.0, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
-  { id: '8f', color: '#000000', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [51.5, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
-  { id: '8g', color: '#000000', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [59.5, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk
-  { id: '8h', color: '#000000', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [57.5, 78.0] as [number, number] }, // Novosibirsk -> Omsk
-  { id: '8i', color: '#000000', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [57.8, 71.45] as [number, number] }, // Omsk -> Ishim
-  { id: '8j', color: '#000000', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [58.0, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
-  { id: '8k', color: '#000000', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [56.5, 55.7] as [number, number] }, // Chelyabinsk -> Samara
-  { id: '8l', color: '#000000', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [56.5, 43.8] as [number, number] }, // Samara -> Moscow
+  { stage: 8, id: '8_pre1', color: '#000000', start: [22.1, 114.5] as [number, number], end: [23.1, 113.2] as [number, number], control: [22.5, 113.5] as [number, number] }, // Hong Kong -> Guangzhou
+  { stage: 8, id: '8_pre2', color: '#000000', start: [23.1, 113.2] as [number, number], end: [31.4, 121.9] as [number, number], control: [27.0, 119.0] as [number, number] }, // Guangzhou -> Shanghai
+  { stage: 8, id: '8a', color: '#000000', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [31.5, 127.5] as [number, number] }, // Shanghai -> Tsushima
+  { stage: 8, id: '8b', color: '#000000', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [40.5, 137.5] as [number, number] }, // Tsushima -> Vladivostok
+  { stage: 8, id: '8c', color: '#000000', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [46.5, 137.0] as [number, number] }, // Vladivostok -> Khabarovsk
+  { stage: 8, id: '8d', color: '#000000', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [53.0, 131.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
+  { stage: 8, id: '8e', color: '#000000', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [54.0, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
+  { stage: 8, id: '8f', color: '#000000', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [51.5, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
+  { stage: 8, id: '8g', color: '#000000', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [59.5, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk
+  { stage: 8, id: '8h', color: '#000000', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [57.5, 78.0] as [number, number] }, // Novosibirsk -> Omsk
+  { stage: 8, id: '8i', color: '#000000', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [57.8, 71.45] as [number, number] }, // Omsk -> Ishim
+  { stage: 8, id: '8j', color: '#000000', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [58.0, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
+  { stage: 8, id: '8k', color: '#000000', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [56.5, 55.7] as [number, number] }, // Chelyabinsk -> Samara
+  { stage: 8, id: '8l', color: '#000000', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [56.5, 43.8] as [number, number] }, // Samara -> Moscow
 
   // Chặng 9: Hành trình về nước qua ngả Tân Cương (Red)
-  { id: '9a', color: '#dc2626', start: [55.7, 37.6] as [number, number], end: [56.3, 44.0] as [number, number], control: [56.5, 40.8] as [number, number] }, // Moscow -> Nizhniy Novgorod
-  { id: '9b', color: '#dc2626', start: [56.3, 44.0] as [number, number], end: [55.8, 49.1] as [number, number], control: [56.5, 46.5] as [number, number] }, // Nizhniy Novgorod -> Kazan
-  { id: '9c', color: '#dc2626', start: [55.8, 49.1] as [number, number], end: [56.8, 60.6] as [number, number], control: [57.0, 54.8] as [number, number] }, // Kazan -> Yekaterinburg
-  { id: '9d', color: '#dc2626', start: [56.8, 60.6] as [number, number], end: [55.0, 73.3] as [number, number], control: [56.5, 67.0] as [number, number] }, // Yekaterinburg -> Omsk
-  { id: '9e', color: '#dc2626', start: [55.0, 73.3] as [number, number], end: [43.8, 87.6] as [number, number], control: [49.4, 80.4] as [number, number] }, // Omsk -> Urumqi
-  { id: '9f', color: '#dc2626', start: [43.8, 87.6] as [number, number], end: [36.1, 103.8] as [number, number], control: [40.0, 95.7] as [number, number] }, // Urumqi -> Lanzhou
-  { id: '9g', color: '#dc2626', start: [36.1, 103.8] as [number, number], end: [34.3, 108.9] as [number, number], control: [35.2, 106.3] as [number, number] }, // Lanzhou -> Xi'an
+  { stage: 9, id: '9a', color: '#dc2626', start: [55.7, 37.6] as [number, number], end: [56.3, 44.0] as [number, number], control: [56.5, 40.8] as [number, number] }, // Moscow -> Nizhniy Novgorod
+  { stage: 9, id: '9b', color: '#dc2626', start: [56.3, 44.0] as [number, number], end: [55.8, 49.1] as [number, number], control: [56.5, 46.5] as [number, number] }, // Nizhniy Novgorod -> Kazan
+  { stage: 9, id: '9c', color: '#dc2626', start: [55.8, 49.1] as [number, number], end: [56.8, 60.6] as [number, number], control: [57.0, 54.8] as [number, number] }, // Kazan -> Yekaterinburg
+  { stage: 9, id: '9d', color: '#dc2626', start: [56.8, 60.6] as [number, number], end: [55.0, 73.3] as [number, number], control: [56.5, 67.0] as [number, number] }, // Yekaterinburg -> Omsk
+  { stage: 9, id: '9e', color: '#dc2626', start: [55.0, 73.3] as [number, number], end: [43.8, 87.6] as [number, number], control: [49.4, 80.4] as [number, number] }, // Omsk -> Urumqi
+  { stage: 9, id: '9f', color: '#dc2626', start: [43.8, 87.6] as [number, number], end: [36.1, 103.8] as [number, number], control: [40.0, 95.7] as [number, number] }, // Urumqi -> Lanzhou
+  { stage: 9, id: '9g', color: '#dc2626', start: [36.1, 103.8] as [number, number], end: [34.3, 108.9] as [number, number], control: [35.2, 106.3] as [number, number] }, // Lanzhou -> Xi'an
 
-  { id: '10a', color: '#dc2626', start: [34.3, 108.9] as [number, number], end: [37.8, 112.5] as [number, number], control: [36.0, 110.7] as [number, number] }, // Xi'an -> Taiyuan
-  { id: '10b', color: '#dc2626', start: [37.8, 112.5] as [number, number], end: [25.2, 110.2] as [number, number], control: [31.5, 111.3] as [number, number] }, // Taiyuan -> Guilin
+  { stage: 9, id: '10a', color: '#dc2626', start: [34.3, 108.9] as [number, number], end: [37.8, 112.5] as [number, number], control: [36.0, 110.7] as [number, number] }, // Xi'an -> Taiyuan
+  { stage: 9, id: '10b', color: '#dc2626', start: [37.8, 112.5] as [number, number], end: [25.2, 110.2] as [number, number], control: [31.5, 111.3] as [number, number] }, // Taiyuan -> Guilin
 
   // Chặng 10: Trở về Tổ quốc (Yellow)
-  { id: '11a', color: '#eab308', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
-  { id: '11b', color: '#eab308', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
+  { stage: 10, id: '11a', color: '#eab308', start: [25.2, 110.2] as [number, number], end: [23.1, 106.4] as [number, number], control: [24.5, 108.0] as [number, number] }, // Quế Lâm -> Quảng Tây (Tĩnh Tây)
+  { stage: 10, id: '11b', color: '#eab308', start: [23.1, 106.4] as [number, number], end: [22.98, 106.05] as [number, number], control: [23.05, 106.2] as [number, number], hideArrow: true }, // Quảng Tây -> Pác Bó
 ];
 
 const createCustomIcon = () => {
@@ -368,29 +368,129 @@ export default function MapComponent() {
   const [routeProgress, setRouteProgress] = useState<number>(historicalRoutes.length);
   const animationRef = useRef<number | null>(null);
   const africaGeoJsonRef = useRef<any>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const isCanceledRef = useRef<boolean>(false);
 
-  const startExploreAnimation = () => {
-    setSelectedLoc(null); // Ensure popup is hidden during animation
-    setRouteProgress(0);
-
-    const durationPerRoute = 500; // 0.5 giây cho mỗi chặng
-    const totalDuration = historicalRoutes.length * durationPerRoute;
-    let start: number | null = null;
-
-    const animate = (time: number) => {
-      if (start === null) start = time;
-      let elapsed = time - start;
-      let progress = (elapsed / totalDuration) * historicalRoutes.length;
-      if (progress >= historicalRoutes.length) {
-        setRouteProgress(historicalRoutes.length);
-        animationRef.current = null;
-      } else {
-        setRouteProgress(progress);
-        animationRef.current = requestAnimationFrame(animate);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        isCanceledRef.current = true;
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current = null;
+        }
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+        setRouteProgress(historicalRoutes.length); // Stop animation and show full map
       }
     };
-    if (animationRef.current) cancelAnimationFrame(animationRef.current);
-    animationRef.current = requestAnimationFrame(animate);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const startExploreAnimation = async () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
+    
+    setSelectedLoc(null); // Ensure popup is hidden during animation
+    setRouteProgress(-1);
+    isCanceledRef.current = false;
+
+    // Phát nhạc mở đầu
+    const modau = new Audio('/voice/mo_dau.wav');
+    audioRef.current = modau;
+    
+    await new Promise<void>(resolve => {
+      modau.onended = () => resolve();
+      modau.onerror = () => resolve(); // Bỏ qua nếu lỗi
+      modau.play().catch(() => resolve());
+    });
+
+    if (isCanceledRef.current) return;
+
+    let currentRouteIndex = 0;
+
+    // Chạy qua 10 chặng
+    for (let stage = 1; stage <= 10; stage++) {
+      if (isCanceledRef.current) break;
+
+      const stageRoutes = historicalRoutes.filter(r => (r as any).stage === stage);
+      if (stageRoutes.length === 0) continue;
+
+      const audio = new Audio(`/voice/chang_${stage}.wav`);
+      audioRef.current = audio;
+
+      // Get duration
+      const durationMs = await new Promise<number>(resolve => {
+        if (audio.readyState >= 1) {
+          resolve(audio.duration * 1000);
+        } else {
+          audio.onloadedmetadata = () => resolve(audio.duration * 1000);
+          audio.onerror = () => resolve(stageRoutes.length * 500); // Mặc định 0.5s mỗi route nếu lỗi
+        }
+      });
+
+      if (isCanceledRef.current) break;
+      
+      audio.play().catch(e => console.error(e));
+
+      // Animate the routes of this stage over the duration of the audio!
+      const startIdx = currentRouteIndex;
+      const endIdx = startIdx + stageRoutes.length;
+
+      await new Promise<void>(resolve => {
+        let startTime: number | null = null;
+        
+        const animate = (time: number) => {
+          if (isCanceledRef.current) {
+            resolve();
+            return;
+          }
+          if (startTime === null) startTime = time;
+          let elapsed = time - startTime;
+          let progress = elapsed / durationMs;
+          
+          if (progress >= 1) {
+            setRouteProgress(endIdx);
+            resolve();
+          } else {
+            setRouteProgress(startIdx + progress * stageRoutes.length);
+            animationRef.current = requestAnimationFrame(animate);
+          }
+        };
+        animationRef.current = requestAnimationFrame(animate);
+      });
+
+      currentRouteIndex = endIdx;
+      
+      // Wait for audio to actually end if the animation somehow finished slightly earlier
+      if (audioRef.current === audio && !audio.paused && !audio.ended && !isCanceledRef.current) {
+        await new Promise<void>(resolve => {
+          audio.onended = () => resolve();
+          audio.onerror = () => resolve();
+        });
+      }
+    }
+
+    if (isCanceledRef.current) return;
+
+    // Phát nhạc kết thúc
+    const ketthuc = new Audio('/voice/ket_thuc.wav');
+    audioRef.current = ketthuc;
+    await new Promise<void>(resolve => {
+      ketthuc.onended = () => resolve();
+      ketthuc.onerror = () => resolve();
+      ketthuc.play().catch(() => resolve());
+    });
+    
+    if (!isCanceledRef.current) {
+      setRouteProgress(historicalRoutes.length);
+    }
   };
 
   useEffect(() => {
