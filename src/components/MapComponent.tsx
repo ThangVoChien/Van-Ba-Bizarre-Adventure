@@ -271,9 +271,10 @@ export default function MapComponent() {
 
     const durationPerRoute = 500; // 0.5 giây cho mỗi chặng
     const totalDuration = historicalRoutes.length * durationPerRoute;
-    let start = performance.now();
+    let start: number | null = null;
 
     const animate = (time: number) => {
+      if (start === null) start = time;
       let elapsed = time - start;
       let progress = (elapsed / totalDuration) * historicalRoutes.length;
       if (progress >= historicalRoutes.length) {
