@@ -56,12 +56,12 @@ const journeyLocations = [
   { id: 18, name: "Quảng Châu, Trung Quốc", year: "1924-1927", desc: "Nơi thành lập Hội Việt Nam Cách mạng Thanh niên.", coords: [23.1291, 113.2644] as [number, number] },
   { id: 19, name: "Bangkok, Thái Lan", year: "1928", desc: "Bác hoạt động bí mật tại Thái Lan với bí danh Thầu Chín.", coords: [13.7, 100.5] as [number, number] },
   { id: 20, name: "Udon Thani, Thái Lan", year: "1928-1929", desc: "Bác xây dựng cơ sở cách mạng trong cộng đồng Việt kiều ở Bản Nỏng.", coords: [17.4138, 102.7872] as [number, number] },
-  { id: 21, name: "Hong Kong", year: "1930", desc: "Nơi diễn ra Hội nghị thành lập Đảng Cộng sản Việt Nam (3/2/1930).", coords: [22.3193, 114.1694] as [number, number] },
+  { id: 21, name: "Hong Kong, Trung Quốc", year: "1930", desc: "Nơi diễn ra Hội nghị thành lập Đảng Cộng sản Việt Nam (3/2/1930).", coords: [22.3193, 114.1694] as [number, number] },
   { id: 22, name: "Hạ Môn, Trung Quốc", year: "1932", desc: "Nơi Bác tạm lánh sau khi thoát khỏi nhà tù Victoria (Hong Kong).", coords: [24.4, 118.0] as [number, number] },
   { id: 23, name: "Thượng Hải, Trung Quốc", year: "1933", desc: "Bác bí mật liên lạc với tổ chức để quay lại Liên Xô.", coords: [31.2, 121.4] as [number, number] },
   { id: 24, name: "Urumqi, Trung Quốc", year: "1938", desc: "Trên đường từ Moscow trở lại Trung Quốc.", coords: [43.8, 87.6] as [number, number] },
-  { id: 25, name: "Tây Ninh (Xining)", year: "1938", desc: "Điểm dừng chân trên tuyến đường bộ.", coords: [36.6, 101.7] as [number, number] },
-  { id: 26, name: "Tây An (Xi'an)", year: "1938", desc: "Hoạt động tại Văn phòng Bát Lộ Quân.", coords: [34.3, 108.9] as [number, number] },
+  { id: 25, name: "Tây Ninh (Xining), Trung Quốc", year: "1938", desc: "Điểm dừng chân trên tuyến đường bộ.", coords: [36.6, 101.7] as [number, number] },
+  { id: 26, name: "Tây An (Xi'an), Trung Quốc", year: "1938", desc: "Hoạt động tại Văn phòng Bát Lộ Quân.", coords: [34.3, 108.9] as [number, number] },
   { id: 27, name: "Côn Minh, Trung Quốc", year: "1940", desc: "Nơi Bác nhận định thời cơ cách mạng Việt Nam đã đến.", coords: [25.0, 102.7] as [number, number] },
   { id: 28, name: "Quế Lâm, Trung Quốc", year: "1940", desc: "Bác tổ chức lớp huấn luyện cán bộ và xuất bản báo.", coords: [25.2, 110.2] as [number, number] },
   { id: 29, name: "Pác Bó, Cao Bằng", year: "1941", desc: "Ngày 28/1/1941, Bác chính thức đặt chân về Tổ quốc sau 30 năm.", coords: [22.9806, 106.0504] as [number, number] }
@@ -568,6 +568,7 @@ export default function MapComponent() {
 
   const visitedCountries = [
     "Vietnam", "France", "United Kingdom", "Russia", "China", "Thailand", "United States of America",
+    "Singapore", "Sri Lanka", "Brazil", "Argentina", "Germany",
     ...africanCountries
   ];
 
@@ -671,6 +672,11 @@ export default function MapComponent() {
     else if (name === "Russia") searchString = "Liên Xô";
     else if (name === "China") searchString = "Trung Quốc";
     else if (name === "Thailand") searchString = "Thái Lan";
+    else if (name === "Singapore") searchString = "Singapore";
+    else if (name === "Sri Lanka") searchString = "Sri Lanka";
+    else if (name === "Brazil") searchString = "Brazil";
+    else if (name === "Argentina") searchString = "Argentina";
+    else if (name === "Germany") searchString = "Đức";
 
     if (searchString) {
       const locs = journeyLocations.filter(l => l.name.includes(searchString));
