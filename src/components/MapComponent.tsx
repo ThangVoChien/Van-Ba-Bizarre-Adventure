@@ -263,23 +263,68 @@ const stageStartIndices = [
 function MapFitter() {
   const map = useMap();
   useEffect(() => {
-    // Tọa độ bao trọn: Mũi Hảo Vọng (Nam), Nga (Bắc), Bờ Đông Mỹ (Tây), Nhật Bản (Đông)
-    const bounds = L.latLngBounds([-40, -85], [65, 145]);
-    
-    // Use timeout to ensure map container has CSS dimensions before fitting bounds
-    const timer = setTimeout(() => {
-      map.fitBounds(bounds, { padding: [10, 10], maxZoom: 2.5 });
-    }, 100);
+    let isFitted = false;
+    const container = map.getContainer();
+
+    const fit = () => {
+      if (container.clientWidth > 0 && container.clientHeight > 0) {
+        map.invalidateSize();
+        let currentLeft = -85;
+        let currentRight = 145;
+        
+        if (container.clientWidth > 400) {
+          const extraPx = container.clientWidth - 400;
+          const degreesPerPx = 230 / 400;
+          // Nội suy mở rộng dần dần sang trái (thấy Mỹ) và phải (thấy Nhật Bản)
+          const extraLngLeft = extraPx * degreesPerPx * 0.7;
+          const extraLngRight = extraPx * degreesPerPx * 0.3;
+          
+          currentLeft = Math.max(-130, -85 - extraLngLeft);
+          currentRight = Math.min(160, 145 + extraLngRight);
+        }
+
+        const currentBounds = L.latLngBounds([-40, currentLeft], [65, currentRight]);
+        map.fitBounds(currentBounds, { padding: [0, 0], maxZoom: 2.5, animate: false });
+        isFitted = true;
+      }
+    };
+
+    fit();
+
+    let interval: any;
+    if (!isFitted) {
+      interval = setInterval(() => {
+        if (!isFitted) fit();
+        else clearInterval(interval);
+      }, 100);
+    }
 
     const onResize = () => {
       setTimeout(() => {
-        map.fitBounds(bounds, { padding: [10, 10], maxZoom: 2.5 });
+        if (container.clientWidth > 0 && container.clientHeight > 0) {
+          map.invalidateSize();
+          let currentLeft = -85;
+          let currentRight = 145;
+          
+          if (container.clientWidth > 400) {
+            const extraPx = container.clientWidth - 400;
+            const degreesPerPx = 230 / 400;
+            const extraLngLeft = extraPx * degreesPerPx * 0.7;
+            const extraLngRight = extraPx * degreesPerPx * 0.3;
+            
+            currentLeft = Math.max(-130, -85 - extraLngLeft);
+            currentRight = Math.min(160, 145 + extraLngRight);
+          }
+
+          const currentBounds = L.latLngBounds([-40, currentLeft], [65, currentRight]);
+          map.fitBounds(currentBounds, { padding: [0, 0], maxZoom: 2.5, animate: false });
+        }
       }, 100);
     };
     
     window.addEventListener('resize', onResize);
     return () => {
-      clearTimeout(timer);
+      if (interval) clearInterval(interval);
       window.removeEventListener('resize', onResize);
     };
   }, [map]);

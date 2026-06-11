@@ -326,7 +326,6 @@ body {
   .map-frame-wrapper { 
     width: 100vw;
     height: 100dvh; 
-    padding: 20px; /* Thinner gold frame on mobile */
   }
   .fixed-overlay-content { padding: 24px; }
   .popup-video-container { height: 220px; }
