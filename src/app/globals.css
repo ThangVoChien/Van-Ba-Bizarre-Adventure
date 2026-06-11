@@ -187,105 +187,117 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(197, 48, 48, 0); }
 }
 
-/* Fixed Overlay Styling - Pastel/Vintage */
+/* Fixed Overlay Styling - Glassmorphism Slate & Gold */
 .fixed-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8); 
+  background: rgba(8, 12, 21, 0.75); 
   z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 24px;
 }
 
 .fixed-overlay-content {
-  background: rgba(28, 35, 49, 0.85); /* Deep elegant dark slate */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.3); /* Delicate gold border */
-  border-top: 3px solid var(--gold-1); /* Stronger gold accent on top */
-  color: #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  padding: 40px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: #f8fafc;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5), 
+    0 25px 60px rgba(0, 0, 0, 0.7), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 32px 36px;
   position: relative;
   width: 100%;
-  max-width: 450px;
-  max-height: 90vh;
+  max-width: 480px;
+  max-height: 85vh;
   overflow-y: auto;
-  animation: scaleUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: scaleUp 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .close-btn {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 1.2rem;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
   cursor: pointer;
   width: 32px;
   height: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
 }
 
 .close-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.4);
   color: var(--gold-1);
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1.05);
 }
 
 .popup-header {
   display: flex;
-  flex-direction: column; /* Stack the year above the title */
+  flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 24px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  padding-bottom: 16px;
 }
 
 .popup-year {
-  background: transparent;
+  background: rgba(212, 175, 55, 0.12);
   color: var(--gold-2);
-  padding: 0;
-  border-radius: 0;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 8px;
-  box-shadow: none;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  display: inline-flex;
+  align-items: center;
 }
 
 .popup-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   margin: 0;
-  color: #fdfbf7;
-  line-height: 1.2;
+  color: #ffffff;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .popup-desc {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #cbd5e1;
   line-height: 1.8;
   margin-bottom: 0;
   white-space: pre-line;
   font-family: 'Inter', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 @keyframes fadeIn {

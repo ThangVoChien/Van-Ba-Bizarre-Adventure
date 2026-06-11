@@ -986,7 +986,13 @@ export default function MapComponent() {
             <button className="close-btn" onClick={() => setSelectedLoc(null)}>✕</button>
             <div className="popup-header">
               <span className="popup-year">{selectedLoc.year}</span>
-              <h3 className="popup-title">{selectedLoc.name}</h3>
+              <h3 className="popup-title">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4af37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', flexShrink: 0 }}>
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                {selectedLoc.name}
+              </h3>
             </div>
             <div className="popup-body">
               <p className="popup-desc">{selectedLoc.desc}</p>
