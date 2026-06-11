@@ -607,6 +607,17 @@ export default function MapComponent() {
 
   return (
     <div className="map-frame-wrapper">
+      <style>{`
+        .flowing-path {
+          stroke-dasharray: 8px 8px !important;
+          animation: customMapFlow 1s linear infinite !important;
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+        }
+        @keyframes customMapFlow {
+          0% { stroke-dashoffset: 16px; }
+          100% { stroke-dashoffset: 0px; }
+        }
+      `}</style>
       <div 
         className="app-header" 
         style={{ 
@@ -721,7 +732,6 @@ export default function MapComponent() {
                     pathOptions={{
                       color: route.color,
                       weight: 2.5,
-                      dashArray: '8, 8',
                       opacity: 0.8,
                       className: 'flowing-path'
                     }}
