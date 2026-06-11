@@ -214,16 +214,16 @@ const createArrowIcon = (angle: number, color: string) => {
 };
 
 const routeLegend = [
-  { id: 1, label: "Chặng 1: Cảng Sài Gòn - Le Havre", color: "#ea580c" },
-  { id: 2, label: "Chặng 2: Vòng quanh châu Phi", color: "#16a34a" },
-  { id: 3, label: "Chặng 3: Pháp - Châu Mỹ - Anh", color: "#1e3a8a" },
-  { id: 4, label: "Chặng 4: Pháp - Liên Xô", color: "#db2777" },
-  { id: 5, label: "Chặng 5: Moskva - Quảng Châu", color: "#9333ea" },
-  { id: 6, label: "Chặng 6: Moskva - Xiêm", color: "#0ea5e9" },
-  { id: 7, label: "Chặng 7: Hong Kong - Thượng Hải", color: "#15803d" },
-  { id: 8, label: "Chặng 8: Thượng Hải - Moskva", color: "#1d4ed8" },
-  { id: 9, label: "Chặng 9: Moskva - Quế Lâm", color: "#dc2626" },
-  { id: 10, label: "Chặng 10: Quế Lâm - Pác Bó", color: "#000000" },
+  { id: 1, prefix: "1.1 - 1.6", label: "Chặng 1: Cảng Sài Gòn - Le Havre", color: "#ea580c" },
+  { id: 2, prefix: "2.1 - 2.20", label: "Chặng 2: Vòng quanh châu Phi", color: "#16a34a" },
+  { id: 3, prefix: "3.1 - 3.8", label: "Chặng 3: Pháp - Châu Mỹ - Anh", color: "#1e3a8a" },
+  { id: 4, prefix: "4.1 - 4.4", label: "Chặng 4: Pháp - Liên Xô", color: "#db2777" },
+  { id: 5, prefix: "5.1 - 5.7", label: "Chặng 5: Moskva - Quảng Châu", color: "#9333ea" },
+  { id: 6, prefix: "6.1 - 6.7", label: "Chặng 6: Moskva - Xiêm", color: "#0ea5e9" },
+  { id: 7, prefix: "7.1 - 7.14", label: "Chặng 7: Hong Kong - Thượng Hải", color: "#15803d" },
+  { id: 8, prefix: "8.1 - 8.3", label: "Chặng 8: Thượng Hải - Moskva", color: "#9333ea" },
+  { id: 9, prefix: "9.1 - 9.4", label: "Chặng 9: Moskva - Quế Lâm", color: "#dc2626" },
+  { id: 10, prefix: "10.1 - 10.8", label: "Chặng 10: Quế Lâm - Pác Bó", color: "#000000" },
 ];
 
 export default function MapComponent() {
@@ -575,17 +575,30 @@ export default function MapComponent() {
         */}
       </MapContainer>
 
-      {/* Map Legend Overlay */}
-      <div className="absolute top-4 right-4 z-[1000] bg-[rgba(255,255,255,0.95)] p-4 rounded-lg shadow-lg border border-gray-200 pointer-events-auto max-h-[80vh] overflow-y-auto">
-        <h4 className="font-bold text-gray-800 mb-3 text-sm border-b pb-2 uppercase tracking-wide">Hành trình trên biển</h4>
-        <div className="flex flex-col gap-2">
-          {routeLegend.map(item => (
-            <div key={item.id} className="flex items-center gap-3">
-              <div className="w-8 h-1.5 rounded-full shadow-sm" style={{ backgroundColor: item.color }}></div>
-              <span className="text-xs font-medium text-gray-700 whitespace-nowrap">{item.label}</span>
+      {/* Small Map Legend Overlay (Bottom Right) */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '30px',
+          right: '30px',
+          zIndex: 9999,
+          pointerEvents: 'none',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '7px',
+          fontFamily: "'Montserrat', sans-serif"
+        }}
+      >
+        {routeLegend.map(item => (
+          <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30px' }}>
+              <div style={{ width: '100%', height: '3px', backgroundColor: item.color, borderRadius: '1.5px', boxShadow: '0 1px 3px rgba(0,0,0,0.6)' }}></div>
             </div>
-          ))}
-        </div>
+            <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc', textShadow: '1px 1px 2px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.9), 1px -1px 2px rgba(0,0,0,0.9), -1px 1px 2px rgba(0,0,0,0.9), 0px 2px 4px rgba(0,0,0,0.8)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>
+              {item.label}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Instruction Overlay for Affordance */}
