@@ -39,7 +39,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  z-index: 5000;
+  z-index: 700;
   background: rgba(0, 0, 0, 0.7);
   padding: 8px 24px;
   border-radius: 4px;
@@ -82,6 +82,11 @@ body {
   box-shadow: none;
   position: relative;
   z-index: 10;
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-pane {
+  z-index: 800 !important;
 }
 
 /* Map container styling */

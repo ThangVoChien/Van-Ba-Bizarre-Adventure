@@ -278,12 +278,12 @@ const routeLegend = [
 const stageStartIndices = [
   0,
   historicalRoutes.findIndex(r => r.id === '7'),
-  historicalRoutes.findIndex(r => r.id === '18'),
-  historicalRoutes.findIndex(r => r.id === '22_to_23'),
+  historicalRoutes.findIndex(r => r.id === '17'),
+  historicalRoutes.findIndex(r => r.id === '22'),
   historicalRoutes.findIndex(r => r.id === '25a'),
   historicalRoutes.findIndex(r => r.id === '6a'),
   historicalRoutes.findIndex(r => r.id === '7a'),
-  historicalRoutes.findIndex(r => r.id === '8a'),
+  historicalRoutes.findIndex(r => r.id === '8_pre1'),
   historicalRoutes.findIndex(r => r.id === '9a'),
   historicalRoutes.findIndex(r => r.id === '11a'),
 ];
@@ -398,7 +398,7 @@ export default function MapComponent() {
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
-    
+
     setSelectedLoc(null); // Ensure popup is hidden during animation
     setRouteProgress(-1);
     setIsExploreActive(true);
@@ -407,7 +407,7 @@ export default function MapComponent() {
     // Phát nhạc mở đầu
     const modau = new Audio('/voice/mo_dau.wav');
     audioRef.current = modau;
-    
+
     await new Promise<void>(resolve => {
       modau.onended = () => resolve();
       modau.onerror = () => resolve(); // Bỏ qua nếu lỗi
@@ -439,7 +439,7 @@ export default function MapComponent() {
       });
 
       if (isCanceledRef.current) break;
-      
+
       audio.play().catch(e => console.error(e));
 
       // Animate the routes of this stage over the duration of the audio!
@@ -448,7 +448,7 @@ export default function MapComponent() {
 
       await new Promise<void>(resolve => {
         let startTime: number | null = null;
-        
+
         const animate = (time: number) => {
           if (isCanceledRef.current) {
             resolve();
@@ -457,7 +457,7 @@ export default function MapComponent() {
           if (startTime === null) startTime = time;
           let elapsed = time - startTime;
           let progress = elapsed / durationMs;
-          
+
           if (progress >= 1) {
             setRouteProgress(endIdx);
             resolve();
@@ -470,7 +470,7 @@ export default function MapComponent() {
       });
 
       currentRouteIndex = endIdx;
-      
+
       // Wait for audio to actually end if the animation somehow finished slightly earlier
       if (audioRef.current === audio && !audio.paused && !audio.ended && !isCanceledRef.current) {
         await new Promise<void>(resolve => {
@@ -893,7 +893,7 @@ export default function MapComponent() {
           position: 'absolute',
           bottom: isMobile ? '15px' : '30px',
           left: isMobile ? '15px' : '30px',
-          zIndex: 9999,
+          zIndex: 600,
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
@@ -935,7 +935,7 @@ export default function MapComponent() {
           left: isMobile ? 'auto' : '50%',
           right: isMobile ? '15px' : 'auto',
           transform: isMobile ? 'none' : 'translateX(-50%)',
-          zIndex: 9999,
+          zIndex: 900,
           opacity: isButtonHidden ? 0 : 1,
           transition: 'opacity 0.5s ease-in-out',
           pointerEvents: isButtonHidden ? 'none' : 'auto'
