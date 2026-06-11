@@ -601,11 +601,47 @@ export default function MapComponent() {
         ))}
       </div>
 
-      {/* Instruction Overlay for Affordance */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none text-center w-max max-w-[90vw]">
-        <p className="bg-[rgba(28,35,49,0.85)] text-[#ffe599] px-6 py-3 rounded-md border border-t-[3px] border-[#d4af37] border-x-[rgba(212,175,55,0.3)] border-b-[rgba(212,175,55,0.3)] shadow-[0_10px_25px_rgba(0,0,0,0.5)] font-['Montserrat',sans-serif] text-[0.85rem] font-semibold uppercase tracking-widest backdrop-blur-md">
-          Nhấp vào các quốc gia được đánh dấu để khám phá hành trình
-        </p>
+      {/* Tiny Start Button */}
+      <div 
+        style={{ 
+          position: 'fixed', 
+          top: '35px', 
+          right: '40px', 
+          zIndex: 9999, 
+        }}
+      >
+        <button 
+          onClick={() => setSelectedLoc(journeyLocations[0])}
+          style={{ 
+            pointerEvents: 'auto',
+            backgroundColor: '#1c2331', 
+            color: '#d4af37',
+            padding: '8px 20px',
+            borderRadius: '9999px',
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 700,
+            fontSize: '13px',
+            textTransform: 'uppercase',
+            letterSpacing: '1.5px',
+            border: '1.5px solid #d4af37',
+            boxShadow: '1px 2px 6px rgba(0,0,0,0.5)',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease-in-out',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#262f40'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#1c2331'; e.currentTarget.style.transform = 'scale(1)'; }}
+          onMouseDown={(e) => { e.currentTarget.style.transform = 'scale(0.95)'; }}
+          onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+        >
+          Khám phá
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
       </div>
 
       {/* Fixed UI Overlay for Selected Location */}
