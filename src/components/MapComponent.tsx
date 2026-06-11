@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
-import { MapContainer, Marker, Polyline, GeoJSON, Pane } from 'react-leaflet';
+import { MapContainer, Marker, Polyline, GeoJSON, Pane, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -220,14 +220,16 @@ const createCustomIcon = () => {
   });
 };
 
-const createArrowIcon = (angle: number, color: string) => {
+const createArrowIcon = (angle: number, color: string, isMobile: boolean = false) => {
+  const size = isMobile ? 8 : 14;
+  const anchor = size / 2;
   return L.divIcon({
     className: 'custom-arrow-icon',
-    html: `<svg width="14" height="14" viewBox="0 0 24 24" style="transform: rotate(${angle}deg); filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));">
+    html: `<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="transform: rotate(${angle}deg); filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));">
             <path fill="${color}" d="M24 12l-24-12v24z"/>
            </svg>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
+    iconSize: [size, size],
+    iconAnchor: [anchor, anchor]
   });
 };
 
@@ -257,8 +259,36 @@ const stageStartIndices = [
   historicalRoutes.findIndex(r => r.id === '11a'),
 ];
 
+// Automatically adjust map zoom and center to perfectly fit the required coordinates
+function MapFitter() {
+  const map = useMap();
+  useEffect(() => {
+    // Tọa độ bao trọn: Mũi Hảo Vọng (Nam), Nga (Bắc), Bờ Đông Mỹ (Tây), Nhật Bản (Đông)
+    const bounds = L.latLngBounds([-40, -85], [65, 145]);
+    
+    // Use timeout to ensure map container has CSS dimensions before fitting bounds
+    const timer = setTimeout(() => {
+      map.fitBounds(bounds, { padding: [10, 10], maxZoom: 2.5 });
+    }, 100);
+
+    const onResize = () => {
+      setTimeout(() => {
+        map.fitBounds(bounds, { padding: [10, 10], maxZoom: 2.5 });
+      }, 100);
+    };
+    
+    window.addEventListener('resize', onResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [map]);
+  return null;
+}
+
 export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [selectedLoc, setSelectedLoc] = useState<typeof journeyLocations[0] | null>(null);
   const [geoData, setGeoData] = useState<any>(null);
   const [routeProgress, setRouteProgress] = useState<number>(historicalRoutes.length);
@@ -291,6 +321,10 @@ export default function MapComponent() {
 
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+
     // Fetch the GeoJSON world map data
     fetch('/world.geo.json')
       .then(res => res.json())
@@ -312,6 +346,8 @@ export default function MapComponent() {
         setGeoData(data);
       })
       .catch(err => console.error("Could not load GeoJSON", err));
+
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -550,8 +586,8 @@ export default function MapComponent() {
         boxZoom={false}
         keyboard={false}
         style={{ height: '100%', width: '100%' }}
-        attributionControl={false}
       >
+        <MapFitter />
         {/* Render the world map using GeoJSON polygons to look like wooden cutouts */}
         {geoData && (
           <>
@@ -648,7 +684,7 @@ export default function MapComponent() {
                   {!(route as any).hideArrow && (
                     <Marker
                       position={arrowPos}
-                      icon={createArrowIcon(currentAngle, route.color)}
+                      icon={createArrowIcon(currentAngle, route.color, isMobile)}
                       interactive={false}
                     />
                   )}
@@ -677,14 +713,14 @@ export default function MapComponent() {
       <div
         style={{
           position: 'absolute',
-          bottom: '30px',
-          left: '30px',
+          bottom: isMobile ? '15px' : '30px',
+          left: isMobile ? '15px' : '30px',
           zIndex: 9999,
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: '7px',
+          gap: isMobile ? '4px' : '7px',
           fontFamily: "'Montserrat', sans-serif"
         }}
       >
@@ -702,10 +738,10 @@ export default function MapComponent() {
                 transition: 'all 0.5s ease-out'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '30px' }}>
-                <div style={{ width: '100%', height: '3px', backgroundColor: item.color, borderRadius: '1.5px', boxShadow: '0 1px 3px rgba(0,0,0,0.6)' }}></div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: isMobile ? '20px' : '30px' }}>
+                <div style={{ width: '100%', height: isMobile ? '2px' : '3px', backgroundColor: item.color, borderRadius: '1.5px', boxShadow: '0 1px 3px rgba(0,0,0,0.6)' }}></div>
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: '#f8fafc', textShadow: '1px 1px 2px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.9), 1px -1px 2px rgba(0,0,0,0.9), -1px 1px 2px rgba(0,0,0,0.9), 0px 2px 4px rgba(0,0,0,0.8)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: isMobile ? '8.5px' : '11px', fontWeight: 700, color: '#f8fafc', textShadow: '1px 1px 2px rgba(0,0,0,0.9), -1px -1px 2px rgba(0,0,0,0.9), 1px -1px 2px rgba(0,0,0,0.9), -1px 1px 2px rgba(0,0,0,0.9), 0px 2px 4px rgba(0,0,0,0.8)', letterSpacing: '0.2px', whiteSpace: 'nowrap' }}>
                 {item.label}
               </span>
             </div>
@@ -717,9 +753,10 @@ export default function MapComponent() {
       <div
         style={{
           position: 'fixed',
-          bottom: '40px',
-          left: '50%',
-          transform: 'translateX(-50%)',
+          bottom: isMobile ? '15px' : '40px',
+          left: isMobile ? 'auto' : '50%',
+          right: isMobile ? '15px' : 'auto',
+          transform: isMobile ? 'none' : 'translateX(-50%)',
           zIndex: 9999,
           opacity: isMapAnimating ? 0 : 1,
           transition: 'opacity 0.5s ease-in-out',
@@ -732,11 +769,11 @@ export default function MapComponent() {
             pointerEvents: 'auto',
             backgroundColor: '#1c2331',
             color: '#d4af37',
-            padding: '8px 20px',
+            padding: isMobile ? '6px 14px' : '8px 20px',
             borderRadius: '9999px',
             fontFamily: "'Montserrat', sans-serif",
             fontWeight: 700,
-            fontSize: '13px',
+            fontSize: isMobile ? '11px' : '13px',
             textTransform: 'uppercase',
             letterSpacing: '1.5px',
             border: '1.5px solid #d4af37',
