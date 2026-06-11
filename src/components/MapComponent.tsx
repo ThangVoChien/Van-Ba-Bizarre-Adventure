@@ -38,7 +38,6 @@ function AnimatedPolyline({ positions, pathOptions }: any) {
 const journeyLocations = [
   { id: 1, name: "Việt Nam", year: "1911", desc: "Ngày 5/6/1911, người thanh niên Nguyễn Tất Thành lên tàu Amiral Latouche-Tréville rời Tổ quốc.", coords: [10.768, 106.706] as [number, number] },
   { id: 2, name: "Singapore", year: "1911", desc: "Tàu dừng chân tại Singapore trên hành trình sang Pháp.", coords: [1.2, 103.8] as [number, number] },
-  { id: 3, name: "Colombo, Sri Lanka", year: "1911", desc: "Điểm dừng chân trên biển Ấn Độ Dương.", coords: [5.9, 80.5] as [number, number] },
   { id: 4, name: "Madagascar", year: "1911", desc: "Bác chứng kiến nỗi khổ của người dân thuộc địa tại châu Phi.", coords: [-18.8, 47.5] as [number, number] },
   { id: 5, name: "Cape Town, Nam Phi", year: "1911", desc: "Điểm vòng qua mũi nam của lục địa châu Phi.", coords: [-35.0, 20.0] as [number, number] },
   { id: 6, name: "Oran, Algeria", year: "1911", desc: "Trên đường sang Pháp, con tàu ghé lại cảng Oran (Bắc Phi). Bác thấy người Pháp cũng đối xử tàn tệ với người bản xứ như ở Đông Dương.", coords: [35.7, -0.6] as [number, number] },
@@ -561,7 +560,7 @@ export default function MapComponent() {
 
   const visitedCountries = [
     "Vietnam", "France", "United Kingdom", "Russia", "China", "Thailand", "United States of America",
-    "Singapore", "Sri Lanka", "Brazil", "Argentina", "Germany",
+    "Singapore", "Brazil", "Argentina", "Germany",
     "Madagascar", "South Africa", "Algeria", "Egypt", "Angola", "Somalia", "Nigeria"
   ];
 
@@ -662,7 +661,6 @@ export default function MapComponent() {
     else if (name === "China") searchString = "Trung Quốc";
     else if (name === "Thailand") searchString = "Thái Lan";
     else if (name === "Singapore") searchString = "Singapore";
-    else if (name === "Sri Lanka") searchString = "Sri Lanka";
     else if (name === "Brazil") searchString = "Brazil";
     else if (name === "Argentina") searchString = "Argentina";
     else if (name === "Germany") searchString = "Đức";
