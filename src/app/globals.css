@@ -32,18 +32,20 @@ body {
   height: 100vh;
 }
 
-/* App Header styling - Restored to static flow so it pushes map down */
+/* App Header styling - Absolute positioning so it floats over the map */
 .app-header {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
-  z-index: 50;
+  z-index: 5000;
   background: rgba(0, 0, 0, 0.7);
   padding: 8px 24px;
   border-radius: 4px;
   border: 2px solid var(--gold-1);
   box-shadow: 0 10px 20px rgba(0,0,0,0.8);
   pointer-events: none;
-  margin-top: 24px;
-  margin-bottom: 16px;
 }
 
 .app-title {

@@ -179,6 +179,8 @@ const historicalRoutes = [
   { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
   { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
   // Chặng 8: Thượng Hải - Moskva (Black - vẽ song song với chặng 5 về)
+  { id: '8_pre1', color: '#000000', start: [22.1, 114.5] as [number, number], end: [23.1, 113.2] as [number, number], control: [22.5, 113.5] as [number, number] }, // Hong Kong -> Guangzhou
+  { id: '8_pre2', color: '#000000', start: [23.1, 113.2] as [number, number], end: [31.4, 121.9] as [number, number], control: [27.0, 119.0] as [number, number] }, // Guangzhou -> Shanghai
   { id: '8a', color: '#000000', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [31.5, 127.5] as [number, number] }, // Shanghai -> Tsushima
   { id: '8b', color: '#000000', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [40.5, 137.5] as [number, number] }, // Tsushima -> Vladivostok
   { id: '8c', color: '#000000', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [46.5, 137.0] as [number, number] }, // Vladivostok -> Khabarovsk
@@ -266,7 +268,7 @@ export default function MapComponent() {
   const startExploreAnimation = () => {
     setSelectedLoc(null); // Ensure popup is hidden during animation
     setRouteProgress(0);
-    
+
     const durationPerRoute = 500; // 0.5 giây cho mỗi chặng
     const totalDuration = historicalRoutes.length * durationPerRoute;
     let start = performance.now();
@@ -522,7 +524,7 @@ export default function MapComponent() {
   return (
     <div className="map-frame-wrapper">
       <MapContainer
-        center={[15, 20]}
+        center={[20, 20]}
         zoom={2.85}
         zoomSnap={0.05}
         zoomControl={false}
@@ -590,54 +592,54 @@ export default function MapComponent() {
 
               const routeLocalProgress = Math.min(1, routeProgress - index);
               const curvePoints = getBezierCurve(route.start, route.end, route.control);
-            
-            const numPoints = curvePoints.length;
-            const visibleCount = Math.max(2, Math.floor(numPoints * routeLocalProgress));
-            const visiblePoints = curvePoints.slice(0, visibleCount);
-            
-            const isAnimating = routeLocalProgress < 1;
 
-            let arrowPos;
-            let currentAngle;
+              const numPoints = curvePoints.length;
+              const visibleCount = Math.max(2, Math.floor(numPoints * routeLocalProgress));
+              const visiblePoints = curvePoints.slice(0, visibleCount);
 
-            if (isAnimating) {
-               arrowPos = visiblePoints[visiblePoints.length - 1];
-               if (visiblePoints.length >= 2) {
+              const isAnimating = routeLocalProgress < 1;
+
+              let arrowPos;
+              let currentAngle;
+
+              if (isAnimating) {
+                arrowPos = visiblePoints[visiblePoints.length - 1];
+                if (visiblePoints.length >= 2) {
                   const p1 = visiblePoints[visiblePoints.length - 2];
                   const p2 = visiblePoints[visiblePoints.length - 1];
                   currentAngle = Math.atan2(p1[0] - p2[0], p2[1] - p1[1]) * (180 / Math.PI);
-               } else {
+                } else {
                   currentAngle = 0;
-               }
-            } else {
-               const midIndex = Math.floor(curvePoints.length / 2);
-               arrowPos = curvePoints[midIndex];
-               currentAngle = Math.atan2(route.start[0] - route.end[0], route.end[1] - route.start[1]) * (180 / Math.PI);
-            }
+                }
+              } else {
+                const midIndex = Math.floor(curvePoints.length / 2);
+                arrowPos = curvePoints[midIndex];
+                currentAngle = Math.atan2(route.start[0] - route.end[0], route.end[1] - route.start[1]) * (180 / Math.PI);
+              }
 
-            return (
-              <React.Fragment key={`route-${route.id}`}>
-                {/* The Path */}
-                <Polyline
-                  positions={visiblePoints}
-                  pathOptions={{
-                    color: route.color,
-                    weight: 2.5,
-                    dashArray: '8, 8',
-                    opacity: 0.8,
-                    className: 'flowing-path'
-                  }}
-                />
-                {!(route as any).hideArrow && (
-                  <Marker
-                    position={arrowPos}
-                    icon={createArrowIcon(currentAngle, route.color)}
-                    interactive={false}
+              return (
+                <React.Fragment key={`route-${route.id}`}>
+                  {/* The Path */}
+                  <Polyline
+                    positions={visiblePoints}
+                    pathOptions={{
+                      color: route.color,
+                      weight: 2.5,
+                      dashArray: '8, 8',
+                      opacity: 0.8,
+                      className: 'flowing-path'
+                    }}
                   />
-                )}
-              </React.Fragment>
-            );
-          });
+                  {!(route as any).hideArrow && (
+                    <Marker
+                      position={arrowPos}
+                      icon={createArrowIcon(currentAngle, route.color)}
+                      interactive={false}
+                    />
+                  )}
+                </React.Fragment>
+              );
+            });
           })()}
         </Pane>
 
@@ -673,11 +675,11 @@ export default function MapComponent() {
         {routeLegend.map((item, index) => {
           const isVisible = routeProgress >= stageStartIndices[index];
           return (
-            <div 
-              key={item.id} 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
+            <div
+              key={item.id}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
                 gap: '10px',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
@@ -696,19 +698,20 @@ export default function MapComponent() {
       </div>
 
       {/* Tiny Start Button */}
-      <div 
-        style={{ 
-          position: 'fixed', 
-          top: '35px', 
-          right: '40px', 
-          zIndex: 9999, 
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '40px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
         }}
       >
-        <button 
+        <button
           onClick={startExploreAnimation}
-          style={{ 
+          style={{
             pointerEvents: 'auto',
-            backgroundColor: '#1c2331', 
+            backgroundColor: '#1c2331',
             color: '#d4af37',
             padding: '8px 20px',
             borderRadius: '9999px',
@@ -731,10 +734,6 @@ export default function MapComponent() {
           onMouseUp={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; }}
         >
           Khám phá
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
         </button>
       </div>
 
