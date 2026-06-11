@@ -114,6 +114,7 @@ const historicalRoutes = [
   { id: '22', color: '#1e3a8a', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
 
   // Chặng 4: Pháp - Liên Xô (Pink/Magenta)
+  { id: '22_to_23', color: '#db2777', start: [49.5, 0.1] as [number, number], end: [48.8, 2.3] as [number, number], control: [49.0, 1.0] as [number, number] }, // Le Havre -> Paris
   { id: '23', color: '#db2777', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 6.0] as [number, number] }, // Paris -> Berlin
   { id: '23b', color: '#db2777', start: [52.5, 13.4] as [number, number], end: [53.5, 9.9] as [number, number], control: [53.5, 12.0] as [number, number] }, // Berlin -> Hamburg
 
@@ -124,6 +125,7 @@ const historicalRoutes = [
   { id: '24d', color: '#db2777', start: [55.0, 14.0] as [number, number], end: [57.5, 20.0] as [number, number], control: [55.5, 17.5] as [number, number] }, // Nam Thụy Điển -> Giữa biển Baltic (né phía dưới đảo Gotland)
   { id: '24e', color: '#db2777', start: [57.5, 20.0] as [number, number], end: [59.8, 24.5] as [number, number], control: [59.5, 20.0] as [number, number] }, // Giữa biển Baltic -> Cửa vịnh Phần Lan (vòng lên Bắc để né các đảo của Estonia)
   { id: '24f', color: '#db2777', start: [59.8, 24.5] as [number, number], end: [59.9, 30.3] as [number, number], control: [60.0, 27.5] as [number, number] }, // Cửa vịnh Phần Lan -> Petrograd
+  { id: '24g', color: '#db2777', start: [59.9, 30.3] as [number, number], end: [55.7, 37.6] as [number, number], control: [58.0, 35.0] as [number, number] }, // Petrograd -> Moscow
 
   // Chặng 5: Liên Xô - Trung Quốc (Purple)
   { id: '25a', color: '#9333ea', start: [55.7, 37.6] as [number, number], end: [53.2, 50.1] as [number, number], control: [54.5, 43.8] as [number, number] }, // Moscow -> Samara (Đi thẳng xuống biên giới)
@@ -175,6 +177,19 @@ const historicalRoutes = [
   { id: '7c', color: '#15803d', start: [31.0, 121.6] as [number, number], end: [22.5, 114.5] as [number, number], control: [25.0, 132.0] as [number, number] }, // Shanghai -> Hong Kong (Vòng rộng ngoài khơi)
   { id: '7d', color: '#15803d', start: [21.9, 113.9] as [number, number], end: [1.15, 103.6] as [number, number], control: [12.0, 110.0] as [number, number] }, // Hong Kong -> Singapore
   { id: '7e', color: '#15803d', start: [1.15, 104.0] as [number, number], end: [22.1, 114.5] as [number, number], control: [12.0, 113.0] as [number, number] }, // Singapore -> Hong Kong
+  // Chặng 8: Thượng Hải - Moskva (Purple)
+  { id: '8a', color: '#9333ea', start: [31.4, 121.9] as [number, number], end: [33.7, 129.5] as [number, number], control: [32.7, 126.5] as [number, number] }, // Shanghai -> Tsushima
+  { id: '8b', color: '#9333ea', start: [33.7, 129.5] as [number, number], end: [43.1, 133.0] as [number, number], control: [39.1, 135.75] as [number, number] }, // Tsushima -> Vladivostok
+  { id: '8c', color: '#9333ea', start: [43.1, 133.0] as [number, number], end: [48.8, 135.1] as [number, number], control: [47.0, 135.5] as [number, number] }, // Vladivostok -> Khabarovsk
+  { id: '8d', color: '#9333ea', start: [48.8, 135.1] as [number, number], end: [55.3, 124.0] as [number, number], control: [54.6, 130.0] as [number, number] }, // Khabarovsk -> Đỉnh vòng cung
+  { id: '8e', color: '#9333ea', start: [55.3, 124.0] as [number, number], end: [51.8, 111.0] as [number, number], control: [55.6, 117.5] as [number, number] }, // Đỉnh vòng cung -> Đoạn võng
+  { id: '8f', color: '#9333ea', start: [51.8, 111.0] as [number, number], end: [52.6, 104.3] as [number, number], control: [53.0, 107.65] as [number, number] }, // Đoạn võng -> Irkutsk
+  { id: '8g', color: '#9333ea', start: [52.6, 104.3] as [number, number], end: [55.3, 82.9] as [number, number], control: [58.1, 93.6] as [number, number] }, // Irkutsk -> Novosibirsk
+  { id: '8h', color: '#9333ea', start: [55.3, 82.9] as [number, number], end: [55.3, 73.4] as [number, number], control: [56.3, 78.0] as [number, number] }, // Novosibirsk -> Omsk
+  { id: '8i', color: '#9333ea', start: [55.3, 73.4] as [number, number], end: [56.4, 69.5] as [number, number], control: [56.65, 71.45] as [number, number] }, // Omsk -> Ishim
+  { id: '8j', color: '#9333ea', start: [56.4, 69.5] as [number, number], end: [55.4, 61.4] as [number, number], control: [56.7, 65.45] as [number, number] }, // Ishim -> Chelyabinsk
+  { id: '8k', color: '#9333ea', start: [55.4, 61.4] as [number, number], end: [53.5, 50.1] as [number, number], control: [55.3, 55.7] as [number, number] }, // Chelyabinsk -> Samara
+  { id: '8l', color: '#9333ea', start: [53.5, 50.1] as [number, number], end: [55.7, 37.6] as [number, number], control: [55.45, 43.8] as [number, number] }, // Samara -> Moscow
 
   // Chặng 9: Hành trình về nước qua ngả Tân Cương (Red)
   { id: '9a', color: '#dc2626', start: [55.7, 37.6] as [number, number], end: [56.3, 44.0] as [number, number], control: [56.5, 40.8] as [number, number] }, // Moscow -> Nizhniy Novgorod
@@ -230,7 +245,32 @@ export default function MapComponent() {
   const [mounted, setMounted] = useState(false);
   const [selectedLoc, setSelectedLoc] = useState<typeof journeyLocations[0] | null>(null);
   const [geoData, setGeoData] = useState<any>(null);
+  const [routeProgress, setRouteProgress] = useState<number>(historicalRoutes.length);
+  const animationRef = useRef<number | null>(null);
   const africaGeoJsonRef = useRef<any>(null);
+
+  const startExploreAnimation = () => {
+    setSelectedLoc(null); // Ensure popup is hidden during animation
+    setRouteProgress(0);
+    
+    const durationPerRoute = 500; // 0.5 giây cho mỗi chặng
+    const totalDuration = historicalRoutes.length * durationPerRoute;
+    let start = performance.now();
+
+    const animate = (time: number) => {
+      let elapsed = time - start;
+      let progress = (elapsed / totalDuration) * historicalRoutes.length;
+      if (progress >= historicalRoutes.length) {
+        setRouteProgress(historicalRoutes.length);
+        animationRef.current = null;
+      } else {
+        setRouteProgress(progress);
+        animationRef.current = requestAnimationFrame(animate);
+      }
+    };
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    animationRef.current = requestAnimationFrame(animate);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -529,17 +569,48 @@ export default function MapComponent() {
 
         {/* Render Historical Routes (Flowing Dashed Lines with Arrows) */}
         <Pane name="routesPane" style={{ zIndex: 500 }}>
-          {historicalRoutes.map((route) => {
-            const curvePoints = getBezierCurve(route.start, route.end, route.control);
-            // Angle of the tangent at midpoint is parallel to the line from start to end
-            const angle = Math.atan2(route.start[0] - route.end[0], route.end[1] - route.start[1]) * (180 / Math.PI);
-            const midPoint = curvePoints[Math.floor(curvePoints.length / 2)];
+          {(() => {
+            const stage8StartIndex = historicalRoutes.findIndex(r => r.id === '8a');
+            return historicalRoutes.map((route, index) => {
+              if (routeProgress <= index) return null;
+
+              const isStage5Return = route.id.startsWith('27') || route.id.startsWith('28');
+              if (isStage5Return && stage8StartIndex !== -1 && routeProgress >= stage8StartIndex) {
+                 return null; // Xóa chiều về chặng 5 khi bắt đầu vẽ chặng 8
+              }
+
+              const routeLocalProgress = Math.min(1, routeProgress - index);
+              const curvePoints = getBezierCurve(route.start, route.end, route.control);
+            
+            const numPoints = curvePoints.length;
+            const visibleCount = Math.max(2, Math.floor(numPoints * routeLocalProgress));
+            const visiblePoints = curvePoints.slice(0, visibleCount);
+            
+            const isAnimating = routeLocalProgress < 1;
+
+            let arrowPos;
+            let currentAngle;
+
+            if (isAnimating) {
+               arrowPos = visiblePoints[visiblePoints.length - 1];
+               if (visiblePoints.length >= 2) {
+                  const p1 = visiblePoints[visiblePoints.length - 2];
+                  const p2 = visiblePoints[visiblePoints.length - 1];
+                  currentAngle = Math.atan2(p1[0] - p2[0], p2[1] - p1[1]) * (180 / Math.PI);
+               } else {
+                  currentAngle = 0;
+               }
+            } else {
+               const midIndex = Math.floor(curvePoints.length / 2);
+               arrowPos = curvePoints[midIndex];
+               currentAngle = Math.atan2(route.start[0] - route.end[0], route.end[1] - route.start[1]) * (180 / Math.PI);
+            }
 
             return (
               <React.Fragment key={`route-${route.id}`}>
                 {/* The Path */}
                 <Polyline
-                  positions={curvePoints}
+                  positions={visiblePoints}
                   pathOptions={{
                     color: route.color,
                     weight: 2.5,
@@ -550,14 +621,15 @@ export default function MapComponent() {
                 />
                 {!(route as any).hideArrow && (
                   <Marker
-                    position={midPoint}
-                    icon={createArrowIcon(angle, route.color)}
+                    position={arrowPos}
+                    icon={createArrowIcon(currentAngle, route.color)}
                     interactive={false}
                   />
                 )}
               </React.Fragment>
             );
-          })}
+          });
+          })()}
         </Pane>
 
         {/* Render markers for each journey stop (TEMPORARILY HIDDEN based on user request) */}
@@ -611,7 +683,7 @@ export default function MapComponent() {
         }}
       >
         <button 
-          onClick={() => setSelectedLoc(journeyLocations[0])}
+          onClick={startExploreAnimation}
           style={{ 
             pointerEvents: 'auto',
             backgroundColor: '#1c2331', 
