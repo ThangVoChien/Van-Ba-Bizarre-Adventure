@@ -14,13 +14,6 @@ const MapComponent = dynamic(() => import('../components/MapComponent'), {
 
 export default function Home() {
   return (
-    <>
-      <div className="app-header">
-        <h1 className="app-title">Hành trình Cứu nước</h1>
-        <p className="app-subtitle">Hồ Chí Minh (1911 – 1941)</p>
-      </div>
-      
-      <MapComponent />
-    </>
+    <MapComponent />
   );
 }

@@ -522,8 +522,22 @@ export default function MapComponent() {
     });
   };
 
+  const isMapAnimating = routeProgress < historicalRoutes.length;
+
   return (
     <div className="map-frame-wrapper">
+      <div 
+        className="app-header" 
+        style={{ 
+          opacity: isMapAnimating ? 0 : 1, 
+          transition: 'opacity 0.5s ease-in-out', 
+          pointerEvents: isMapAnimating ? 'none' : 'auto' 
+        }}
+      >
+        <h1 className="app-title">Hành trình Cứu nước</h1>
+        <p className="app-subtitle">Hồ Chí Minh (1911 – 1941)</p>
+      </div>
+
       <MapContainer
         center={[20, 20]}
         zoom={2.5}
@@ -664,11 +678,12 @@ export default function MapComponent() {
         style={{
           position: 'absolute',
           bottom: '30px',
-          right: '30px',
+          left: '30px',
           zIndex: 9999,
           pointerEvents: 'none',
           display: 'flex',
           flexDirection: 'column',
+          alignItems: 'flex-start',
           gap: '7px',
           fontFamily: "'Montserrat', sans-serif"
         }}
@@ -706,6 +721,9 @@ export default function MapComponent() {
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 9999,
+          opacity: isMapAnimating ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out',
+          pointerEvents: isMapAnimating ? 'none' : 'auto'
         }}
       >
         <button
