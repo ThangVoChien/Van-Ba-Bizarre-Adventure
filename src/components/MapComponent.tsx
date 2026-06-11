@@ -11,7 +11,7 @@ function AnimatedPolyline({ positions, pathOptions }: any) {
 
   useEffect(() => {
     if (!polylineRef.current) return;
-    
+
     let offset = 16;
     const interval = setInterval(() => {
       offset -= 1;
@@ -141,9 +141,9 @@ const historicalRoutes = [
   { id: '20b', color: '#1e3a8a', start: [-7.0, -30.0] as [number, number], end: [40.7, -74.0] as [number, number], control: [10.0, -40.0] as [number, number] }, // Ngoài khơi Brazil -> New York (chéo qua đường kia)
   { id: '21', color: '#1e3a8a', start: [40.7, -74.0] as [number, number], end: [49.5, -8.0] as [number, number], control: [45.0, -40.0] as [number, number] }, // New York -> Cửa ngõ eo biển Manche (đi vòng xuống Nam Ireland để né đất liền)
   { id: '21b', color: '#1e3a8a', start: [49.5, -8.0] as [number, number], end: [50.9, -1.4] as [number, number], control: [50.0, -4.0] as [number, number] }, // Cửa ngõ eo biển -> Anh (cảng bờ Nam)
-  { id: '22', color: '#1e3a8a', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
 
   // Chặng 4: Pháp - Liên Xô (Pink/Magenta)
+  { id: '22', color: '#db2777', start: [50.9, -1.4] as [number, number], end: [49.5, 0.1] as [number, number], control: [50.0, -0.5] as [number, number] }, // Anh -> Le Havre
   { id: '22_to_23', color: '#db2777', start: [49.5, 0.1] as [number, number], end: [48.8, 2.3] as [number, number], control: [49.0, 1.0] as [number, number] }, // Le Havre -> Paris
   { id: '23', color: '#db2777', start: [48.8, 2.3] as [number, number], end: [52.5, 13.4] as [number, number], control: [52.0, 6.0] as [number, number] }, // Paris -> Berlin
   { id: '23b', color: '#db2777', start: [52.5, 13.4] as [number, number], end: [53.5, 9.9] as [number, number], control: [53.5, 12.0] as [number, number] }, // Berlin -> Hamburg
@@ -300,14 +300,14 @@ function MapFitter() {
         map.invalidateSize();
         let currentLeft = -85;
         let currentRight = 145;
-        
+
         if (container.clientWidth > 400) {
           const extraPx = container.clientWidth - 400;
           const degreesPerPx = 230 / 400;
           // Nội suy mở rộng dần dần sang trái (thấy Mỹ) và phải (thấy Nhật Bản)
           const extraLngLeft = extraPx * degreesPerPx * 0.7;
           const extraLngRight = extraPx * degreesPerPx * 0.3;
-          
+
           currentLeft = Math.max(-130, -85 - extraLngLeft);
           currentRight = Math.min(160, 145 + extraLngRight);
         }
@@ -334,13 +334,13 @@ function MapFitter() {
           map.invalidateSize();
           let currentLeft = -85;
           let currentRight = 145;
-          
+
           if (container.clientWidth > 400) {
             const extraPx = container.clientWidth - 400;
             const degreesPerPx = 230 / 400;
             const extraLngLeft = extraPx * degreesPerPx * 0.7;
             const extraLngRight = extraPx * degreesPerPx * 0.3;
-            
+
             currentLeft = Math.max(-130, -85 - extraLngLeft);
             currentRight = Math.min(160, 145 + extraLngRight);
           }
@@ -350,7 +350,7 @@ function MapFitter() {
         }
       }, 100);
     };
-    
+
     window.addEventListener('resize', onResize);
     return () => {
       if (interval) clearInterval(interval);
@@ -636,12 +636,12 @@ export default function MapComponent() {
 
   return (
     <div className="map-frame-wrapper">
-      <div 
-        className="app-header" 
-        style={{ 
-          opacity: isMapAnimating ? 0 : 1, 
-          transition: 'opacity 0.5s ease-in-out', 
-          pointerEvents: isMapAnimating ? 'none' : 'auto' 
+      <div
+        className="app-header"
+        style={{
+          opacity: isMapAnimating ? 0 : 1,
+          transition: 'opacity 0.5s ease-in-out',
+          pointerEvents: isMapAnimating ? 'none' : 'auto'
         }}
       >
         <h1 className="app-title">Hành trình Cứu nước</h1>
@@ -659,6 +659,7 @@ export default function MapComponent() {
         touchZoom={false}
         boxZoom={false}
         keyboard={false}
+        attributionControl={false}
         style={{ height: '100%', width: '100%' }}
       >
         <MapFitter />
@@ -839,7 +840,6 @@ export default function MapComponent() {
         <button
           onClick={startExploreAnimation}
           style={{
-            pointerEvents: 'auto',
             backgroundColor: '#1c2331',
             color: '#d4af37',
             padding: isMobile ? '6px 14px' : '8px 20px',
