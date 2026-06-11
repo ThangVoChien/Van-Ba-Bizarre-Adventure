@@ -20,9 +20,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  /* Steel-blue painted wall background */
-  background-color: #3b5062;
-  background-image: radial-gradient(circle at center 30%, #5d758f 0%, #314455 100%);
+  /* Dark steel-blue painted wall background with spotlight lighting */
+  background-color: #222d3a;
+  background-image: radial-gradient(circle at center 35%, #566c82 0%, #2b3a4a 65%, #18232e 100%);
   color: var(--foreground);
   overflow: hidden;
   display: flex;
@@ -368,4 +368,31 @@ path.leaflet-interactive:not(.africa-continent):focus-visible {
   outline: 2px solid var(--gold-1);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Vignette Overlay for museum spotlight effect */
+.vignette-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 550; /* Above routes but below popups & headers */
+  background: radial-gradient(circle at center 35%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 75%, rgba(0,0,0,0.6) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Vintage Paper Noise Texture Overlay */
+.vintage-texture-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 560;
+  opacity: 0.055; /* Subtle noise texturing */
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }

@@ -749,6 +749,10 @@ export default function MapComponent() {
 
   return (
     <div className="map-frame-wrapper">
+      {/* Vintage Texture & Vignette Overlay */}
+      <div className="vintage-texture-overlay"></div>
+      <div className="vignette-overlay"></div>
+
       <div
         className="app-header"
         style={{
