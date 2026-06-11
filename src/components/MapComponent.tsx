@@ -5,6 +5,35 @@ import { MapContainer, Marker, Polyline, GeoJSON, Pane, useMap } from 'react-lea
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+// Component để animate nét đứt trực tiếp bằng Javascript của Leaflet
+function AnimatedPolyline({ positions, pathOptions }: any) {
+  const polylineRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (!polylineRef.current) return;
+    
+    let offset = 16;
+    const interval = setInterval(() => {
+      offset -= 1;
+      if (offset <= 0) offset = 16;
+      // Cập nhật dashOffset trực tiếp vào Leaflet
+      if (polylineRef.current.setStyle) {
+        polylineRef.current.setStyle({ dashOffset: offset.toString() });
+      }
+    }, 30); // Khoảng 30fps
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Polyline
+      ref={polylineRef}
+      positions={positions}
+      pathOptions={pathOptions}
+    />
+  );
+}
+
 // Journey Data with exact GPS coordinates
 const journeyLocations = [
   { id: 1, name: "Việt Nam", year: "1911", desc: "Ngày 5/6/1911, người thanh niên Nguyễn Tất Thành lên tàu Amiral Latouche-Tréville rời Tổ quốc.", coords: [10.768, 106.706] as [number, number] },
@@ -607,17 +636,6 @@ export default function MapComponent() {
 
   return (
     <div className="map-frame-wrapper">
-      <style>{`
-        .flowing-path {
-          stroke-dasharray: 8px 8px !important;
-          animation: customMapFlow 1s linear infinite !important;
-          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
-        }
-        @keyframes customMapFlow {
-          0% { stroke-dashoffset: 16px; }
-          100% { stroke-dashoffset: 0px; }
-        }
-      `}</style>
       <div 
         className="app-header" 
         style={{ 
@@ -727,13 +745,13 @@ export default function MapComponent() {
               return (
                 <React.Fragment key={`route-${route.id}`}>
                   {/* The Path */}
-                  <Polyline
+                  <AnimatedPolyline
                     positions={visiblePoints}
                     pathOptions={{
                       color: route.color,
                       weight: 2.5,
-                      opacity: 0.8,
-                      className: 'flowing-path'
+                      dashArray: '8, 8',
+                      opacity: 0.8
                     }}
                   />
                   {!(route as any).hideArrow && (
